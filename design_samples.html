@@ -1,0 +1,4330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Design Concept Combinations - UI Sampler</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@300;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-global: #030712;
+      --card-bg: #111827;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent-color: #3b82f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-global);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 60px 20px 40px;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #60a5fa, #c084fc, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: rgba(96, 165, 250, 0.15);
+      border-color: rgba(96, 165, 250, 0.3);
+      color: #60a5fa;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(96, 165, 250, 0.15);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto 100px;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+    }
+
+    .sample-section {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 50px;
+      align-items: center;
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 968px) {
+      .sample-section {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 30px 20px;
+      }
+    }
+
+    .sample-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sample-badge {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 6px 14px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 100px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      color: #60a5fa;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sample-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #fff;
+      word-break: keep-all;
+    }
+
+    .sample-desc {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .concept-comb {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .concept-comb-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #93c5fd;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .concept-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      color: #e5e7eb;
+    }
+
+    .concept-tag span {
+      opacity: 0.5;
+      margin-right: 4px;
+    }
+
+    .prompt-viewer {
+      background: #020617;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,0.04);
+      position: relative;
+    }
+
+    .prompt-label {
+      font-size: 0.75rem;
+      color: #64748b;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .prompt-text {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      word-break: break-word;
+    }
+
+
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 2: Futuristic Aurora Dashboard                */
+    /* ---------------------------------------------------- */
+    .viewport-s2 {
+      width: 100%;
+      height: 480px;
+      background: #02040a;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Swirling animated auroras */
+    .aurora-blur1 {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(236, 72, 153, 0.1) 60%, transparent 100%);
+      filter: blur(35px);
+      animation: aurora1 12s infinite alternate ease-in-out;
+    }
+
+    .aurora-blur2 {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, rgba(59, 130, 246, 0.1) 60%, transparent 100%);
+      filter: blur(30px);
+      animation: aurora2 15s infinite alternate ease-in-out;
+    }
+
+    @keyframes aurora1 {
+      0% { transform: translate(-80px, -60px) rotate(0deg) scale(1); }
+      100% { transform: translate(80px, 40px) rotate(180deg) scale(1.3); }
+    }
+
+    @keyframes aurora2 {
+      0% { transform: translate(60px, 80px) rotate(0deg) scale(1.2); }
+      100% { transform: translate(-60px, -40px) rotate(-180deg) scale(0.9); }
+    }
+
+    /* Glassmorphic card overlay */
+    .glass-card {
+      width: 340px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1.2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 26px;
+      z-index: 2;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .glass-meta {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .glass-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .glass-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .glass-chart-container {
+      height: 50px;
+      width: 100%;
+      margin: 4px 0;
+    }
+
+    .glass-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #60a5fa;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    .glass-btn:hover {
+      background: rgba(96, 165, 250, 0.15);
+      border-color: rgba(96, 165, 250, 0.4);
+      box-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+    }
+
+    /* Chromatic Aberration Text Effect */
+    .chromatic-text {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .chromatic-text::before, .chromatic-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+    }
+
+    .chromatic-text::before {
+      color: #ff007f;
+      left: -1px;
+      text-shadow: 1px 0 0 #ff007f;
+      clip-path: rect(0 340px 0 0);
+      animation: chrom-glitch-1 4s infinite linear alternate-reverse;
+    }
+
+    .chromatic-text::after {
+      color: #00f2fe;
+      left: 1px;
+      text-shadow: -1px 0 0 #00f2fe;
+      clip-path: rect(0 340px 0 0);
+      animation: chrom-glitch-2 3s infinite linear alternate-reverse;
+    }
+
+    @keyframes chrom-glitch-1 {
+      0% { clip-path: inset(10% 0 85% 0); }
+      50% { clip-path: inset(40% 0 50% 0); }
+      100% { clip-path: inset(80% 0 10% 0); }
+    }
+
+    @keyframes chrom-glitch-2 {
+      0% { clip-path: inset(85% 0 10% 0); }
+      50% { clip-path: inset(20% 0 70% 0); }
+      100% { clip-path: inset(5% 0 90% 0); }
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 3: Organic Wellness Grid                      */
+    /* ---------------------------------------------------- */
+    .viewport-s3 {
+      width: 100%;
+      height: 480px;
+      background: #192218;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Gentle drifting fog */
+    .fog-layer1 {
+      position: absolute;
+      width: 300px;
+      height: 120px;
+      background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.08) 0%, transparent 75%);
+      filter: blur(25px);
+      left: -100px;
+      top: 30%;
+      animation: fogDrift 14s infinite linear;
+    }
+
+    .fog-layer2 {
+      position: absolute;
+      width: 350px;
+      height: 150px;
+      background: radial-gradient(ellipse at center, rgba(143, 151, 121, 0.12) 0%, transparent 75%);
+      filter: blur(30px);
+      left: -100px;
+      bottom: 20%;
+      animation: fogDrift 18s infinite linear;
+      animation-delay: -6s;
+    }
+
+    @keyframes fogDrift {
+      0% { transform: translateX(-100px) translateY(10px); }
+      50% { transform: translateX(200px) translateY(-10px); }
+      100% { transform: translateX(500px) translateY(10px); }
+    }
+
+    /* Swiss Style Grid Layout using Sage Green & Paper */
+    .swiss-card {
+      width: 340px;
+      background: #fdfaf7;
+      border-radius: 4px;
+      padding: 28px;
+      color: #223c28;
+      z-index: 2;
+      box-shadow: 0 15px 35px rgba(25, 34, 24, 0.25);
+      border: 1px solid #eae1d7;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle paper texture overlay */
+    .swiss-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      opacity: 0.06;
+      pointer-events: none;
+      background-image: radial-gradient(#000 20%, transparent 20%),
+                        radial-gradient(#000 20%, transparent 20%);
+      background-size: 4px 4px;
+      background-position: 0 0, 2px 2px;
+    }
+
+    .swiss-meta {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #8f9779; /* Sage green */
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .swiss-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #223c28;
+      letter-spacing: -0.5px;
+    }
+
+    .swiss-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: #4a5444;
+    }
+
+    .swiss-badge-row {
+      display: flex;
+      gap: 8px;
+      margin: 4px 0;
+    }
+
+    .swiss-card-tag {
+      background: rgba(143, 151, 121, 0.15);
+      color: #5e6b4e;
+      border: 1px solid rgba(143, 151, 121, 0.25);
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .swiss-btn {
+      background: #8f9779;
+      color: #fdfaf7;
+      border: 1px solid #7c8463;
+      padding: 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+
+    .swiss-btn:hover {
+      background: #7c8463;
+      box-shadow: 0 4px 10px rgba(124, 132, 99, 0.25);
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 4: Neo-Brutalism Tech Website                 */
+    /* ---------------------------------------------------- */
+    .viewport-s4 {
+      width: 100%;
+      height: 480px;
+      background: #e5e7eb;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      border: 4px solid #000;
+    }
+
+    .concrete-bg {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      opacity: 0.15;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0,0,0,0.15) 1px, transparent 1px),
+        radial-gradient(circle at 80% 70%, rgba(0,0,0,0.1) 2px, transparent 2px);
+      background-size: 20px 20px;
+    }
+
+    .brutal-card {
+      width: 320px;
+      background: #fef08a;
+      border: 4px solid #000;
+      border-radius: 12px;
+      padding: 24px;
+      z-index: 2;
+      box-shadow: 8px 8px 0px #000;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: all 0.2s ease;
+      color: #000;
+    }
+
+    .brutal-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 12px 12px 0px #000;
+    }
+
+    .brutal-badge {
+      background: #f43f5e;
+      color: #fff;
+      border: 2px solid #000;
+      align-self: flex-start;
+      padding: 4px 10px;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      box-shadow: 2px 2px 0px #000;
+    }
+
+    .brutal-btn {
+      background: #22c55e;
+      color: #000;
+      border: 3px solid #000;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 4px 4px 0px #000;
+      text-align: center;
+      transition: all 0.1s ease;
+    }
+
+    .brutal-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px #000;
+    }
+
+    .brutal-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0px 0px 0px #000;
+    }
+
+    .glitch-btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      position: relative;
+      color: #000;
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 5: Y2K Candy Pop Mobile UI                   */
+    /* ---------------------------------------------------- */
+    .viewport-s5 {
+      width: 100%;
+      height: 480px;
+      background: linear-gradient(135deg, #fbcfe8, #cffafe);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .y2k-star {
+      position: absolute;
+      color: rgba(236, 72, 153, 0.25);
+      font-size: 3rem;
+      filter: blur(1px);
+    }
+    
+    .y2k-star-1 { top: 15%; left: 15%; animation: floatY2K 6s infinite ease-in-out; }
+    .y2k-star-2 { bottom: 15%; right: 15%; animation: floatY2K 8s infinite ease-in-out -3s; }
+
+    @keyframes floatY2K {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(45deg); }
+    }
+
+    .y2k-phone {
+      width: 260px;
+      height: 420px;
+      background: rgba(255, 255, 255, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      border-radius: 40px;
+      padding: 16px;
+      z-index: 2;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #db2777;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .jelly-btn {
+      background: linear-gradient(135deg, #ff007f, #db2777);
+      border: none;
+      color: #fff;
+      padding: 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 
+        inset -4px -4px 10px rgba(0, 0, 0, 0.3),
+        inset 4px 4px 10px rgba(255, 255, 255, 0.5),
+        0 10px 20px rgba(219, 39, 119, 0.4);
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .jelly-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 
+        inset -2px -2px 5px rgba(0, 0, 0, 0.3),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.5),
+        0 15px 25px rgba(219, 39, 119, 0.5);
+    }
+
+    .jelly-btn:active {
+      transform: scale(0.95);
+    }
+
+    .y2k-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .y2k-bubble {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
+      border-radius: 18px;
+      padding: 12px;
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      box-shadow: inset 2px 2px 4px rgba(255,255,255,1), 0 4px 10px rgba(0,0,0,0.03);
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 6: Classic Mid-Century Vinyl Player           */
+    /* ---------------------------------------------------- */
+    .viewport-s6 {
+      width: 100%;
+      height: 480px;
+      background: #2e261f;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 0 80px rgba(0,0,0,0.9);
+    }
+
+    .light-leak-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at 95% 5%, rgba(249, 115, 22, 0.3) 0%, rgba(220, 38, 38, 0.08) 50%, transparent 100%);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .vinyl-card {
+      width: 330px;
+      background-color: #f5efe6;
+      background-image: 
+        radial-gradient(rgba(69, 26, 3, 0.08) 15%, transparent 16%),
+        radial-gradient(rgba(69, 26, 3, 0.05) 15%, transparent 16%);
+      background-size: 8px 8px;
+      background-position: 0 0, 4px 4px;
+      border-radius: 12px;
+      border: 8px solid #854d0e; /* Walnut Wood Frame */
+      padding: 24px;
+      z-index: 2;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .vinyl-meta {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: #7c2d12; /* Warm Orange/Brown */
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+    }
+
+    .vinyl-card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #451a03;
+    }
+
+    .vinyl-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: #5c3a21;
+    }
+
+    .turntable-platter {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: #111;
+      border: 4px solid #451a03;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      margin: 8px auto;
+    }
+
+    .vinyl-record {
+      width: 106px;
+      height: 106px;
+      animation: rotateVinyl 4s infinite linear paused;
+    }
+
+    .vinyl-card:hover .vinyl-record {
+      animation-play-state: running;
+    }
+
+    @keyframes rotateVinyl {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .tonearm {
+      position: absolute;
+      width: 50px;
+      height: 70px;
+      top: 5px;
+      right: 10px;
+      transform-origin: top right;
+      transform: rotate(10deg);
+      transition: transform 0.8s ease-in-out;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .vinyl-card:hover .tonearm {
+      transform: rotate(26deg);
+    }
+
+    .vinyl-btn {
+      background: #ca8a04;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      color: #ffffff;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(202, 138, 4, 0.2);
+      transition: all 0.2s ease;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .vinyl-btn:hover {
+      background: #a16207;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 12px rgba(161, 98, 7, 0.4);
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 7: Cyberpunk Terminal UI                      */
+    /* ---------------------------------------------------- */
+    .viewport-s7 {
+      width: 100%;
+      height: 480px;
+      background: #050508;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .s7-scanlines {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 4px, 6px 100%;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .cyber-panel {
+      width: 330px;
+      background: rgba(10, 15, 30, 0.8);
+      border: 2px solid #00ffcc;
+      border-radius: 8px;
+      padding: 24px;
+      z-index: 2;
+      box-shadow: 0 0 25px rgba(0, 255, 204, 0.25);
+      position: relative;
+      color: #00ffcc;
+      font-family: 'Space Grotesk', monospace;
+    }
+
+    .cyber-header {
+      border-bottom: 2px solid #ff0055;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cyber-btn {
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      border: 1px solid #ff0055;
+      color: #ff0055;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(255, 0, 85, 0.2);
+    }
+
+    .cyber-btn:hover {
+      background: #ff0055;
+      color: #000;
+      box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
+      text-shadow: none;
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 8: Wabi-Sabi Spa Intro                        */
+    /* ---------------------------------------------------- */
+    .viewport-s8 {
+      width: 100%;
+      height: 480px;
+      background: #dfd5c6;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 0 80px rgba(0,0,0,0.15);
+    }
+
+    .caustics-layer {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.25) 0%, transparent 60%),
+                        radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .wabi-card {
+      width: 330px;
+      background: #b26a51;
+      border-radius: 4px;
+      padding: 28px;
+      color: #f6eee0;
+      z-index: 2;
+      box-shadow: 20px 20px 40px rgba(74, 52, 45, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .wabi-card::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.15);
+      top: 12px;
+      left: 12px;
+      z-index: -1;
+      filter: blur(8px);
+      border-radius: 4px;
+    }
+
+    .wabi-meta {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: rgba(246, 238, 224, 0.65);
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+    }
+
+    .wabi-card-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: #f6eee0;
+      font-weight: 400;
+    }
+
+    .wabi-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      line-height: 1.6;
+      color: rgba(246, 238, 224, 0.85);
+    }
+
+    .wabi-btn {
+      background: transparent;
+      border: 1px solid rgba(246, 238, 224, 0.4);
+      padding: 12px;
+      border-radius: 4px;
+      font-weight: 700;
+      color: #f6eee0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .wabi-btn:hover {
+      background: #f6eee0;
+      color: #b26a51;
+      border-color: #f6eee0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 9: Ultra-Minimal Obsidian Portfolio           */
+    /* ---------------------------------------------------- */
+    .viewport-s9 {
+      width: 100%;
+      height: 480px;
+      background: #000000;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .obsidian-card {
+      width: 340px;
+      background: #0a0a0a;
+      border: 1px solid #ffffff;
+      border-radius: 0px;
+      padding: 30px;
+      z-index: 2;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .obsidian-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 12px;
+    }
+
+    .obsidian-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+    }
+
+    .obsidian-meta {
+      font-size: 0.75rem;
+      color: #888888;
+      letter-spacing: 1px;
+    }
+
+    .obsidian-btn {
+      background: #ffffff;
+      color: #000000;
+      border: 1px solid #ffffff;
+      padding: 12px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-align: center;
+      font-family: 'Space Grotesk', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .obsidian-btn:hover {
+      background: transparent;
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 10: Retro Synthwave Arcade                    */
+    /* ---------------------------------------------------- */
+    .viewport-s10 {
+      width: 100%;
+      height: 480px;
+      background: #0d0118;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .synth-grid {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      bottom: -50%;
+      background-image: 
+        linear-gradient(rgba(244, 63, 94, 0.15) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(244, 63, 94, 0.15) 2px, transparent 2px);
+      background-size: 40px 40px;
+      transform: perspective(180px) rotateX(60deg);
+      z-index: 1;
+      transform-origin: center bottom;
+      animation: gridScroll 12s infinite linear;
+    }
+
+    @keyframes gridScroll {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 480px; }
+    }
+
+    .synth-vignette {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle, transparent 40%, rgba(13,1,24,0.95) 95%);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .synth-bokeh1, .synth-bokeh2 {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(12px);
+      opacity: 0.3;
+      z-index: 2;
+    }
+
+    .synth-bokeh1 {
+      width: 160px; height: 160px;
+      background: #f43f5e;
+      top: 20%; left: 15%;
+      animation: floatBokeh 10s infinite alternate ease-in-out;
+    }
+
+    .synth-bokeh2 {
+      width: 180px; height: 180px;
+      background: #a855f7;
+      bottom: 25%; right: 10%;
+      animation: floatBokeh 8s infinite alternate ease-in-out -4s;
+    }
+
+    @keyframes floatBokeh {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(30px, -20px) scale(1.15); }
+    }
+
+    .synth-card {
+      width: 320px;
+      background: linear-gradient(135deg, rgba(40, 10, 60, 0.8), rgba(20, 5, 30, 0.9));
+      border: 2.5px solid #ff007f;
+      border-radius: 12px;
+      padding: 24px;
+      z-index: 4;
+      box-shadow: 
+        0 15px 35px rgba(0,0,0,0.6),
+        0 0 20px rgba(255, 0, 127, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .synth-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #fff 0%, #ff007f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 11: Ethereal Holographic Lab                  */
+    /* ---------------------------------------------------- */
+    .viewport-s11 {
+      width: 100%;
+      height: 480px;
+      background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .holo-glow {
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(255, 0, 128, 0.12) 0%, rgba(0, 255, 255, 0.12) 30%, rgba(240, 240, 240, 0) 70%);
+      animation: holoShift 15s infinite alternate linear;
+      z-index: 1;
+    }
+
+    @keyframes holoShift {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(50px, 50px) rotate(180deg); }
+    }
+
+    .liquid-metal {
+      position: absolute;
+      width: 180px; height: 180px;
+      z-index: 2;
+      filter: drop-shadow(0 15px 30px rgba(0,0,0,0.15));
+      animation: floatLiquid 6s infinite alternate ease-in-out;
+    }
+
+    @keyframes floatLiquid {
+      0% { transform: translateY(0) rotate(0deg) scale(1); }
+      100% { transform: translateY(-20px) rotate(15deg) scale(1.05); }
+    }
+
+    .holo-card {
+      width: 320px;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(25px) saturate(160%);
+      -webkit-backdrop-filter: blur(25px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 16px;
+      padding: 24px;
+      z-index: 3;
+      box-shadow: 
+        0 20px 40px rgba(0,0,0,0.08),
+        inset 0 0 12px rgba(255,255,255,0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      color: #1e293b;
+      text-align: left;
+    }
+
+    .holo-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, #ff007f, #7928ca, #00dfd8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientFlow 6s infinite linear;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .holo-btn {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5));
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      color: #7928ca;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(121, 40, 202, 0.1);
+      transition: all 0.3s;
+    }
+
+    .holo-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 6px 15px rgba(121, 40, 202, 0.2),
+        0 0 10px rgba(0, 223, 216, 0.4);
+      border-color: #00dfd8;
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 12: 3D Puffy & Clay Toy                       */
+    /* ---------------------------------------------------- */
+    .viewport-s12 {
+      width: 100%;
+      height: 480px;
+      background: #eef2f7;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .tilt-shift-blur {
+      position: absolute;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 10;
+      box-shadow: 
+        inset 0 60px 40px -30px rgba(238,242,247,0.85),
+        inset 0 -60px 40px -30px rgba(238,242,247,0.85);
+    }
+
+    .clay-bg-sphere1, .clay-bg-sphere2 {
+      position: absolute;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .clay-bg-sphere1 {
+      width: 130px; height: 130px;
+      background: #fbcfe8;
+      top: 15%; left: 10%;
+      box-shadow: 
+        inset -10px -10px 25px rgba(0, 0, 0, 0.05),
+        inset 15px 15px 35px rgba(255, 255, 255, 0.8),
+        0 20px 40px rgba(244, 63, 94, 0.1);
+      animation: floatClay1 7s infinite alternate ease-in-out;
+    }
+
+    .clay-bg-sphere2 {
+      width: 150px; height: 150px;
+      background: #c084fc;
+      bottom: 10%; right: 8%;
+      box-shadow: 
+        inset -15px -15px 30px rgba(0, 0, 0, 0.1),
+        inset 20px 20px 40px rgba(255, 255, 255, 0.7),
+        0 25px 45px rgba(121, 40, 202, 0.15);
+      animation: floatClay2 8s infinite alternate ease-in-out -3s;
+    }
+
+    @keyframes floatClay1 {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-25px) scale(1.08); }
+    }
+    @keyframes floatClay2 {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(20px) scale(0.95); }
+    }
+
+    .clay-card {
+      width: 320px;
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 30px;
+      z-index: 5;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      color: #475569;
+      box-shadow: 
+        0 30px 60px rgba(100, 116, 139, 0.12),
+        inset -10px -10px 20px rgba(100, 116, 139, 0.05),
+        inset 10px 10px 20px rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+
+    .clay-badge {
+      align-self: center;
+      background: #ecfdf5;
+      color: #10b981;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      font-family: 'Space Grotesk', sans-serif;
+      box-shadow: 
+        0 4px 8px rgba(16, 185, 129, 0.08),
+        inset -2px -2px 5px rgba(16, 185, 129, 0.05),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.8);
+    }
+
+    .clay-card-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: #1e293b;
+    }
+
+    .clay-btn {
+      background: #3b82f6;
+      color: #ffffff;
+      border: none;
+      padding: 16px 28px;
+      border-radius: 24px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+      box-shadow: 
+        0 10px 20px rgba(59, 130, 246, 0.25),
+        inset -4px -4px 8px rgba(0, 0, 0, 0.15),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.2);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .clay-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 
+        0 14px 28px rgba(59, 130, 246, 0.35),
+        inset -2px -2px 4px rgba(0, 0, 0, 0.15),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.3);
+    }
+
+    .clay-btn:active {
+      transform: scale(0.98);
+      box-shadow: 
+        0 5px 10px rgba(59, 130, 246, 0.2),
+        inset 4px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 13: Dark Academia Archive                    */
+    /* ---------------------------------------------------- */
+    .viewport-s13 {
+      width: 100%;
+      height: 480px;
+      background: #1b1310;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(139, 92, 26, 0.25);
+    }
+
+    .academia-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle, rgba(94, 60, 40, 0.15) 0%, #150e0c 90%);
+      z-index: 1;
+    }
+
+    .candle-glow {
+      position: absolute;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(234, 179, 8, 0.08) 0%, rgba(234, 179, 8, 0) 70%);
+      top: 10%; left: 40%;
+      z-index: 2;
+      animation: flickerLight 5s infinite alternate ease-in-out;
+    }
+
+    @keyframes flickerLight {
+      0% { opacity: 0.8; transform: scale(1); }
+      100% { opacity: 1.2; transform: scale(1.08); }
+    }
+
+    .leather-card {
+      width: 340px;
+      background: #271d19;
+      border: 2px solid #b89765;
+      border-radius: 8px;
+      padding: 30px;
+      z-index: 3;
+      box-shadow: 
+        0 25px 50px rgba(0,0,0,0.7),
+        inset 0 0 15px rgba(0,0,0,0.5),
+        inset 0 0 30px rgba(184, 151, 101, 0.05);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      font-family: 'Playfair Display', serif;
+      color: #e5dada;
+      background-image: 
+        radial-gradient(rgba(0,0,0,0.15) 15%, transparent 20%),
+        radial-gradient(rgba(0,0,0,0.15) 15%, transparent 20%);
+      background-size: 4px 4px;
+      background-position: 0 0, 2px 2px;
+    }
+
+    .leather-card::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px solid rgba(184, 151, 101, 0.35);
+      pointer-events: none;
+    }
+
+    .academia-header {
+      border-bottom: 1px double rgba(184, 151, 101, 0.4);
+      padding-bottom: 14px;
+      text-align: center;
+    }
+
+    .academia-meta {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: #b89765;
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+      margin-bottom: 4px;
+    }
+
+    .academia-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: #f3eae8;
+      font-weight: 400;
+    }
+
+    .academia-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #c4b9b6;
+      text-align: justify;
+    }
+
+    .academia-btn {
+      background: transparent;
+      color: #b89765;
+      border: 1px solid #b89765;
+      padding: 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+
+    .academia-btn:hover {
+      background: #b89765;
+      color: #271d19;
+      box-shadow: 0 0 10px rgba(184, 151, 101, 0.3);
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 1: Avant-garde Bento Grid                     */
+    /* ---------------------------------------------------- */
+    .viewport-s1 {
+      width: 100%;
+      height: 480px;
+      background: #0d0d0d;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      box-sizing: border-box;
+      padding: 24px;
+    }
+
+    .bento-container {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .bento-item {
+      background: #141414;
+      border: 1px solid #222222;
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      box-sizing: border-box;
+    }
+
+    .bento-item:hover {
+      transform: translateY(-2px);
+      border-color: #002fa7;
+      box-shadow: 0 8px 24px rgba(0, 47, 167, 0.15);
+    }
+
+    .bento-meta {
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      color: #666666;
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+    }
+
+    .bento-item.item-large {
+      grid-column: span 2;
+      grid-row: span 1;
+      background: linear-gradient(135deg, #141414 0%, #1a1a1a 100%);
+    }
+
+    .bento-item.item-accent {
+      background: #002fa7;
+      color: #ffffff;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .bento-item.item-accent:hover {
+      background: #002585;
+      box-shadow: 0 8px 24px rgba(0, 47, 167, 0.45);
+    }
+
+    .bento-item.item-chart {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .bento-item.item-info {
+      grid-column: span 3;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+    }
+
+    .bento-large-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #ffffff;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.5px;
+      margin: 0;
+    }
+
+    .bento-accent-num {
+      font-size: 3rem;
+      font-weight: 900;
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .bento-svg {
+      width: 100%;
+      height: 55px;
+      margin-top: 8px;
+    }
+
+    .bento-semi {
+      transform-origin: 80px 30px;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .bento-item:hover .bento-semi {
+      transform: rotate(45deg);
+    }
+
+    .bento-status-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .bento-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #002fa7;
+      box-shadow: 0 0 8px #002fa7;
+      animation: bentoPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes bentoPulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .bento-status-text {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #ffffff;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .bento-chart-svg {
+      width: 100%;
+      height: 60px;
+      margin-top: 6px;
+    }
+
+    .bento-ticker {
+      font-size: 0.7rem;
+      color: #888888;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    .bento-btn {
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .bento-btn:hover {
+      background: #002fa7;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 47, 167, 0.4);
+    }
+
+    .bento-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 14: Nebula Constellation Map                  */
+    /* ---------------------------------------------------- */
+    .viewport-s14 {
+      width: 100%;
+      height: 480px;
+      background: #06060e;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      box-sizing: border-box;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .nebula-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.35;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      animation: nebulaFloat 18s infinite alternate ease-in-out;
+    }
+
+    .neb-magenta {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, #db2777 0%, transparent 70%);
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .neb-purple {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
+      bottom: 10%;
+      right: 15%;
+      animation-delay: -4s;
+      animation-duration: 22s;
+    }
+
+    .neb-cyan {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+      top: 30%;
+      right: 20%;
+      animation-delay: -8s;
+      animation-duration: 15s;
+    }
+
+    @keyframes nebulaFloat {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      100% { transform: translate(30px, -20px) scale(1.15) rotate(120deg); }
+    }
+
+    .const-star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #ffffff;
+      pointer-events: none;
+      animation: starTwinkle 3s infinite ease-in-out;
+    }
+
+    @keyframes starTwinkle {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px #ffffff, 0 0 4px #06b6d4; }
+    }
+
+    .const-map-card {
+      width: 330px;
+      height: 380px;
+      background: rgba(10, 10, 22, 0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: 22px;
+      color: #f1f5f9;
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      z-index: 2;
+    }
+
+    .const-map-card:hover {
+      border-color: rgba(6, 182, 212, 0.4);
+      box-shadow: 
+        0 25px 50px rgba(6, 182, 212, 0.12),
+        0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .const-svg {
+      position: absolute;
+      top: 50px;
+      left: 20px;
+      width: 290px;
+      height: 200px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .const-line {
+      stroke: rgba(255, 255, 255, 0.15);
+      stroke-width: 1;
+      transition: all 0.8s ease;
+    }
+
+    .const-map-card:hover .const-line {
+      stroke: #06b6d4;
+      stroke-width: 1.5;
+      filter: drop-shadow(0 0 4px #06b6d4);
+    }
+
+    .const-star-glow {
+      fill: #ffffff;
+      transition: all 0.5s ease;
+    }
+
+    .const-map-card:hover .const-star-glow {
+      fill: #06b6d4;
+      r: 4;
+      filter: drop-shadow(0 0 6px #06b6d4);
+    }
+
+    .galaxy-core {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      top: 100px;
+      left: 115px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: coreRotate 30s infinite linear;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes coreRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+
+    .const-hud-grid {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+
+    .const-meta {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .const-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-top: -4px;
+    }
+
+    .const-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      line-height: 1.6;
+      color: #94a3b8;
+      text-align: justify;
+      word-break: keep-all;
+      z-index: 2;
+    }
+
+    .const-btn {
+      background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+      color: #ffffff;
+      border: none;
+      padding: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: center;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(6, 182, 212, 0.2);
+      z-index: 2;
+    }
+
+    .const-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+      background: linear-gradient(135deg, #8b5cf6 0%, #22d3ee 100%);
+    }
+
+    .const-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 8px rgba(6, 182, 212, 0.1);
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 15: Japandi Editorial                         */
+    /* ---------------------------------------------------- */
+    .viewport-s15 {
+      width: 100%;
+      height: 480px;
+      background: #f4efe8; /* Warm beige */
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid #e7dfd5;
+    }
+
+    /* Washi Paper Linen grain */
+    .linen-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0.05;
+      pointer-events: none;
+      background-image: 
+        linear-gradient(rgba(0,0,0,0.8) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.8) 1px, transparent 1px);
+      background-size: 3px 3px;
+      z-index: 1;
+    }
+
+    /* Soft leaf shadow */
+    .leaf-shadow {
+      position: absolute;
+      top: -20px;
+      right: -30px;
+      width: 280px;
+      height: 350px;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10,90 Q50,70 80,10 Q60,30 40,35 Q65,60 10,90 Z M40,35 Q20,30 35,15 Q30,25 40,35 Z M60,30 Q45,20 55,5 Q50,15 60,30 Z' fill='%2342372d'/%3E%3C/svg%3E") no-repeat center/contain;
+      opacity: 0.08;
+      filter: blur(6px);
+      pointer-events: none;
+      z-index: 2;
+      transform: rotate(-10deg);
+    }
+
+    /* Japandi minimalist editorial card */
+    .japandi-card {
+      width: 350px;
+      background: #faf7f2;
+      border: 1px solid #e2d9cd;
+      border-radius: 8px;
+      padding: 24px;
+      z-index: 3;
+      box-shadow: 0 15px 35px rgba(66, 55, 45, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      color: #42372d;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .japandi-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: #9c8e7e;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .japandi-title {
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: #2c251e;
+      line-height: 1.3;
+    }
+
+    /* Double exposure simulated image block */
+    .japandi-double-exposure {
+      width: 100%;
+      height: 130px;
+      background: #e2d9cd;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .japandi-image-layer1 {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 30% 50%, #dcd2c4 0%, #bcae9f 100%);
+    }
+
+    .japandi-image-layer2 {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10,90 Q30,30 50,70 T90,20 L90,100 L10,100 Z' fill='%236e6053'/%3E%3C/svg%3E") no-repeat center/cover;
+      mix-blend-mode: multiply;
+      opacity: 0.6;
+    }
+
+    .japandi-double-exposure-text {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #faf7f2;
+      font-size: 1.2rem;
+      z-index: 2;
+      text-shadow: 0 2px 4px rgba(44, 37, 30, 0.3);
+    }
+
+    .japandi-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: #6e6053;
+      text-align: justify;
+      word-break: keep-all;
+    }
+
+    .japandi-btn {
+      background: #2c251e;
+      color: #faf7f2;
+      border: none;
+      padding: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      border-radius: 4px;
+    }
+
+    .japandi-btn:hover {
+      background: #6e6053;
+      transform: translateY(-1px);
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 16: Art Deco Gatsby Luxe                      */
+    /* ---------------------------------------------------- */
+    .viewport-s16 {
+      width: 100%;
+      height: 480px;
+      background: #0d1b2a;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .artdeco-card {
+      width: 330px;
+      background: #0d1b2a;
+      border-radius: 6px;
+      border: 2px solid #e0a96d; /* Gold border */
+      padding: 28px;
+      color: #faf7f2;
+      z-index: 2;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(224, 169, 109, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .artdeco-meta {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: rgba(224, 169, 109, 0.7);
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+    }
+
+    .artdeco-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #e0a96d;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .artdeco-visual-box {
+      width: 120px;
+      height: 120px;
+      border: 1px solid #e0a96d;
+      margin: 8px auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.5s ease;
+    }
+
+    .artdeco-card:hover .artdeco-visual-box {
+      transform: scale(1.05) rotate(45deg);
+    }
+
+    .artdeco-visual-box::before {
+      content: '';
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border: 1px dashed #e0a96d;
+      transform: rotate(45deg);
+      transition: transform 0.5s ease;
+    }
+
+    .artdeco-card:hover .artdeco-visual-box::before {
+      transform: rotate(-45deg);
+    }
+
+    .artdeco-visual-inner {
+      width: 30px;
+      height: 30px;
+      background: #e0a96d;
+      box-shadow: 0 0 10px rgba(224, 169, 109, 0.5);
+    }
+
+    .artdeco-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      line-height: 1.6;
+      color: rgba(250, 247, 242, 0.8);
+      text-align: justify;
+      word-break: keep-all;
+    }
+
+    .artdeco-btn {
+      background: linear-gradient(135deg, #e0a96d 0%, #c5935c 100%);
+      border: 1px solid #e0a96d;
+      padding: 12px;
+      border-radius: 4px;
+      font-weight: 700;
+      color: #0d1b2a;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .artdeco-btn:hover {
+      box-shadow: 0 0 15px rgba(224, 169, 109, 0.6);
+      transform: translateY(-1px);
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 17: Vintage Press Halftone                    */
+    /* ---------------------------------------------------- */
+    .viewport-s17 {
+      width: 100%;
+      height: 480px;
+      background: #e6dfd3;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .vintage-card {
+      width: 330px;
+      background: #eae1d4;
+      border-radius: 4px;
+      border: 4px double #8d5b4c;
+      padding: 26px;
+      color: #8d5b4c;
+      z-index: 2;
+      box-shadow: 0 15px 30px rgba(141, 91, 76, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .vintage-meta {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      color: #8d5b4c;
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      opacity: 0.8;
+    }
+
+    .vintage-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #8d5b4c;
+      text-align: left;
+    }
+
+    .vintage-halftone-box {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 2px solid #8d5b4c;
+      margin: 4px auto;
+      background-image: 
+        radial-gradient(#8d5b4c 20%, transparent 20%),
+        radial-gradient(#8d5b4c 20%, transparent 20%);
+      background-size: 10px 10px;
+      background-position: 0 0, 5px 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s ease;
+      position: relative;
+    }
+
+    .vintage-card:hover .vintage-halftone-box {
+      background-size: 8px 8px;
+      transform: scale(1.05);
+    }
+
+    .vintage-halftone-inner {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #eae1d4;
+      border: 2px solid #8d5b4c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .vintage-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      line-height: 1.6;
+      color: #70473c;
+      text-align: justify;
+      word-break: keep-all;
+    }
+
+    .vintage-btn {
+      background: #8d5b4c;
+      border: none;
+      padding: 12px;
+      border-radius: 2px;
+      font-weight: 700;
+      color: #eae1d4;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .vintage-btn:hover {
+      background: #70473c;
+      box-shadow: 0 4px 8px rgba(141, 91, 76, 0.3);
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 18: Cozy Clay Diary                           */
+    /* ---------------------------------------------------- */
+    .viewport-s18 {
+      width: 100%;
+      height: 480px;
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fed7aa 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      box-sizing: border-box;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .clay-card {
+      width: 320px;
+      background: #fffbeb; /* Warm cream */
+      border-radius: 32px;
+      padding: 24px;
+      color: #7c2d12; /* Warm brown */
+      box-shadow:
+        9px 9px 18px #e5e0d0,
+        -9px -9px 18px #ffffff,
+        inset 3px 3px 6px #ffffff,
+        inset -3px -3px 6px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+      z-index: 2;
+      box-sizing: border-box;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .clay-card:hover {
+      transform: translateY(-5px);
+      box-shadow:
+        12px 12px 24px #dbd6c6,
+        -12px -12px 24px #ffffff,
+        inset 4px 4px 8px #ffffff,
+        inset -4px -4px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .clay-cat-decor {
+      position: absolute;
+      top: -38px;
+      right: 30px;
+      width: 65px;
+      height: 45px;
+      z-index: 3;
+      pointer-events: none;
+      transition: transform 0.4s ease;
+    }
+
+    .clay-card:hover .clay-cat-decor {
+      transform: translateY(2px) scaleY(0.95);
+    }
+
+    .cat-ear {
+      transform-origin: 50% 50%;
+      transition: transform 0.3s ease;
+    }
+
+    .clay-card:hover .cat-ear-left {
+      transform: rotate(-10deg);
+    }
+
+    .clay-card:hover .cat-ear-right {
+      transform: rotate(10deg);
+    }
+
+    .clay-row-decor {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .clay-meta {
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      color: #c2410c;
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+    }
+
+    .clay-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #7c2d12;
+      margin-top: -6px;
+    }
+
+    .clay-mug-svg {
+      width: 48px;
+      height: 48px;
+      filter: drop-shadow(2px 4px 6px rgba(124, 45, 18, 0.08));
+    }
+
+    .steam-line {
+      stroke: #ea580c;
+      stroke-width: 2;
+      stroke-linecap: round;
+      fill: none;
+      stroke-dasharray: 20;
+      stroke-dashoffset: 40;
+      animation: steamRise 3s infinite linear;
+    }
+
+    .steam-2 {
+      animation-delay: 1.5s;
+    }
+
+    @keyframes steamRise {
+      0% {
+        stroke-dashoffset: 40;
+        opacity: 0;
+        transform: translateY(0) scaleX(1);
+      }
+      50% {
+        opacity: 0.8;
+        transform: translateY(-8px) scaleX(1.2);
+      }
+      100% {
+        stroke-dashoffset: 0;
+        opacity: 0;
+        transform: translateY(-16px) scaleX(0.8);
+      }
+    }
+
+    .clay-todo-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .clay-todo-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fffbeb;
+      border-radius: 16px;
+      padding: 10px 14px;
+      box-shadow:
+        inset 3px 3px 6px #e5e0d0,
+        inset -3px -3px 6px #ffffff;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .clay-todo-item:hover {
+      box-shadow:
+        inset 1px 1px 2px #e5e0d0,
+        inset -1px -1px 2px #ffffff;
+    }
+
+    .clay-checkbox {
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      background: #fffbeb;
+      box-shadow:
+        3px 3px 6px #e5e0d0,
+        -3px -3px 6px #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .clay-todo-item:hover .clay-checkbox {
+      box-shadow:
+        inset 2px 2px 4px #e5e0d0,
+        inset -2px -2px 4px #ffffff;
+    }
+
+    .clay-checkbox-checked::after {
+      content: '✓';
+      font-size: 0.75rem;
+      font-weight: 900;
+      color: #ea580c;
+    }
+
+    .clay-todo-text {
+      font-size: 0.8rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: #9a3412;
+    }
+
+    .clay-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      line-height: 1.6;
+      color: #9a3412;
+      text-align: justify;
+      word-break: keep-all;
+    }
+
+    .clay-btn {
+      background: #fed7aa; /* Cozy peach */
+      color: #7c2d12;
+      border: none;
+      padding: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: center;
+      box-shadow:
+        4px 4px 8px #e5e0d0,
+        -4px -4px 8px #ffffff;
+      border-radius: 16px;
+    }
+
+    .clay-btn:hover {
+      background: #ffedd5;
+      transform: translateY(-2px);
+      box-shadow:
+        6px 6px 12px #e5e0d0,
+        -6px -6px 12px #ffffff;
+    }
+
+    .clay-btn:active {
+      transform: translateY(1px);
+      box-shadow:
+        inset 3px 3px 6px #e5e0d0,
+        inset -3px -3px 6px #ffffff;
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 19: Risograph Newtro Zine                    */
+    /* ---------------------------------------------------- */
+    .viewport-s19 {
+      width: 100%;
+      height: 480px;
+      background: #f4eedb; /* Recycled paper off-white */
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      filter: url(#riso-grain);
+    }
+
+    .riso-card {
+      width: 310px;
+      height: 390px;
+      background: #fcfbf7;
+      border: 3.5px solid #0047ab;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      box-shadow: 8px 8px 0px rgba(0, 71, 171, 0.15);
+      font-family: 'Space Grotesk', 'Impact', sans-serif;
+      overflow: hidden;
+      transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .riso-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 12px 12px 0px rgba(0, 71, 171, 0.2);
+    }
+
+    .riso-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 2.5px solid #0047ab;
+      padding-bottom: 8px;
+    }
+
+    .riso-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #0047ab;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .riso-issue {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #ff007f;
+      background: rgba(255, 0, 127, 0.08);
+      padding: 2px 6px;
+      border: 2px solid #ff007f;
+      border-radius: 2px;
+      letter-spacing: 0.5px;
+    }
+
+    .riso-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: 15px 0;
+    }
+
+    .riso-halftone-bg {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background-image: radial-gradient(#0047ab 20%, transparent 22%);
+      background-size: 8px 8px;
+      opacity: 0.18;
+      z-index: 1;
+    }
+
+    .riso-illustration-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .riso-illustration {
+      width: 100%;
+      height: 100%;
+    }
+
+    .riso-pink-layer {
+      transition: transform 0.2s ease;
+    }
+
+    .riso-card:hover .riso-pink-layer {
+      animation: risoShift 0.15s infinite alternate steps(2);
+    }
+
+    @keyframes risoShift {
+      0% { transform: translate(-3px, -3px); }
+      100% { transform: translate(-1px, -4px); }
+    }
+
+    .riso-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .riso-details {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #0047ab;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-top: 1.5px dashed #0047ab;
+      padding-top: 6px;
+    }
+
+    .riso-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      line-height: 1.5;
+      color: #374151;
+      text-align: justify;
+      word-break: keep-all;
+    }
+
+    .riso-btn {
+      background: #ff007f;
+      color: #ffffff;
+      border: 3px solid #0047ab;
+      padding: 10px 16px;
+      font-weight: 800;
+      font-family: 'Space Grotesk', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 4px 4px 0px #0047ab;
+      transition: all 0.1s steps(2);
+      cursor: pointer;
+      border-radius: 0;
+      text-align: center;
+    }
+
+    .riso-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px #0047ab;
+      background: #0047ab;
+    }
+
+    .riso-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px #0047ab;
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 20: Whimsical Dreamy Calendar                */
+    /* ---------------------------------------------------- */
+    .viewport-s20 {
+      width: 100%;
+      height: 480px;
+      background: #faf5ff; /* Fallback light lavender */
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .mesh-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      z-index: 1;
+    }
+
+    .orb1 {
+      width: 280px;
+      height: 280px;
+      background: #fbcfe8; /* pastel pink */
+      top: -40px;
+      left: -40px;
+      animation: floatOrb1 18s infinite alternate ease-in-out;
+    }
+
+    .orb2 {
+      width: 320px;
+      height: 320px;
+      background: #e9d5ff; /* pastel lavender */
+      bottom: -80px;
+      right: -40px;
+      animation: floatOrb2 22s infinite alternate ease-in-out;
+    }
+
+    .orb3 {
+      width: 230px;
+      height: 230px;
+      background: #ccfbf1; /* pastel mint */
+      bottom: -40px;
+      left: -40px;
+      animation: floatOrb3 15s infinite alternate ease-in-out;
+    }
+
+    .orb4 {
+      width: 260px;
+      height: 260px;
+      background: #fef08a; /* pastel yellow */
+      top: -60px;
+      right: -40px;
+      animation: floatOrb4 19s infinite alternate ease-in-out;
+    }
+
+    @keyframes floatOrb1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 30px) scale(1.1); }
+    }
+    @keyframes floatOrb2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-30px, -50px) scale(0.95); }
+    }
+    @keyframes floatOrb3 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(25px, -30px) scale(1.05); }
+    }
+    @keyframes floatOrb4 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-40px, 40px) scale(1.02); }
+    }
+
+    .whimsical-particle {
+      position: absolute;
+      background: #ffffff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+      box-shadow: 0 0 8px #ffffff, 0 0 16px #fbcfe8;
+      animation: particleFloat 7s infinite ease-in-out;
+    }
+
+    .p1 { width: 8px; height: 8px; left: 12%; top: 20%; animation-delay: 0s; }
+    .p2 { width: 10px; height: 10px; right: 15%; top: 12%; animation-delay: 2s; }
+    .p3 { width: 6px; height: 6px; left: 22%; bottom: 15%; animation-delay: 4s; }
+    .p4 { width: 9px; height: 9px; right: 12%; bottom: 22%; animation-delay: 1s; }
+
+    @keyframes particleFloat {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.25; }
+      50% { transform: translateY(-25px) scale(1.15); opacity: 0.85; }
+    }
+
+    .glass-calendar {
+      width: 320px;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 26px;
+      padding: 22px;
+      color: #5b21b6; /* Deep purple/indigo text */
+      z-index: 3;
+      box-shadow: 
+        0 15px 35px rgba(139, 92, 246, 0.12),
+        inset 1px 1px 0px rgba(255, 255, 255, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .glass-calendar:hover {
+      transform: translateY(-5px);
+      box-shadow: 
+        0 20px 40px rgba(139, 92, 246, 0.22),
+        inset 1px 1px 0px rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.26);
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      padding-bottom: 10px;
+    }
+
+    .calendar-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .calendar-subtitle {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #7c3aed;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.8;
+    }
+
+    .calendar-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #4c1d95;
+      letter-spacing: -0.3px;
+    }
+
+    .dreamy-moon {
+      width: 28px;
+      height: 28px;
+      filter: drop-shadow(0 0 6px rgba(219, 39, 119, 0.3));
+      animation: moonSway 5s infinite ease-in-out;
+    }
+
+    @keyframes moonSway {
+      0%, 100% { transform: rotate(0deg) translateY(0); }
+      50% { transform: rotate(8deg) translateY(-2px); }
+    }
+
+    .calendar-week {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin: 4px 0;
+    }
+
+    .day-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .day-label {
+      font-size: 0.6rem;
+      font-weight: 800;
+      color: #7c3aed;
+      opacity: 0.75;
+    }
+
+    .day-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7c3aed;
+      box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.3);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .day-circle:hover {
+      background: rgba(255, 255, 255, 0.6);
+      transform: scale(1.1);
+    }
+
+    .day-circle.mood-dreamy {
+      background: rgba(236, 72, 153, 0.18);
+      color: #db2777;
+      border-color: rgba(236, 72, 153, 0.3);
+    }
+    .day-circle.mood-cozy {
+      background: rgba(14, 165, 233, 0.12);
+      color: #0284c7;
+      border-color: rgba(14, 165, 233, 0.25);
+    }
+    .day-circle.mood-mystic {
+      background: rgba(168, 85, 247, 0.18);
+      color: #7c3aed;
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+    .day-circle.mood-spark {
+      background: rgba(234, 179, 8, 0.15);
+      color: #ca8a04;
+      border-color: rgba(234, 179, 8, 0.25);
+    }
+    .day-circle.mood-active {
+      background: rgba(20, 184, 166, 0.15);
+      color: #0d9488;
+      border-color: rgba(20, 184, 166, 0.25);
+    }
+
+    .mood-icon {
+      width: 13px;
+      height: 13px;
+    }
+
+    .calendar-quote {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+    }
+
+    .quote-text {
+      font-size: 0.65rem;
+      font-style: italic;
+      color: #6b21a8;
+      line-height: 1.4;
+      display: block;
+    }
+
+    .glass-btn {
+      background: linear-gradient(135deg, rgba(219, 39, 119, 0.85) 0%, rgba(124, 58, 237, 0.85) 100%);
+      color: #ffffff;
+      border: none;
+      padding: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: center;
+      box-shadow: 0 8px 18px rgba(124, 58, 237, 0.18);
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 30%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0) 70%
+      );
+      transform: rotate(25deg);
+      transition: all 0.5s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .glass-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(124, 58, 237, 0.3);
+      background: linear-gradient(135deg, rgba(219, 39, 119, 0.95) 0%, rgba(124, 58, 237, 0.95) 100%);
+    }
+
+    .glass-btn:hover::after {
+      animation: sweepShimmer 1.4s infinite ease-in-out;
+      opacity: 1;
+    }
+
+    @keyframes sweepShimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .glass-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 8px rgba(124, 58, 237, 0.15);
+    }
+
+    /* ---------------------------------------------------- */
+    /* SAMPLE 21: Kinetic Typography Poster                 */
+    /* ---------------------------------------------------- */
+    .viewport-s21 {
+      width: 100%;
+      height: 480px;
+      background: #f4ecd8; /* Sand color canvas */
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .kinetic-poster {
+      width: 325px;
+      height: 380px;
+      background: #851c1c; /* Crimson Red background */
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 16px 36px rgba(133, 28, 28, 0.25);
+      border: 6px solid #f4ecd8;
+      color: #f4ecd8;
+      font-family: 'Space Grotesk', sans-serif;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      z-index: 2;
+    }
+
+    .kinetic-poster:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 48px rgba(133, 28, 28, 0.4);
+    }
+
+    .bauhaus-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.15;
+    }
+
+    .kinetic-meta {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      z-index: 3;
+    }
+
+    .kinetic-canvas {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 10px;
+      z-index: 3;
+    }
+
+    .kinetic-row {
+      font-size: 3.2rem;
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .kinetic-char {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: default;
+    }
+
+    .kinetic-char:hover {
+      transform: translateY(-8px) skewX(-15deg) scaleY(1.3);
+      color: #eab308; /* Yellow accent on hover */
+    }
+
+    .kinetic-poster:hover .kinetic-char:nth-child(odd) {
+      animation: letterWiggle 0.6s infinite alternate ease-in-out;
+    }
+
+    .kinetic-poster:hover .kinetic-char:nth-child(even) {
+      animation: letterWiggle2 0.6s infinite alternate ease-in-out;
+    }
+
+    @keyframes letterWiggle {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-4px) rotate(-3deg); }
+    }
+
+    @keyframes letterWiggle2 {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(4px) rotate(3deg); }
+    }
+
+    .kinetic-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 3;
+    }
+
+    .kinetic-ticker {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      opacity: 0.8;
+    }
+
+    .kinetic-btn {
+      background: #f4ecd8;
+      color: #851c1c;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .kinetic-btn:hover {
+      background: #eab308;
+      color: #851c1c;
+      box-shadow: 0 4px 12px rgba(234, 179, 8, 0.4);
+    }
+
+    .kinetic-btn:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>AI Design Prompt Combinations</h1>
+    <p>디자인 가이드의 서로 다른 기법들을 영리하게 매칭하여 완성한 현대적이고 프리미엄한 웹/UI 결합 예시 20종 샘플러입니다.</p>
+    <a href="./design_concepts.html" class="back-btn">⬅️ 디자인 가이드 사전으로 돌아가기</a>
+  </header>
+
+  <div class="container">
+
+    <!-- ----------------- SAMPLE 1 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 01</div>
+        <h2 class="sample-title">아방가르드 벤토 그리드</h2>
+        <p class="sample-desc">스위스 인터내셔널 타이포그래피 스타일과 현대적인 벤토 그리드(Bento Grid) 레이아웃을 결합한 하이 콘트라스트 대시보드 드래프트입니다. 매트 블랙 배경 위에 강렬한 코발트 블루(#002fa7) 악센트 컬러를 사용하고, 기하학적 SVG 드로잉과 마우스 호버에 기민하게 반응하는 카드의 팽창 인터랙션을 조화시켜 세련되고 아방가르드한 감각을 극대화했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Bento Grid Layout</div>
+            <div class="concept-tag"><span>2.</span> Swiss Design</div>
+            <div class="concept-tag"><span>3.</span> Cobalt Blue Accent</div>
+            <div class="concept-tag"><span>4.</span> High Contrast</div>
+            <div class="concept-tag"><span>5.</span> Avant-garde Mood</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Avant-garde web dashboard layout, Swiss graphic design style, bento grid structure, deep matte black background with sharp cobalt blue accents, bold modernist sans-serif typography, high-contrast minimal vector geometry illustrations, clean line art</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s1">
+        <div class="bento-container">
+          <!-- Item 1: Large geometrical archive card -->
+          <div class="bento-item item-large">
+            <div class="bento-meta">STRUCTURE // 01</div>
+            <h4 class="bento-large-title">AVANT-GARDE LAB</h4>
+            <!-- Swiss geometry SVG -->
+            <svg viewBox="0 0 160 60" class="bento-svg" xmlns="http://www.w3.org/2000/svg">
+              <line x1="10" y1="30" x2="150" y2="30" stroke="#333" stroke-width="1" stroke-dasharray="2 2" />
+              <circle cx="80" cy="30" r="22" fill="none" stroke="#222" stroke-width="1.5" />
+              <path d="M 58,30 A 22,22 0 0,1 102,30 Z" fill="#002fa7" class="bento-semi" />
+              <line x1="80" y1="5" x2="80" y2="55" stroke="#333" stroke-width="1" stroke-dasharray="2 2" />
+            </svg>
+          </div>
+          
+          <!-- Item 2: Bold Accent block -->
+          <div class="bento-item item-accent">
+            <div class="bento-accent-num">01</div>
+          </div>
+          
+          <!-- Item 3: Status widget -->
+          <div class="bento-item">
+            <div class="bento-meta">SYSTEM</div>
+            <div class="bento-status-row">
+              <div class="bento-status-dot"></div>
+              <span class="bento-status-text">SYS_OK</span>
+            </div>
+          </div>
+          
+          <!-- Item 4: Line Chart widget -->
+          <div class="bento-item item-chart">
+            <div class="bento-meta">BANDWIDTH TICKER</div>
+            <!-- Minimal sparkline SVG -->
+            <svg class="bento-chart-svg" viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="chart-grad-s1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#002fa7" stop-opacity="0.4"/>
+                  <stop offset="100%" stop-color="#002fa7" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0 45 Q30 20 60 35 T120 15 T160 25 L160 60 L0 60 Z" fill="url(#chart-grad-s1)"/>
+              <path d="M0 45 Q30 20 60 35 T120 15 T160 25" fill="none" stroke="#002fa7" stroke-width="2"/>
+            </svg>
+          </div>
+          
+          <!-- Item 5: Action bar -->
+          <div class="bento-item item-info">
+            <div class="bento-ticker">GRID.ACTIVE // SWISS.SYS.V1</div>
+            <button class="bento-btn">Activate Grid</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 2 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 02</div>
+        <h2 class="sample-title">미래형 글래스모피즘 대시보드</h2>
+        <p class="sample-desc">몽환적이고 유동적으로 일렁이는 네온 핑크와 청록색의 오로라 배경을 토대로 제작했습니다. 가독성과 레이어의 입체감을 잡기 위해 투명도 및 블러 효과(backdrop-filter)를 최대로 극대화한 반투명 젖빛 유리 패널 카드를 설계하고, 타이틀 텍스트 부분에 정교한 색수차(RGB split) 글리치 효과를 얹어 미래형 핀테크 테마를 표현했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Glassmorphism</div>
+            <div class="concept-tag"><span>2.</span> Aurora Palette</div>
+            <div class="concept-tag"><span>3.</span> Frosted Glass</div>
+            <div class="concept-tag"><span>4.</span> Neon Lighting</div>
+            <div class="concept-tag"><span>5.</span> Chromatic Aberration</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Futuristic finance web dashboard layout, glassmorphism frosted glass card floating on smooth cosmic aurora pink and purple gradient, neon glow light indicators, chromatic aberration typography</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s2">
+        <div class="aurora-blur1"></div>
+        <div class="aurora-blur2"></div>
+        
+        <div class="glass-card">
+          <div class="glass-meta">SECURE ASSET / VOL. 02</div>
+          <div class="glass-title">
+            <span class="chromatic-text" data-text="Aurora Wallet">Aurora Wallet</span>
+          </div>
+          
+          <div class="glass-chart-container">
+            <svg viewBox="0 0 290 50" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+              <defs>
+                <linearGradient id="neon_line" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#00f2fe"/>
+                  <stop offset="100%" stop-color="#ff007f"/>
+                </linearGradient>
+              </defs>
+              <path d="M 0 35 Q 40 10 80 30 T 160 15 T 240 40 T 290 15" stroke="url(#neon_line)" stroke-width="2.5" style="filter: drop-shadow(0 0 4px rgba(0, 242, 254, 0.6));"/>
+              <path d="M 0 35 Q 40 10 80 30 T 160 15 T 240 40 T 290 15 L 290 50 L 0 50 Z" fill="url(#neon_line)" fill-opacity="0.05"/>
+            </svg>
+          </div>
+          
+          <p class="glass-desc">
+            일렁이는 오로라 광원 배경 위에 플로팅되어 은은한 투명도와 블러 대비를 보여주며, 네온 차트가 반사되는 미래형 유리 자산 카드.
+          </p>
+          <button class="glass-btn">Access Account</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 3 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 03</div>
+        <h2 class="sample-title">내추럴 웰니스 에코 인트로</h2>
+        <p class="sample-desc">비대칭적이고 실용적인 스위스 타이포그래피 스타일 구도와 이끼(Moss), 세이지 카키 배색을 조화시켜 눈이 편안한 그리드를 구성했습니다. 크라프트 무광 종이 텍스처(Paper)가 입혀진 패널 레이아웃 위에 부드러운 소프트 확산광을 주었으며, 주변으로 은은하게 흐르는 연기와 수증기 안개 효과를 가미해 정갈하고 아늑한 웰니스 힐링 브랜딩 페이지를 구현했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Swiss Style</div>
+            <div class="concept-tag"><span>2.</span> Moss & Sage</div>
+            <div class="concept-tag"><span>3.</span> Paper</div>
+            <div class="concept-tag"><span>4.</span> Soft Diffused</div>
+            <div class="concept-tag"><span>5.</span> Smoke / Fog</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Swiss international style layout, wellness brand landing page, moss green and sage gray color grid, raw kraft paper textured cards, soft diffused lighting, ethereal foggy mist swirling around</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s3">
+        <div class="fog-layer1"></div>
+        <div class="fog-layer2"></div>
+        
+        <div class="swiss-card">
+          <div class="swiss-meta">Spa Treatment / Vol. 03</div>
+          <div class="swiss-title">Aura Moss Therapy</div>
+          <div class="swiss-badge-row">
+            <span class="swiss-card-tag">Sage Grass</span>
+            <span class="swiss-card-tag">Warm Stone</span>
+          </div>
+          <p class="swiss-desc">
+            이끼 낀 돌과 세이지 리프의 천연 색상 배색을 띠고, 크라프트 한지의 부드럽고 매트한 표면 느낌을 그대로 살려낸 오가닉 힐링 스파 카드.
+          </p>
+          <button class="swiss-btn">Book Therapy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 4 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 04</div>
+        <h2 class="sample-title">네오 브루탈리즘 테크 허브</h2>
+        <p class="sample-desc">기하학적 대칭성과 강렬하고 대담한 레이아웃을 표현하는 네오 브루탈리즘 기법을 기반으로 제작했습니다. 콘크리트 질감(Concrete)의 그레이 배경 위에 대비가 극대화된 블랙 테두리와 고대비 하드 섀도우(Hard Shadow)를 적용한 노란색 카드를 플로팅하고, 개발자 감성의 네온 다크 색상 및 노이즈 오류 느낌의 글리치(Glitch) 효과를 가미했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Neo-Brutalism</div>
+            <div class="concept-tag"><span>2.</span> Neon & Dark</div>
+            <div class="concept-tag"><span>3.</span> Concrete</div>
+            <div class="concept-tag"><span>4.</span> Hard Shadows</div>
+            <div class="concept-tag"><span>5.</span> Glitch Effect</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Neo-Brutalism tech website dashboard card, black borders, hard shadow, bold yellow color block, concrete texture background, neon green accent glitch text effects</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s4">
+        <div class="concrete-bg"></div>
+        <div class="brutal-card">
+          <div class="brutal-badge">TECH PORTAL</div>
+          <div class="glitch-btn">SYSTEM: ACTIVE</div>
+          <div style="font-size: 0.85rem; font-weight: 500; line-height: 1.4; border-top: 2px solid #000; padding-top: 10px;">
+            디비전 노이즈 및 고해상도 고대비 블랙 아웃라인을 머금은 브루탈리스트 개발자 카드 요소 레이아웃.
+          </div>
+          <button class="brutal-btn">INITIALIZE CORE</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 5 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 05</div>
+        <h2 class="sample-title">Y2K 캔디 팝 모바일 UI</h2>
+        <p class="sample-desc">2000년대 감성의 상큼하고 생동감 넘치는 파스텔 캔디 배색을 기반으로 제작했습니다. 말랑말랑한 질감과 반사광을 극대화한 투명 3D 젤리(Jelly) 버튼과 입체감 있는 버블 카드들을 적용하고, 반짝이는 네온 파스텔 조명(Glow) 효과와 굴절(Refraction) 렌즈 패널을 얹어 미래형 레트로 감성의 모바일 쇼케이스를 표현했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Y2K / Pop Art</div>
+            <div class="concept-tag"><span>2.</span> Pastel & Candy</div>
+            <div class="concept-tag"><span>3.</span> Translucent (Jelly)</div>
+            <div class="concept-tag"><span>4.</span> Neon Glow</div>
+            <div class="concept-tag"><span>5.</span> Refraction / Distortion</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Y2K mobile screen UI, pastel candy pink background, glossy translucent jelly buttons, glowing star vectors floating around, ribbed glass refraction overlays</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s5">
+        <span class="y2k-star y2k-star-1">★</span>
+        <span class="y2k-star y2k-star-2">★</span>
+        
+        <div class="y2k-phone">
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; font-weight:900;">
+            <span>11:30 AM</span>
+            <span>LTE 100%</span>
+          </div>
+          
+          <div style="text-align:center; margin: 15px 0;">
+            <div style="font-size: 1.4rem; font-weight: 900; letter-spacing: -0.5px;">CANDY SPACE</div>
+            <div style="font-size: 0.65rem; font-weight: 700; opacity: 0.8; margin-top: 4px;">TOUCH THE JELLY EFFECT</div>
+          </div>
+          
+          <div class="y2k-grid">
+            <div class="y2k-bubble">
+              <svg viewBox="0 0 24 24" fill="#ec4899" style="width: 28px; height: 28px; margin: 0 auto 4px; display:block;">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              Favorites
+            </div>
+            <div class="y2k-bubble">
+              <svg viewBox="0 0 24 24" fill="#06b6d4" style="width: 28px; height: 28px; margin: 0 auto 4px; display:block;">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+              </svg>
+              Starry
+            </div>
+          </div>
+          
+          <button class="jelly-btn">SWEET ENTER</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 6 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 06</div>
+        <h2 class="sample-title">미드센추리 바이닐 오디오</h2>
+        <p class="sample-desc">1950년대 미드센추리 모던 디자인 특유의 기하학적 형태와 유기적 따뜻함을 기반으로 구성했습니다. 결이 살아있는 원목 프레임(Wood)과 클래식 패브릭 그릴 질감의 카드 패널을 설계하고, 햇빛이 드는 창가 느낌의 소프트 확산광 조명과 오렌지빛 감성의 라이트 리크(Light Leak) 햇빛 번짐 효과를 얹었습니다. 호버 시 레코드가 회전하여 아날로그 바이닐 감성을 전달합니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> 1950s Mid-Century</div>
+            <div class="concept-tag"><span>2.</span> Muted Tones / Earthy</div>
+            <div class="concept-tag"><span>3.</span> Wood Grain & Fabric</div>
+            <div class="concept-tag"><span>4.</span> Soft Diffused</div>
+            <div class="concept-tag"><span>5.</span> Light Leak Effect</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Vintage mid-century audio player UI, dark maple wood framing, cloth speaker fabric texture card, warm orange light leak overlay, analog rotating vinyl record</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s6">
+        <div class="light-leak-overlay"></div>
+        
+        <div class="vinyl-card">
+          <div class="vinyl-meta">PHONO SOUNDS / VOL. 06</div>
+          <div class="vinyl-card-title">Retro Phono 1958</div>
+          
+          <div class="turntable-platter">
+            <svg class="vinyl-record" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="48" fill="#111111" stroke="#222222" stroke-width="2"/>
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#222222" stroke-width="0.5" stroke-dasharray="8 2"/>
+              <circle cx="50" cy="50" r="32" fill="none" stroke="#333333" stroke-width="0.5"/>
+              <circle cx="50" cy="50" r="24" fill="none" stroke="#222222" stroke-width="0.5" stroke-dasharray="12 4"/>
+              <circle cx="50" cy="50" r="16" fill="none" stroke="#333333" stroke-width="0.5"/>
+              <circle cx="50" cy="50" r="12" fill="#ca8a04"/>
+              <circle cx="50" cy="50" r="4" fill="#ffffff"/>
+            </svg>
+            <svg class="tonearm" viewBox="0 0 40 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M35 10 L 25 10 L 15 50 L 18 70 L 12 75" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+              <rect x="8" y="70" width="10" height="8" fill="#475569" rx="1"/>
+              <circle cx="35" cy="10" r="5" fill="#475569"/>
+            </svg>
+          </div>
+          
+          <p class="vinyl-desc">
+            원목 프레임과 패브릭 그릴 레이아웃 위에 LP 회전 애니메이션 효과를 결합하여 아날로그 바이닐 레코드 감성을 담아낸 하이파이 오디오 카드.
+          </p>
+          <button class="vinyl-btn">Play Vinyl</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 7 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 07</div>
+        <h2 class="sample-title">사이버펑크 터미널 콘솔</h2>
+        <p class="sample-desc">어둡고 반사율이 적은 무광 실리콘 질감(Matte Silicone)의 미래형 조작 패널을 기반으로 구성했습니다. 일렉트릭 그린과 네온 로즈빛 네온 광원(Neon Lighting)을 적용하고, 수평 주사선(Scanlines) 및 텍스트 떨림 효과 등의 미세한 글리치(Glitch) 효과를 얹어 극적인 해커 콘솔 테마를 표현했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Cyberpunk</div>
+            <div class="concept-tag"><span>2.</span> Neon & Dark</div>
+            <div class="concept-tag"><span>3.</span> Matte Rubber / Silicone</div>
+            <div class="concept-tag"><span>4.</span> Neon Lighting</div>
+            <div class="concept-tag"><span>5.</span> Glitch / Scanline</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Cyberpunk user interface, hacker console panel screen, matte black carbon texture rubber details, neon cyan scanlines, pink glowing neon light buttons</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s7">
+        <div class="s7-scanlines"></div>
+        <div class="cyber-panel">
+          <div class="cyber-header">
+            <div style="font-size:0.85rem; font-weight:700; display:flex; align-items:center; gap:6px;">
+              <span style="display:inline-block; width:8px; height:8px; background:#00ffcc; border-radius:50%; animation: pulse 1s infinite alternate;"></span>
+              SECURE LINK ACTIVE
+            </div>
+            <div style="font-size:0.75rem; color:#ff0055;">SYS_V3.8</div>
+          </div>
+          <div style="font-size: 0.8rem; line-height:1.5; margin-bottom: 15px; color: rgba(0,255,204,0.85); text-align: left;">
+            &gt; DECRYPTING CORE SIGNALS...<br>
+            &gt; STABLE INTERSECTION OBSERVER LOADED.<br>
+            &gt; GLITCH RESIDUAL DETECTED [0.034ms]
+          </div>
+          <button class="cyber-btn">OVERRIDE MAINFRAME</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 8 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 08</div>
+        <h2 class="sample-title">와비사비 스파 인트로</h2>
+        <p class="sample-desc">미니멀리즘과 자연스러운 비완성을 추구하는 오가닉 와비사비 스타일을 기반으로 제작했습니다. 따뜻하고 자연스러운 적토색(Terracotta) 질감의 미니멀 3D 플레이트 배경을 형성하고, 저녁 무렵 서서히 지는 붉은 태양광(Golden Hour)의 부드러운 대비광을 드리웠습니다. 한편에 온천수처럼 일렁이는 은은한 물빛 굴절광(Caustics) 무늬가 은은하게 어른거리는 극도로 평온한 스파 테마 인트로입니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Minimalism / Organic</div>
+            <div class="concept-tag"><span>2.</span> Terracotta & Clay</div>
+            <div class="concept-tag"><span>3.</span> Terracotta</div>
+            <div class="concept-tag"><span>4.</span> Golden Hour</div>
+            <div class="concept-tag"><span>5.</span> Caustics / Water Reflection</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Wabi-sabi minimalist spa intro layout, organic earthy terracotta clay plate, soft long golden hour shadows, moving caustic water reflections on warm sand textured background</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s8">
+        <div class="caustics-layer"></div>
+        <div class="wabi-card">
+          <div class="wabi-meta">ZEN WELLNESS / VOL. 08</div>
+          <div class="wabi-card-title">Zen & Clay</div>
+          <p class="wabi-desc">
+            비대칭 레이아웃과 적토의 자연스러운 무광 질감. 골든아워의 부드러운 그림자 대조가 어우러져 마음에 평온함을 전하는 힐링 플레이트.
+          </p>
+          <button class="wabi-btn">Book Ritual</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 9 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 09</div>
+        <h2 class="sample-title">울트라 미니멀 옵시디언 포트폴리오</h2>
+        <p class="sample-desc">극단적으로 절제된 현대적 모던 아키텍처 및 미니멀 바우하우스 타이포그래피 스타일을 기반으로 설계했습니다. 차갑고 매끄러운 칠흑색 옵시디언(Obsidian Matte Black) 표면 질감 위에 선명한 고대비 화이트 아웃라인 보더와 텍스트(Monotone)만으로 그리드를 구성하고, 부드러운 스튜디오 확산광과 은은한 원경 아웃포커싱(DoF) 효과를 복합적으로 녹여냈습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Ultra-Minimalism / Bauhaus</div>
+            <div class="concept-tag"><span>2.</span> Monotone & High Contrast</div>
+            <div class="concept-tag"><span>3.</span> Matte Carbon & Obsidian</div>
+            <div class="concept-tag"><span>4.</span> Soft Studio Light</div>
+            <div class="concept-tag"><span>5.</span> Depth of Field (DoF)</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Ultra-minimalist modern layout, Bauhaus monotone black and white interface, solid matte carbon sheet, clean borders, crisp typography, soft studio lighting</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s9">
+        <div class="obsidian-card">
+          <div class="obsidian-header">
+            <div class="obsidian-title">ARCH_STUDIO</div>
+            <div class="obsidian-meta">NO. 09 / 10</div>
+          </div>
+          <div style="font-size:0.8rem; line-height:1.6; opacity:0.85; text-align: left;">
+            불필요한 색상과 꾸밈을 배제하고 오직 흑과 백의 강렬한 대조를 통해 가독성과 현대성을 극대화한 미니멀 포트폴리오 카드 레이아웃.
+          </div>
+          <button class="obsidian-btn">ENTER PORTFOLIO</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 10 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 10</div>
+        <h2 class="sample-title">레트로 신스웨이브 아케이드</h2>
+        <p class="sample-desc">1980년대 몽환적인 일렉트릭 레트로 감성의 신스웨이브 스타일을 차용했습니다. 사선 격자 라인(Synth Grid) 배경 위에 초고광택 반사 효과를 머금은 핫핑크 에나멜/래커(Enamel) 재질의 UI 카드를 올리고, 네온 라이트 조명(Neon Light)과 모서리에 어두운 점차적 비네팅(Vignette) 필터 및 밤하늘 번짐용 네온 보케(Bokeh) 원들을 적용하여 화려한 아케이드 로비 화면을 구현했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Synthwave</div>
+            <div class="concept-tag"><span>2.</span> Neon & Retro</div>
+            <div class="concept-tag"><span>3.</span> Enamel / Lacquer</div>
+            <div class="concept-tag"><span>4.</span> Neon Lighting</div>
+            <div class="concept-tag"><span>5.</span> Vignette & Bokeh</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Synthwave retro gaming interface, wireframe sunset grid, glowing neon pink enamel glossy card, dark vignette, out-of-focus neon bokeh lights</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s10">
+        <div class="synth-grid"></div>
+        <div class="synth-vignette"></div>
+        <div class="synth-bokeh1"></div>
+        <div class="synth-bokeh2"></div>
+        
+        <div class="synth-card">
+          <div style="font-family:'Space Grotesk', sans-serif; font-size:0.75rem; letter-spacing:4px; color:#ff007f; font-weight:700;">INSERT COIN TO START</div>
+          <div class="synth-title">NEON ARCADE</div>
+          <div style="font-size:0.75rem; opacity:0.8; line-height:1.4;">
+            80년대 복고풍 격자선 그리드와 매트 네온 비네팅 및 고광택 피치가 만나 완성된 아날로그 오락실 테마 UI 패널.
+          </div>
+          <button style="background:#ff007f; border:none; padding:12px; color:#fff; border-radius:4px; font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:2px; cursor:pointer; box-shadow:0 0 10px #ff007f; transition:all 0.2s;" onmouseover="this.style.background='#3b82f6'; this.style.boxShadow='0 0 15px #3b82f6';" onmouseout="this.style.background='#ff007f'; this.style.boxShadow='0 0 10px #ff007f';">PLAY GAME</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 11 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 11</div>
+        <h2 class="sample-title">에테리얼 홀로그래픽 랩</h2>
+        <p class="sample-desc">빛의 시각적 분산(Dispersion)과 유동적인 몽환성(Ethereal)을 테마로 설계했습니다. 각도에 따라 색이 미세하게 변화하는 오색빛깔의 홀로그래픽 배경(Holographic & Iridescent Glow) 위로 유기적으로 출렁이는 유체 질감의 입체 액체 금속(Liquid Metal Chrome) 오브젝트를 띄우고, 은은한 서브라이팅과 화사한 네온 그러데이션 카드를 결합해 뷰티/미래기술 웹 디자인을 연출했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Ethereal / Dreamlike</div>
+            <div class="concept-tag"><span>2.</span> Iridescent / Holographic</div>
+            <div class="concept-tag"><span>3.</span> Liquid Metal / Chrome</div>
+            <div class="concept-tag"><span>4.</span> Bioluminescence</div>
+            <div class="concept-tag"><span>5.</span> Light Dispersion</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Ethereal surreal landing page UI, liquid chrome metallic blob floating on pastel iridescent holographic gradient background, bioluminescent glow, refraction rainbow prism light dispersion</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s11">
+        <div class="holo-glow"></div>
+        
+        <svg class="liquid-metal" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="20%" stop-color="#fbcfe8" />
+              <stop offset="45%" stop-color="#a855f7" />
+              <stop offset="70%" stop-color="#3b82f6" />
+              <stop offset="85%" stop-color="#06b6d4" />
+              <stop offset="100%" stop-color="#1e1b4b" />
+            </linearGradient>
+            <radialGradient id="specularGlow" cx="30%" cy="30%" r="35%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <path d="M145,45 C170,65 180,105 165,135 C150,165 105,185 75,170 C45,155 25,110 35,75 C45,40 120,25 145,45 Z" fill="url(#liquidGrad)"/>
+          <path d="M85,65 C100,55 125,55 140,65 C145,68 130,75 115,75 C100,75 90,75 85,65 Z" fill="url(#specularGlow)"/>
+        </svg>
+
+        <div class="holo-card">
+          <div style="font-family:'Space Grotesk', sans-serif; font-size:0.7rem; letter-spacing:3px; opacity:0.8; text-transform:uppercase; color:#7928ca;">Lab Project / Vol. 11</div>
+          <div class="holo-title">AURA METALLIC</div>
+          <div style="font-size:0.75rem; line-height:1.6; color:#475569;">
+            액체 금속의 반사 질감과 오색 홀로그램 투명 레이어가 만나 기묘하고 몽환적인 신비감을 부여하는 다이내믹 UI 플레이트.
+          </div>
+          <button class="holo-btn">Explore Fluid</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 12 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 12</div>
+        <h2 class="sample-title">3D 퍼피 & 클레이 토이</h2>
+        <p class="sample-desc">최근 트렌디한 장난감 느낌의 클레이모피즘(Claymorphism)과 푹신하게 부푼 Puffy 3D 스타일을 혼합했습니다. 부드러운 고무 및 실리콘(Matte Silicone) 느낌의 마블 화이트 입체 카드에 외곽선을 따라 하이라이트가 은은하게 도는 림 라이팅(Rim Light)을 적용하고, 배경에 3D 구체 형태와 함께 주변부가 뽀얗게 블러 처리되는 틸트 시프트(Tilt-shift) 효과를 조합해 따뜻하고 위트 있는 모바일 화면을 구성했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> 3D Puffy / Claymorphism</div>
+            <div class="concept-tag"><span>2.</span> Soft Pastel Tones</div>
+            <div class="concept-tag"><span>3.</span> Matte Silicone / Rubber</div>
+            <div class="concept-tag"><span>4.</span> Rim Lighting</div>
+            <div class="concept-tag"><span>5.</span> Tilt-Shift / Bokeh</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Playful puffy 3D mobile app interface, claymorphism soft white silicone card, cute round buttons, pastel background with clay shapes, cinematic rim lighting, tilt-shift bokeh</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s12">
+        <div class="tilt-shift-blur"></div>
+        <div class="clay-bg-sphere1"></div>
+        <div class="clay-bg-sphere2"></div>
+        
+        <div class="clay-card">
+          <div class="clay-badge">NEW VERSION</div>
+          <div class="clay-card-title">Bubble Cloud</div>
+          <div style="font-size:0.8rem; line-height:1.6; opacity:0.8;">
+            말랑한 점토 질감과 풍선 형태의 입체 요소를 활용하여 누르고 싶은 호기심과 촉각적 즐거움을 유발하는 3D 인터페이스.
+          </div>
+          <button class="clay-btn">Start Bubbling</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 13 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 13</div>
+        <h2 class="sample-title">다크 아카데미아 아카이브</h2>
+        <p class="sample-desc">인문학적 깊이와 역사적 고풍스러움을 갖춘 Victorian / Dark Academia 양식을 반영했습니다. 엠보싱 처리된 무거운 빈티지 가죽(Vintage Leather) 텍스처 카드와 고결한 금박 코너 장식을 얹고, 촛불의 미세한 움직임을 본뜬 시네마틱 앰비언트 글로우(Candlelight Glow) 및 공기 중 먼지 입자(Dust Particles)를 연출하여 고급 클래식 도서관의 분위기를 살려냈습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Victorian / Dark Academia</div>
+            <div class="concept-tag"><span>2.</span> Sepia & Deep Burgundy</div>
+            <div class="concept-tag"><span>3.</span> Embossed Leather & Gold Foil</div>
+            <div class="concept-tag"><span>4.</span> Cinematic Lighting</div>
+            <div class="concept-tag"><span>5.</span> Particle / Dust Effects</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Dark academia vintage archiving library interface, deep burgundy leather card with delicate gold filigree edges, soft candlelight low key cinematic lighting, dust particles floating in air</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s13">
+        <div class="academia-bg"></div>
+        <div class="candle-glow"></div>
+        
+        <div class="leather-card">
+          <div class="academia-header">
+            <div class="academia-meta">ARCHIVE NO. 13</div>
+            <div class="academia-title">The Secret Codex</div>
+          </div>
+          <p class="academia-text">
+            “배움이 깊어질수록 어둠은 밝아지나, 기록되지 않은 진실은 서재의 오래된 가죽 냄새와 흐릿한 촛불 너머의 먼지처럼 흩어지리라.”
+          </p>
+          <button class="academia-btn">Read Codex</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 15 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 15</div>
+        <h2 class="sample-title">자포니즘 에디토리얼</h2>
+        <p class="sample-desc">일본 특유의 미니멀 선 사상과 북유럽 스칸디나비아의 따뜻하고 실용적인 감성이 결합된 자포니즘(Japandi) 스타일을 기반으로 설계했습니다. 부드러운 웜 뉴트럴 & 베이지 톤을 주조색으로 삼아 한지 및 리넨 패브릭(Washi Paper/Linen)의 차분하고 거친 결을 구현하고, 나뭇잎이나 창살 틈새로 부드럽게 내리쬐는 오후의 자연 햇살광(Natural Daylight) 그림자를 더했습니다. 여기에 정갈하게 겹쳐진 레이아웃 위에 이미지가 자연스럽게 오버랩되는 이중 노출(Double Exposure) 아트워크를 얹어 고품격 리빙 에디토리얼 레이아웃을 표현했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Japandi</div>
+            <div class="concept-tag"><span>2.</span> Warm Neutral & Beige</div>
+            <div class="concept-tag"><span>3.</span> Washi Paper / Linen</div>
+            <div class="concept-tag"><span>4.</span> Natural Daylight</div>
+            <div class="concept-tag"><span>5.</span> Double Exposure</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Japandi editorial design landing page, warm beige neutral interior colors, washi paper and linen texture card, natural leaf shadow silhouette cast across, double exposure portrait blending overlay</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s15">
+        <div class="linen-overlay"></div>
+        <div class="leaf-shadow"></div>
+        
+        <div class="japandi-card">
+          <div class="japandi-meta">Collection 2026</div>
+          <div class="japandi-title">The Art of Serene Living</div>
+          
+          <div class="japandi-double-exposure">
+            <div class="japandi-image-layer1"></div>
+            <div class="japandi-image-layer2"></div>
+            <div class="japandi-double-exposure-text">Silenced Wood</div>
+          </div>
+          
+          <p class="japandi-desc">
+            천연 나뭇결 무늬와 한지의 촉감, 자연광이 만드는 느린 정취를 고유의 감성 레이어로 녹여낸 에디토리얼 플레이트.
+          </p>
+          
+          <button class="japandi-btn">Read Narrative</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 16 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 16</div>
+        <h2 class="sample-title">아르데코 게츠비 럭스</h2>
+        <p class="sample-desc">아름다운 기하학적 대칭 라인과 화려함을 상징하는 아르데코(Art Deco) 기법을 메인으로 구성했습니다. 딥 네이비(Jewel Tones)의 매끄럽고 고급스러운 대리석 질감(Carrara Marble) 배경 위에 정교한 대칭형 금색 테두리와 격자 패턴을 얹었습니다. 극적이고 짙은 명암 대비(Chiaroscuro) 조명 효과와 균형 있는 황금비(Golden Ratio) 구도를 차용하여 화려하고 호사스러운 비주얼을 연출합니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Art Deco</div>
+            <div class="concept-tag"><span>2.</span> Jewel Tones</div>
+            <div class="concept-tag"><span>3.</span> Carrara Marble</div>
+            <div class="concept-tag"><span>4.</span> Chiaroscuro</div>
+            <div class="concept-tag"><span>5.</span> Golden Ratio</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Art Deco gatsby luxury web element, dark sapphire navy Carrara marble plate, symmetrical polished gold lines frame, elegant geometric pattern, dramatic chiaroscuro dark mood studio lighting</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s16">
+        <div class="artdeco-card">
+          <div class="artdeco-meta">ESTATE / VOL. 16</div>
+          <div class="artdeco-card-title">Gatsby Estate</div>
+          
+          <div class="artdeco-visual-box">
+            <div class="artdeco-visual-inner"></div>
+          </div>
+          
+          <p class="artdeco-desc">
+            정교한 대칭 구조의 금빛 아르데코 대칭 비주얼과 매끄러운 딥 네이비 대리석 플레이트를 융합해 고전적 럭셔리를 완성한 카드.
+          </p>
+          <button class="artdeco-btn">Explore Estate</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 17 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 17</div>
+        <h2 class="sample-title">빈티지 프레스 하프톤</h2>
+        <p class="sample-desc">인쇄물 특유의 입자감이 묻어나는 클래식 레트로(Retro / Vintage) 디자인을 토대로 설계했습니다. 오래된 크라프트 신문지 느낌의 무광 종이(Paper) 질감 카드 플레이트 위에 고전 신문 및 서적에 사용되던 따뜻한 세피아 톤(Sepia & Warm) 배색을 부여했습니다. 여기에 인라인 원 안쪽의 하프톤 망점(Halftone) 패턴 비주얼 효과와 태양광 누출(Light Leak) 효과를 입혀 아날로그 감성을 표현했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Retro / Vintage</div>
+            <div class="concept-tag"><span>2.</span> Sepia & Warm</div>
+            <div class="concept-tag"><span>3.</span> Paper</div>
+            <div class="concept-tag"><span>4.</span> Soft Diffused</div>
+            <div class="concept-tag"><span>5.</span> Halftone</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Vintage retro printing press advertisement layout, aged raw kraft paper card, warm sepia filter tone, retro halftone dot pattern emblem, soft diffused light leak overlays</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s17">
+        <div class="vintage-card">
+          <div class="vintage-meta">JOURNAL / VOL. 17</div>
+          <div class="vintage-card-title">The Daily Press</div>
+          
+          <div class="vintage-halftone-box">
+            <div class="vintage-halftone-inner">1928</div>
+          </div>
+          
+          <p class="vintage-desc">
+            세피아 톤의 이중 프레임 테두리와 고전 인쇄물 특유의 크라프트 종이 질감, 회전하는 복고풍 하프톤 배지를 장착한 카드.
+          </p>
+          <button class="vintage-btn">Read Archive</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 18 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 18</div>
+        <h2 class="sample-title">코지 클레이 다이어리</h2>
+        <p class="sample-desc">클레이모피즘(Claymorphism) 특유의 포근하고 아기자기한 감성을 연출한 모바일 다이어리 위젯 드래프트입니다. 마음을 차분히 가라앉히는 따뜻한 피치-크림 그라데이션 바탕 위에 푹신한 찰흙 요철 형태의 카드를 얹고, 모락모락 올라가는 따뜻한 음료 머그잔과 호버 시 귀를 쫑긋거리는 식빵 굽는 고양이 및 입체적인 투두(To-Do) 리스트 버튼을 배치하여 친근하고 사랑스러운(Cozy & Adorable) 힐링 무드를 극대화했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Cozy Mood</div>
+            <div class="concept-tag"><span>2.</span> Soft Claymorphism</div>
+            <div class="concept-tag"><span>3.</span> Steaming Mug SVG</div>
+            <div class="concept-tag"><span>4.</span> Warm Pastel Palette</div>
+            <div class="concept-tag"><span>5.</span> Cute Sleepy Cat SVG</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Cozy minimal personal diary dashboard mobile widget, soft claymorphism style, fluffy pillowy warm cream color card, steaming cute coffee cup, sleeping cat wiggling ears, checklist task UI, warm pastel peach background</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s18">
+        <!-- Squishy Clay Card -->
+        <div class="clay-card">
+          <!-- Sleepy Cat SVG Layered on Top Border -->
+          <svg class="clay-cat-decor" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="cat-grad-s18" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#fdba74" />
+                <stop offset="100%" stop-color="#f97316" />
+              </linearGradient>
+            </defs>
+            <!-- Cat Body (sleeping loaf) -->
+            <path d="M10,35 Q10,18 30,18 Q50,18 50,35 Z" fill="url(#cat-grad-s18)" />
+            <!-- Cat Head -->
+            <circle cx="20" cy="22" r="10" fill="url(#cat-grad-s18)" />
+            <!-- Left Ear -->
+            <polygon class="cat-ear cat-ear-left" points="12,15 16,7 22,14" fill="#ea580c" />
+            <!-- Right Ear -->
+            <polygon class="cat-ear cat-ear-right" points="26,14 32,7 34,16" fill="#ea580c" />
+            <!-- Sleeping Closed Eyes -->
+            <path d="M14,24 Q16,26 18,24" stroke="#7c2d12" stroke-width="1.5" stroke-linecap="round" fill="none" />
+            <path d="M22,24 Q24,26 26,24" stroke="#7c2d12" stroke-width="1.5" stroke-linecap="round" fill="none" />
+            <!-- Cat Tail curled up -->
+            <path d="M48,32 Q54,26 52,20" stroke="#fdba74" stroke-width="4" stroke-linecap="round" fill="none" />
+          </svg>
+
+          <div class="clay-row-decor">
+            <div class="clay-header-text">
+              <span class="clay-meta">Cozy Diary</span>
+              <h3 class="clay-title">Today's Vibe</h3>
+            </div>
+            <!-- Steaming Mug SVG -->
+            <svg class="clay-mug-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <!-- Steam waves -->
+              <path class="steam-line" d="M14,14 Q16,8 14,2" />
+              <path class="steam-line steam-2" d="M22,14 Q20,8 22,2" />
+              <!-- Cup Body -->
+              <path d="M10,16 Q10,34 20,34 Q30,34 30,16 Z" fill="#ea580c" />
+              <!-- Cup handle -->
+              <path d="M30,20 C35,20 35,28 30,28" stroke="#ea580c" stroke-width="3.5" fill="none" stroke-linecap="round" />
+            </svg>
+          </div>
+
+          <!-- Checklist UI -->
+          <div class="clay-todo-list">
+            <div class="clay-todo-item">
+              <div class="clay-checkbox clay-checkbox-checked"></div>
+              <span class="clay-todo-text">Warm tea in the morning</span>
+            </div>
+            <div class="clay-todo-item">
+              <div class="clay-checkbox"></div>
+              <span class="clay-todo-text">Listen to low-fi cafe music</span>
+            </div>
+            <div class="clay-todo-item">
+              <div class="clay-checkbox"></div>
+              <span class="clay-todo-text">Write 3 good lines of code</span>
+            </div>
+          </div>
+
+          <p class="clay-desc">
+            마음을 편안하게 녹이는 모닥불 같은 다이어리 폼. 찰흙을 만지는 부드러운 버튼 클릭감과 모락모락 김이 피어오르는 애니메이션을 제공합니다.
+          </p>
+          <button class="clay-btn">Save Diary</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 19 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 19</div>
+        <h2 class="sample-title">리소그래프 뉴트로 매거진</h2>
+        <p class="sample-desc">네온 핑크와 코발트 블루의 강렬한 보색 대비를 이루는 리소그래프(Risograph) 인쇄 기법에 질감 오버레이(Textured Overlay)와 아날로그적인 빈티지 무드를 가미한 디자인입니다. 거친 하프톤 도트 패턴과 미세한 종이 질감, 어긋난 레이어 오프셋 정렬, 그리고 과감한 볼드 브루탈리즘 타이포그래피를 결합하여 독창적인 뉴트로 매거진 표지를 완성했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Risograph</div>
+            <div class="concept-tag"><span>2.</span> Neon Duo-tone</div>
+            <div class="concept-tag"><span>3.</span> Vintage Print</div>
+            <div class="concept-tag"><span>4.</span> Textured Overlay</div>
+            <div class="concept-tag"><span>5.</span> Bold Brutalism</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Experimental risograph print magazine cover, vivid neon pink and intense cobalt blue ink, heavy halftone pattern, recycled paper texture, offset printing alignment glitch, bold brutalist typography, retro aesthetic illustration</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s19">
+        <!-- SVG noise filter definitions -->
+        <svg style="position: absolute; width: 0; height: 0;">
+          <defs>
+            <filter id="riso-grain">
+              <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
+              <feColorMatrix type="matrix" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.08 0" />
+              <feBlend mode="multiply" in="SourceGraphic" in2="noise" />
+            </filter>
+          </defs>
+        </svg>
+
+        <div class="riso-card">
+          <div class="riso-header">
+            <span class="riso-title">NeoRetro</span>
+            <span class="riso-issue">N°19</span>
+          </div>
+          
+          <div class="riso-body">
+            <!-- Halftone pattern circle backdrop -->
+            <div class="riso-halftone-bg"></div>
+            
+            <!-- Risograph misregistered layered illustration -->
+            <div class="riso-illustration-container">
+              <svg class="riso-illustration" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Cobalt Blue Layer -->
+                <g fill="#0047ab" style="mix-blend-mode: multiply;">
+                  <path d="M50 12 L54 36 L76 26 L62 46 L86 50 L62 54 L76 74 L54 64 L50 88 L46 64 L24 74 L38 54 L14 50 L38 46 L24 26 L46 36 Z" />
+                  <circle cx="50" cy="50" r="18" />
+                </g>
+                <!-- Neon Pink Layer, shifted slightly to top-left -->
+                <g class="riso-pink-layer" fill="#ff007f" style="mix-blend-mode: multiply; transform: translate(-3px, -3px);">
+                  <path d="M50 12 L54 36 L76 26 L62 46 L86 50 L62 54 L76 74 L54 64 L50 88 L46 64 L24 74 L38 54 L14 50 L38 46 L24 26 L46 36 Z" />
+                  <circle cx="50" cy="50" r="18" />
+                </g>
+                <!-- Knockout Center Eye -->
+                <circle cx="50" cy="50" r="8" fill="#fcfbf7" style="mix-blend-mode: normal;" />
+                <circle cx="50" cy="50" r="4.5" fill="#0047ab" />
+              </svg>
+            </div>
+          </div>
+          
+          <div class="riso-footer">
+            <div class="riso-details">
+              <span>Spec. Edition</span>
+              <span>May 2026</span>
+            </div>
+            <p class="riso-desc">
+              네온 핑크와 코발트 블루의 강렬한 보색 겹침(mix-blend-mode: multiply) 효과와 거친 종이 질감, 하프톤 패턴을 결합한 리소그래프 표지 카드.
+            </p>
+            <button class="riso-btn">Collect Zine</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 20 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 20</div>
+        <h2 class="sample-title">윔지컬 몽환 캘린더</h2>
+        <p class="sample-desc">부드럽고 신비로운 메쉬 그라데이션(Mesh Gradient) 배경에 투명한 유리 질감의 글래스모피즘(Glassmorphism) 카드를 배치하고, 유기적인 유선형 형태(Organic Curved Shape)와 흩날리는 빛망울(Floating Particles) 애니메이션을 결합하여 동화 속 한 장면 같은 윔지컬 몽환 캘린더를 구현했습니다. 호버 시 빛망울이 피어나고 유리 카드가 부드럽게 반짝이는 인터랙션을 제공합니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Whimsical Mood</div>
+            <div class="concept-tag"><span>2.</span> Mesh Gradient</div>
+            <div class="concept-tag"><span>3.</span> Glassmorphism</div>
+            <div class="concept-tag"><span>4.</span> Floating Particles</div>
+            <div class="concept-tag"><span>5.</span> Organic Curved</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Whimsical dreamy calendar UI, magical pastel mesh gradient background, translucent frosted glassmorphism interface cards, organic curved shape details, floating glowing particle effects, soft fairy-tale wizard mood tracker</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s20">
+        <!-- Mesh gradient animated orbs -->
+        <div class="mesh-orb orb1"></div>
+        <div class="mesh-orb orb2"></div>
+        <div class="mesh-orb orb3"></div>
+        <div class="mesh-orb orb4"></div>
+
+        <!-- Floating mystical stars/particles -->
+        <div class="whimsical-particle p1"></div>
+        <div class="whimsical-particle p2"></div>
+        <div class="whimsical-particle p3"></div>
+        <div class="whimsical-particle p4"></div>
+
+        <div class="glass-calendar">
+          <div class="calendar-header">
+            <div class="calendar-title-wrap">
+              <span class="calendar-subtitle">May 2026</span>
+              <h3 class="calendar-title">Dreamy Days</h3>
+            </div>
+            <!-- Magic Swaying Moon SVG -->
+            <svg class="dreamy-moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3C10.5 3 9.07998 3.39999 7.82998 4.09999C11.13 5.79999 13.5 9.17997 13.5 13.12C13.5 17.06 11.13 20.44 7.82998 22.14C9.07998 22.84 10.5 23.24 12 23.24C17.52 23.24 22 18.76 22 13.24C22 7.71997 17.52 3.24 12 3Z" fill="url(#moon-grad-s20)"/>
+              <defs>
+                <linearGradient id="moon-grad-s20" x1="12" y1="3" x2="22" y2="23.24" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#db2777"/>
+                  <stop offset="1" stop-color="#7c3aed"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- Weekly log / mood tracker -->
+          <div class="calendar-week">
+            <div class="day-col">
+              <span class="day-label">M</span>
+              <div class="day-circle mood-dreamy" title="Dreamy">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="mood-icon"><path d="M12 2L14.5 9.5H22L16 14L18.5 21.5L12 17L5.5 21.5L8 14L2 9.5H9.5L12 2Z"/></svg>
+              </div>
+            </div>
+            <div class="day-col">
+              <span class="day-label">T</span>
+              <div class="day-circle mood-cozy" title="Cozy">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" class="mood-icon"><path d="M12 3v18M3 12h18"/></svg>
+              </div>
+            </div>
+            <div class="day-col">
+              <span class="day-label">W</span>
+              <div class="day-circle mood-mystic" title="Mystic">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="mood-icon"><circle cx="12" cy="12" r="8"/></svg>
+              </div>
+            </div>
+            <div class="day-col">
+              <span class="day-label">T</span>
+              <div class="day-circle mood-dreamy" title="Dreamy">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="mood-icon"><path d="M12 2L14.5 9.5H22L16 14L18.5 21.5L12 17L5.5 21.5L8 14L2 9.5H9.5L12 2Z"/></svg>
+              </div>
+            </div>
+            <div class="day-col">
+              <span class="day-label">F</span>
+              <div class="day-circle mood-spark" title="Sparkling">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="mood-icon"><path d="M12 2L13.5 8.5L20 10L13.5 11.5L12 18L10.5 11.5L4 10L10.5 8.5L12 2Z"/></svg>
+              </div>
+            </div>
+            <div class="day-col">
+              <span class="day-label">S</span>
+              <div class="day-circle mood-cozy" title="Cozy">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" class="mood-icon"><path d="M12 3v18M3 12h18"/></svg>
+              </div>
+            </div>
+            <div class="day-col">
+              <span class="day-label">S</span>
+              <div class="day-circle mood-active" title="Magical">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="mood-icon"><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="calendar-quote">
+            <span class="quote-text">"Deep sleep brings stardust to your mind."</span>
+          </div>
+
+          <button class="glass-btn">Trace Dreams</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------- SAMPLE 21 ----------------- -->
+    <section class="sample-section">
+      <div class="sample-info">
+        <div class="sample-badge">Sample 21</div>
+        <h2 class="sample-title">키네틱 타이포그래피 포스터</h2>
+        <p class="sample-desc">바우하우스(Bauhaus) 스타일의 비대칭적이고 강렬한 레이아웃과 플랫 디자인(Flat Design)을 결합한 키네틱 타이포그래피 포스터 드래프트입니다. 황토색 모래 질감의 배경과 선명한 크림색 테두리를 입힌 진홍빛 카드 위에 개별 알파벳 단위로 마우스 반응성 애니메이션을 심어, 호버 시 문자가 유기적이고 뒤틀리며 튀어 오르는 역동적인 운동 형태를 구현했습니다.</p>
+        
+        <div class="concept-comb">
+          <div class="concept-comb-title">Combined Concepts</div>
+          <div class="tag-container">
+            <div class="concept-tag"><span>1.</span> Bauhaus Layout</div>
+            <div class="concept-tag"><span>2.</span> Flat Design</div>
+            <div class="concept-tag"><span>3.</span> Typography Motion</div>
+            <div class="concept-tag"><span>4.</span> Stretch & Rotate</div>
+            <div class="concept-tag"><span>5.</span> High Contrast</div>
+          </div>
+        </div>
+
+        <div class="prompt-viewer">
+          <div class="prompt-label">Prompt Idea</div>
+          <div class="prompt-text">Bauhaus abstract typography poster art print, bold kinetic typography, Crimson Red background, beige/sand colors, geometric flat design graphics, letters stretch and skew layout, high-contrast structural grid</div>
+        </div>
+      </div>
+      
+      <div class="viewport-s21">
+        <div class="kinetic-poster">
+          <!-- Bauhaus Background Geometry SVG -->
+          <svg class="bauhaus-bg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="30" fill="#f4ecd8" />
+            <polygon points="100,0 60,100 100,100" fill="#f4ecd8" />
+            <line x1="0" y1="50" x2="100" y2="50" stroke="#f4ecd8" stroke-width="4" />
+          </svg>
+          
+          <div class="kinetic-meta">Motion Poster v2.1</div>
+          
+          <div class="kinetic-canvas">
+            <div class="kinetic-row">
+              <span class="kinetic-char">K</span>
+              <span class="kinetic-char">I</span>
+              <span class="kinetic-char">N</span>
+              <span class="kinetic-char">E</span>
+              <span class="kinetic-char">T</span>
+              <span class="kinetic-char">I</span>
+              <span class="kinetic-char">C</span>
+            </div>
+            <div class="kinetic-row" style="color: #eab308;">
+              <span class="kinetic-char">T</span>
+              <span class="kinetic-char">Y</span>
+              <span class="kinetic-char">P</span>
+              <span class="kinetic-char">E</span>
+            </div>
+            <div class="kinetic-row" style="font-size: 2.2rem; margin-top: 4px; letter-spacing: -1px;">
+              <span class="kinetic-char">M</span>
+              <span class="kinetic-char">O</span>
+              <span class="kinetic-char">T</span>
+              <span class="kinetic-char">I</span>
+              <span class="kinetic-char">O</span>
+              <span class="kinetic-char">N</span>
+            </div>
+          </div>
+          
+          <div class="kinetic-footer">
+            <span class="kinetic-ticker">BAUHAUS LAYOUT // 2026</span>
+            <button class="kinetic-btn">Copy Idea</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.sample-section').forEach(section => {
+      const viewport = section.querySelector('[class^="viewport-s"]');
+      if (!viewport) return;
+      
+      const button = viewport.querySelector('button');
+      if (!button) return;
+
+      const promptTextEl = section.querySelector('.prompt-text');
+      if (!promptTextEl) return;
+      const promptText = promptTextEl.innerText.trim();
+
+      button.addEventListener('click', () => {
+        navigator.clipboard.writeText(promptText).then(() => {
+          const originalHTML = button.innerHTML;
+          button.innerHTML = '✨ Copied!';
+          button.style.pointerEvents = 'none';
+          
+          setTimeout(() => {
+            button.innerHTML = originalHTML;
+            button.style.pointerEvents = 'auto';
+          }, 1500);
+        }).catch(err => {
+          console.error('Clipboard copy failed: ', err);
+          
+          // Fallback copy method
+          const textarea = document.createElement('textarea');
+          textarea.value = promptText;
+          textarea.style.position = 'fixed';
+          document.body.appendChild(textarea);
+          textarea.select();
+          try {
+            document.execCommand('copy');
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '✨ Copied!';
+            button.style.pointerEvents = 'none';
+            setTimeout(() => {
+              button.innerHTML = originalHTML;
+              button.style.pointerEvents = 'auto';
+            }, 1500);
+          } catch (e) {
+            console.error('Fallback copy failed: ', e);
+          }
+          document.body.removeChild(textarea);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

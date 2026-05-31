@@ -233,7 +233,6 @@
       padding: 12px 16px;
       font-size: 0.85rem;
       border: 1px solid rgba(255, 255, 255, 0.03);
-      position: relative;
     }
 
     .prompt-label {
@@ -248,7 +247,9 @@
     .prompt-text {
       font-family: 'Space Grotesk', 'Noto Sans KR', sans-serif;
       color: #e0e7ff;
-      word-break: break-all;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      line-height: 1.45;
     }
 
     /* ==========================================================================
@@ -327,8 +328,8 @@
     .iso-right { background: #312e81; transform: rotateX(-90deg) translateZ(30px); }
 
     /* Bofomorphism */
-    .preview-puffy-3d { background: #faf5ff; }
-    .puffy-3d-bubble { width: 85px; height: 85px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #f472b6, #db2777); box-shadow: inset -8px -8px 20px rgba(0, 0, 0, 0.4), inset 12px 12px 20px rgba(255, 255, 255, 0.8), 0 15px 25px rgba(219, 39, 119, 0.3); }
+    .preview-bofo { background: #faf5ff; }
+    .bofo-bubble { width: 85px; height: 85px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #f472b6, #db2777); box-shadow: inset -8px -8px 20px rgba(0, 0, 0, 0.4), inset 12px 12px 20px rgba(255, 255, 255, 0.8), 0 15px 25px rgba(219, 39, 119, 0.3); }
 
     /* Mesh Gradient */
     .preview-mesh { background: radial-gradient(at 10% 20%, #4f46e5 0px, transparent 50%), radial-gradient(at 90% 10%, #ec4899 0px, transparent 50%), radial-gradient(at 50% 90%, #f59e0b 0px, transparent 50%), radial-gradient(at 80% 90%, #10b981 0px, transparent 50%), #06b6d4; }
@@ -486,13 +487,13 @@
     .preview-motion-blur { background: #0f172a; position: relative; }
 
     /* Long Exposure */
-    
+    .preview-long-exposure { background: #020617; position: relative; }
 
     /* Depth of Field */
     .preview-dof { background: #111827; position: relative; }
 
     /* Chromatic Aberration */
-    
+    .preview-chromatic { background: #0b0f19; position: relative; }
 
     /* Glitch Effect */
     .preview-glitch { background: #080b11; position: relative; }
@@ -539,7 +540,7 @@
     .poly-svg { width: 140px; height: 140px; }
 
     /* Claymorphism */
-    
+    .preview-claymorphism { background: #e0f2fe; }
     .clay-card { width: 130px; height: 90px; background: #38bdf8; border-radius: 24px; box-shadow: 8px 8px 16px #bae6fd, -8px -8px 16px #ffffff, inset 6px 6px 12px #7dd3fc, inset -6px -6px 12px #0284c7; }
 
     /* Monochrome + Accent */
@@ -565,61 +566,6 @@
     .block-yellow { width: 40%; height: 100%; background: #fbbf24; }
     .block-blue { width: 35%; height: 100%; background: #2563eb; }
     .block-red { width: 25%; height: 100%; background: #dc2626; }
-
-    /* 1. Deep Tone */
-    .preview-deep-tone { background: linear-gradient(135deg, #1e0b1a 0%, #061c15 50%, #081220 100%); display: flex; gap: 8px; justify-content: center; align-items: center; }
-    .deep-gem { width: 35px; height: 35px; border-radius: 50%; box-shadow: 0 8px 16px rgba(0,0,0,0.5); }
-    .deep-burgundy { background: #581c2f; border: 1px solid rgba(255,255,255,0.08); }
-    .deep-forest { background: #143d28; border: 1px solid rgba(255,255,255,0.08); }
-    .deep-sapphire { background: #0f2537; border: 1px solid rgba(255,255,255,0.08); }
-
-    /* 2. Light Tone */
-    .preview-light-tone { background: #f8fafc; display: flex; gap: 10px; align-items: center; justify-content: center; }
-    .light-bubble { width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-    .light-yellow { background: #fef08a; }
-    .light-peach { background: #fed7aa; }
-    .light-lavender { background: #e9d5ff; }
-
-    /* 3. Grayish Tone */
-    .preview-grayish-tone { background: #d1d5db; background-image: radial-gradient(#9ca3af 20%, transparent 20%), radial-gradient(#9ca3af 20%, transparent 20%); background-size: 16px 16px; background-position: 0 0, 8px 8px; opacity: 0.85; display: flex; align-items: center; justify-content: center; }
-    .grayish-card { background: #e5e7eb; border: 1px solid #9ca3af; padding: 12px 24px; font-weight: bold; color: #4b5563; border-radius: 4px; box-shadow: 2px 2px 0px #9ca3af; }
-
-    /* 4. Aurora Palette */
-    .preview-aurora { background: #030712; position: relative; overflow: hidden; }
-    .aurora-stream-1 { position: absolute; width: 250px; height: 120px; background: radial-gradient(circle, rgba(16,185,129,0.3) 0%, transparent 70%); top: -10%; left: -20%; transform: rotate(-15deg); filter: blur(12px); animation: auroraWave 8s ease-in-out infinite alternate; }
-    .aurora-stream-2 { position: absolute; width: 200px; height: 100px; background: radial-gradient(circle, rgba(168,85,247,0.3) 0%, transparent 70%); bottom: -10%; right: -10%; transform: rotate(15deg); filter: blur(10px); animation: auroraWave 10s ease-in-out infinite alternate-reverse; }
-    @keyframes auroraWave { 0% { transform: translate(0, 0) scale(1) rotate(-15deg); } 100% { transform: translate(20px, 15px) scale(1.1) rotate(-5deg); } }
-
-    /* 5. Terracotta & Clay */
-    .preview-terracotta { background: #f5ebe6; display: flex; align-items: flex-end; justify-content: center; gap: 12px; }
-    .clay-pot-1 { width: 35px; height: 70px; background: #c2593f; border-radius: 8px 8px 0 0; }
-    .clay-pot-2 { width: 45px; height: 95px; background: #8c4331; border-radius: 12px 12px 0 0; }
-    .clay-pot-3 { width: 30px; height: 50px; background: #d98a6c; border-radius: 6px 6px 0 0; }
-
-    /* 6. Ice & Frost (Color version) */
-    .preview-ice-frost-color { background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); position: relative; display: flex; align-items: center; justify-content: center; }
-    .ice-crystal-color-1 { position: absolute; width: 40px; height: 40px; background: rgba(255,255,255,0.7); clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); transform: rotate(15deg) translate(-20px, -5px); border: 1px solid rgba(255,255,255,0.8); }
-    .ice-crystal-color-2 { position: absolute; width: 50px; height: 50px; background: rgba(255,255,255,0.4); clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); transform: rotate(-20deg) translate(15px, 10px); border: 1px solid rgba(255,255,255,0.6); }
-
-    /* 7. Moss & Sage */
-    .preview-moss-sage { background: #e2e8f0; display: flex; align-items: center; justify-content: center; gap: 14px; }
-    .moss-patch { width: 50px; height: 50px; background: #3f6212; border-radius: 40% 60% 50% 50% / 40% 40% 60% 60%; }
-    .sage-patch { width: 55px; height: 55px; background: #708238; border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%; opacity: 0.9; }
-
-    /* 8. Glassmorphism Colors */
-    .preview-glassmorphism-color { background: linear-gradient(135deg, #ec4899 0%, #3b82f6 100%); position: relative; }
-    .glass-card-color { width: 120px; height: 80px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.35); border-radius: 12px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15); }
-
-    /* 9. Gradient Blur */
-    .preview-gradient-blur { background: #fafafa; position: relative; overflow: hidden; }
-    .blur-glow-1 { position: absolute; width: 100px; height: 100px; background: radial-gradient(circle, rgba(167,139,250,0.6) 0%, transparent 70%); top: 10%; left: 10%; filter: blur(16px); }
-    .blur-glow-2 { position: absolute; width: 120px; height: 120px; background: radial-gradient(circle, rgba(253,186,116,0.6) 0%, transparent 70%); bottom: 10%; right: 10%; filter: blur(16px); }
-
-    /* 10. Chromatic Aberration */
-    .preview-chromatic { background: #000000; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    
-    
-    
 
     /* Symmetry & Balance */
     .preview-symmetry { background: #111827; position: relative; }
@@ -736,15 +682,15 @@
     @keyframes psychSpin { 0% { transform: rotate(0deg) scale(0.9); } 50% { transform: rotate(180deg) scale(1.1); } 100% { transform: rotate(360deg) scale(0.9); } }
 
     /* 5. Japonisme */
-    
-    
-    
-    
+    .preview-japonisme { background: #f4edd2; position: relative; }
+    .japo-sun { position: absolute; width: 60px; height: 60px; background: #c82333; border-radius: 50%; top: 20%; left: 30%; box-shadow: 0 0 15px rgba(200,35,51,0.2); }
+    .japo-wave-container { position: absolute; bottom: 0; width: 100%; height: 60px; overflow: hidden; }
+    .japo-wave { position: absolute; bottom: -10px; width: 120%; height: 50px; border-radius: 50% 50% 0 0; border-top: 2px solid #1c2d37; background: #324c5a; transform: skewY(-5deg); }
 
 
 
     /* 7. Chinoiserie */
-    
+    .preview-chinoiserie { background: #e0f2f1; display: flex; align-items: center; justify-content: center; }
     .chino-svg { width: 130px; height: 130px; filter: drop-shadow(0 4px 8px rgba(0,77,64,0.15)); }
 
     /* 8. Constructivism */
@@ -921,7 +867,7 @@
        ========================================================================== */
 
     /* Kinetic Typography */
-    
+    .preview-kinetic-typography { background: #000; font-family: 'Space Grotesk', sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; position: relative; }
     .kinetic-text-wrap { transform: rotate(-10deg) scale(1.1); font-weight: 800; text-transform: uppercase; line-height: 0.9; }
     .kinetic-row-1 { color: #fff; font-size: 1.8rem; animation: slideLeft 4s linear infinite; white-space: nowrap; }
     .kinetic-row-2 { color: var(--primary); font-size: 2.2rem; animation: slideRight 4s linear infinite; white-space: nowrap; text-shadow: 0 0 10px var(--primary-glow); }
@@ -930,7 +876,7 @@
     @keyframes slideRight { 0% { transform: translateX(-40px); } 100% { transform: translateX(20px); } }
 
     /* Morphing Design */
-    
+    .preview-morphism-fluid { background: linear-gradient(135deg, #0f051d, #250742); position: relative; }
     .fluid-shape { width: 90px; height: 90px; background: linear-gradient(135deg, #a855f7, #ec4899); border-radius: 50%; filter: blur(2px); animation: morphFluid 8s ease-in-out infinite; box-shadow: 0 0 30px rgba(236,72,153,0.4); }
     .fluid-shape-2 { position: absolute; width: 60px; height: 60px; background: linear-gradient(135deg, #3b82f6, #06b6d4); border-radius: 50%; opacity: 0.6; filter: blur(3px); animation: morphFluid2 6s ease-in-out infinite; }
     @keyframes morphFluid {
@@ -1000,7 +946,7 @@
     .parallax-fore { position: absolute; width: 40%; height: 40%; background: #fbbf24; border-radius: 4px; right: 10%; bottom: 10%; transform: translateZ(50px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
 
     /* Morph Transition */
-    
+    .preview-morph-transition { background: #0c0a15; }
     .morph-shape-animated { width: 75px; height: 75px; background: linear-gradient(135deg, #10b981, #06b6d4); animation: shapeMorphAnim 4s ease-in-out infinite; box-shadow: 0 0 25px rgba(16,185,129,0.3); }
     @keyframes shapeMorphAnim {
       0% { border-radius: 8px; transform: rotate(0deg); }
@@ -1009,7 +955,7 @@
     }
 
     /* Timelapse Effect */
-    
+    .preview-timelapse { background: #02040a; position: relative; overflow: hidden; }
     .star-trail-1 { position: absolute; width: 180px; height: 180px; border: 1px solid rgba(255,255,255,0.25); border-radius: 50%; border-top-color: transparent; border-right-color: transparent; top: -50px; left: -50px; transform: rotate(15deg); }
     .star-trail-2 { position: absolute; width: 230px; height: 230px; border: 1.5px solid rgba(0,242,254,0.3); border-radius: 50%; border-top-color: transparent; border-right-color: transparent; top: -70px; left: -70px; transform: rotate(45deg); }
     .star-trail-3 { position: absolute; width: 280px; height: 280px; border: 1px solid rgba(255,0,127,0.25); border-radius: 50%; border-top-color: transparent; border-right-color: transparent; top: -90px; left: -90px; transform: rotate(80deg); }
@@ -1089,25 +1035,25 @@
     .mood-shard-float { animation: moodShardFloat 7s ease-in-out infinite; }
 
     /* Medieval / Dark Fantasy */
-    
+    .preview-medieval { background: #141416; position: relative; }
     .gothic-stained-glass { width: 70px; height: 105px; border: 3px solid #374151; border-radius: 35px 35px 0 0; background: linear-gradient(135deg, #b91c1c 30%, #1d4ed8 70%); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 20px rgba(185,28,28,0.4); }
     .stained-lead-lines { width: 100%; height: 100%; background: repeating-linear-gradient(45deg, transparent, transparent 15px, #111 15px, #111 17px), repeating-linear-gradient(-45deg, transparent, transparent 15px, #111 15px, #111 17px); opacity: 0.85; }
 
     /* Renaissance */
-    
+    .preview-renaissance { background: #2b221a; position: relative; display: flex; align-items: center; justify-content: center; }
     .renaissance-frame { width: 130px; height: 95px; border: 6px solid #b45309; background: #1c1510; box-shadow: 0 8px 16px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
     .renaissance-painting { width: 95%; height: 95%; background: radial-gradient(circle at 35% 35%, #854d0e 0%, #1e1b4b 100%); position: relative; }
     .renaissance-painting::after { content: ''; position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.15); mix-blend-mode: multiply; }
 
     /* Baroque / Rococo */
-    
+    .preview-baroque { background: #3b0712; display: flex; align-items: center; justify-content: center; }
     .baroque-ornament { width: 110px; height: 110px; position: relative; }
     .baroque-circle { position: absolute; width: 70px; height: 70px; border: 3.5px double #fbbf24; border-radius: 50%; top: 20px; left: 20px; }
     .baroque-curl-1 { position: absolute; width: 45px; height: 45px; border: 3px solid #fbbf24; border-radius: 50% 50% 0 50%; transform: rotate(45deg); top: 12px; left: 12px; }
     .baroque-curl-2 { position: absolute; width: 45px; height: 45px; border: 3px solid #fbbf24; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); bottom: 12px; right: 12px; }
 
     /* Victorian */
-    
+    .preview-victorian { background: #1f1224; position: relative; overflow: hidden; }
     .victorian-wallpaper { position: absolute; width: 100%; height: 100%; background: repeating-linear-gradient(45deg, rgba(234,179,8,0.06), rgba(234,179,8,0.06) 10px, transparent 10px, transparent 20px); }
     .victorian-cameo { width: 55px; height: 75px; background: radial-gradient(circle, #312e81 0%, #1e1b4b 100%); border: 3px solid #ea580c; border-radius: 50% / 60% 60% 40% 40%; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; }
     .victorian-silhouette { width: 25px; height: 35px; background: #fff; border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%; }
@@ -1146,7 +1092,7 @@
     .watercolor-texture { position: absolute; width: 100%; height: 100%; opacity: 0.15; background-image: radial-gradient(#d6d3d1 0.5px, transparent 0.5px); background-size: 8px 8px; }
 
     /* Oil Painting / Impasto */
-    
+    .preview-oil-painting { background: #3e2723; display: flex; align-items: center; justify-content: center; }
     .oil-canvas { width: 130px; height: 95px; background: linear-gradient(135deg, #78350f 0%, #3f1d0b 100%); border-radius: 4px; position: relative; box-shadow: inset 0 0 15px rgba(0,0,0,0.8), 0 5px 15px rgba(0,0,0,0.3); overflow: hidden; }
     .oil-stroke-1 { position: absolute; width: 90px; height: 16px; background: #b45309; transform: rotate(-15deg); top: 25px; left: 15px; border-radius: 8px; filter: blur(0.5px); box-shadow: 1px 2px 2px rgba(0,0,0,0.4); }
     .oil-stroke-2 { position: absolute; width: 70px; height: 18px; background: #eab308; transform: rotate(10deg); bottom: 25px; right: 15px; border-radius: 8px; filter: blur(0.5px); box-shadow: 1px 2px 2px rgba(0,0,0,0.4); }
@@ -1189,7 +1135,7 @@
     .collage-paint { position: absolute; width: 45px; height: 45px; background: rgba(219,39,119,0.7); border-radius: 50% 30% 50% 40%; top: 35%; left: 40%; transform: rotate(45deg); filter: blur(0.5px); }
 
     /* Woodcut / Linocut */
-    
+    .preview-woodcut { background: #1c1917; display: flex; align-items: center; justify-content: center; }
     .woodcut-stamp { width: 110px; height: 80px; background: #f5f5f4; border-radius: 2px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; }
     .woodcut-row { width: 100%; height: 8px; background: #1c1917; margin: 4px 0; transform: skewX(-20deg); }
     .woodcut-row:nth-child(even) { transform: skewX(20deg); width: 80%; }
@@ -1296,7 +1242,112 @@
       h1 { font-size: 2.2rem; }
       .grid { grid-template-columns: 1fr; }
     }
-  </style>
+  
+    /* Color Palette Section Refinements */
+    .palette-preview {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      gap: 0;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      background: #090c15;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .palette-color {
+      flex: 1;
+      height: 100%;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 20px;
+      cursor: pointer;
+    }
+    .palette-color:hover {
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      z-index: 2;
+    }
+    .palette-color::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 60%);
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .palette-color:hover::after {
+      opacity: 0.95;
+    }
+    .palette-label {
+      position: relative;
+      z-index: 3;
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      opacity: 0.9;
+      transform: translateY(0);
+      transition: all 0.3s;
+      text-align: center;
+    }
+    .palette-hex {
+      position: relative;
+      z-index: 3;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.65rem;
+      font-family: monospace;
+      margin-top: 4px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.1);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+      opacity: 0.7;
+      transform: translateY(0);
+      transition: all 0.3s;
+    }
+    .palette-color:hover .palette-hex {
+      opacity: 1;
+      background: rgba(0,0,0,0.6);
+      border-color: rgba(255,255,255,0.25);
+    }
+    .palette-color:hover .palette-label {
+      transform: translateY(-2px);
+    }
+    .prompt-copy {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e0e7ff;
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+    .prompt-copy:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    .prompt-copy:active {
+      transform: scale(0.95);
+    }
+
+    .preview-arttoy {
+      background: linear-gradient(135deg, #ffedd5, #fce7f3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+</style>
 </head>
 <body>
 
@@ -1309,7 +1360,12 @@
   <header>
     <div class="badge">🎨 Design Showcase Dictionary</div>
     <h1>AI Prompt Design Dictionary</h1>
-    <p class="subtitle">AI 이미지 / UI 생성 프롬프트에 활용하면 최상의 결과가 나오는 167가지 시각적 디자인 가이드입니다.</p>
+    <p class="subtitle">AI 이미지 / UI 생성 프롬프트에 활용하면 최상의 결과가 나오는 181가지 시각적 디자인 가이드입니다.</p>
+    <div style="margin-top: 24px;">
+      <a href="design_samples.html" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #6366f1, #a855f7); color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 20px rgba(99, 102, 241, 0.6)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(99, 102, 241, 0.4)'">
+        ✨ Design Samples 보러가기
+      </a>
+    </div>
   </header>
 
   <!-- Sticky Section Navigation Bar -->
@@ -1324,6 +1380,7 @@
       <a href="#sec-mood" class="nav-item">🔮 7. 무드</a>
       <a href="#sec-era" class="nav-item">⏳ 8. 시대</a>
       <a href="#sec-illustration" class="nav-item">✏️ 9. 일러스트</a>
+      <a href="#sec-palettes" class="nav-item">🎨 10. 팔레트</a>
     </div>
   </nav>
 
@@ -1331,12 +1388,11 @@
   <div class="section-container" id="sec-style">
     <div class="section-title">
       <span>1. 디자인 스타일 (Design Styles)</span>
-      <span style="font-size:1rem; opacity:0.6;">26 Items</span>
+      <span style="font-size:1rem; opacity:0.6;">29 Items</span>
     </div>
     <p class="section-desc">가장 대표적이고 트렌디한 주요 디자인 레이아웃 및 표현 기법입니다.</p>
   </div>
   <div class="grid">
-    
     <div class="card">
       <div class="visual-preview preview-minimalism"><div><div class="min-box">M</div><div class="min-text">Minimal</div></div></div>
       <div class="card-info">
@@ -1346,7 +1402,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Minimalistic UI, clean layout, monochrome, negative space</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-glassmorphism"><div class="glass-orb"></div><div class="glass-orb-2"></div><div class="glass-card"><div class="glass-line"></div><div class="glass-line" style="width:70px; opacity:0.6;"></div><div class="glass-circle"></div></div></div>
       <div class="card-info">
@@ -1356,7 +1411,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Glassmorphism card UI overlaying colorful glowing gradient spheres</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-neumorphism"><div class="neu-button">⚡</div><div class="neu-button-inset">♥</div></div>
       <div class="card-info">
@@ -1366,7 +1420,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Neumorphic user interface design, soft shadows, light mode grey, tactile buttons</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-flat"><div class="flat-card"><div class="flat-circle"></div><div class="flat-bar"></div></div></div>
       <div class="card-info">
@@ -1376,7 +1429,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Flat design illustration, 2D vector graphic, clean borders, bright solid colors</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-cyberpunk"><div class="cyber-card"><div class="cyber-title">CRITICAL</div><div class="cyber-grid"></div></div></div>
       <div class="card-info">
@@ -1386,7 +1438,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Cyberpunk city street, neon glowing sign, high-tech interface overlay, futuristic</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-bauhaus"><div class="bauhaus-shape-1"></div><div class="bauhaus-shape-2"></div><div class="bauhaus-shape-3"></div><div class="bauhaus-line"></div></div>
       <div class="card-info">
@@ -1396,7 +1447,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Bauhaus poster, geometric shapes, primary colors, retro vintage style, clean shapes</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-artdeco"><div class="artdeco-pattern"><div class="artdeco-inner"></div></div></div>
       <div class="card-info">
@@ -1406,7 +1456,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Art Deco geometric frame, luxury gold lines on navy background, symmetrical pattern</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-skeuomorphism"><div class="skeuo-leather"><div class="skeuo-button"></div></div></div>
       <div class="card-info">
@@ -1416,7 +1465,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Skeuomorphic interface, realistic stitched brown leather background, glossy metal dial</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-brutalism"><div class="brutalist-card"><div class="brutalist-title">RAW POWER</div><div class="brutalist-badge">1990</div></div></div>
       <div class="card-info">
@@ -1426,7 +1474,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Brutalist poster layout, bold raw fonts, thick black border strokes, vibrant acidic yellow</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-retro"><div class="retro-badge"><h4>EST.</h4><span>1975</span><h4>ORIGINAL</h4></div></div>
       <div class="card-info">
@@ -1436,7 +1483,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Vintage retro advertisement style, 1970s print design, sepia and orange palette, grain</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-isometric"><div class="iso-cube"><div class="iso-face iso-top"></div><div class="iso-face iso-left"></div><div class="iso-face iso-right"></div></div></div>
       <div class="card-info">
@@ -1446,17 +1492,17 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Isometric 3D icon, tech server room, neon cyan and violet lighting, glossy render</div></div>
       </div>
     </div>
-
     <div class="card">
-      <div class="visual-preview preview-puffy-3d"><div class="puffy-3d-bubble"></div></div>
+      <div class="visual-preview preview-bofo"><div class="bofo-bubble"></div></div>
       <div class="card-info">
-        <div class="card-meta"><span class="card-category">Style</span><button class="keyword-copy" onclick="copyKeyword(&#39;Puffy 3D&#39;)">Puffy 3D 📋</button></div>
-        <div class="card-title">Puffy 3D / 3D Toy Art</div>
+        <div class="card-meta"><span class="card-category">Style</span><button class="keyword-copy" onclick="copyKeyword(&#39;Bofomorphism&#39;)">Bofomorphism 📋</button></div>
+        <div class="card-title">보포모피즘</div>
         <p class="card-desc">동글동글하고 통통한, 마치 풍선이나 찰흙 인형을 빚은 듯한 부드럽고 말랑해 보이는 최신 3D 캐릭터/아이콘 트렌드.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Puffy 3D toy character design, puffy 3d, cute pastel gradient, clay material gloss</div></div>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Puffy 3D toy character design, bofomorphism, cute pastel gradient, clay material gloss</div></div>
       </div>
     </div>
 
+    <!-- ADDED 7 NEW CARDS -->
     <div class="card">
       <div class="visual-preview preview-memphis"><div class="memphis-zigzag"></div><div class="memphis-shape-1"></div><div class="memphis-shape-2"></div></div>
       <div class="card-info">
@@ -1466,7 +1512,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Memphis design style graphic, bold black outlines, zigzag lines, bright yellow and pink</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-artnouveau">
         <svg class="nouveau-svg" viewBox="0 0 100 100" fill="none" stroke="#d4af37" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
@@ -1485,7 +1530,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Art Nouveau style illustration, flowing organic lines, intricate floral patterns, Alphonse Mucha vibe</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-vaporwave"><div class="vapor-sun"></div><div class="vapor-grid"></div></div>
       <div class="card-info">
@@ -1495,7 +1539,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Vaporwave aesthetic, 3D wireframe grid floor, neon sunset glow, marble statue silhouette</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-swiss"><div class="swiss-title">SWI<br>SS.</div><div class="swiss-grid-line"></div><div class="swiss-sub">Grid &amp; Layout</div></div>
       <div class="card-info">
@@ -1505,7 +1548,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Swiss International Style poster, asymmetric grid, bold sans-serif, striking red and black</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-pixel"><div class="pixel-heart"></div></div>
       <div class="card-info">
@@ -1515,7 +1557,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">16-bit pixel art scene, isometric RPG game style, vibrant colors, retro gaming</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-lowpoly">
         <svg class="poly-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -1533,17 +1574,9 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Low poly 3D render of a geometric fox, origami style triangles, clean colored facets</div></div>
       </div>
     </div>
+    
 
-    <div class="card">
-      <div class="visual-preview preview-claymorphism"><div class="clay-card"></div></div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Style</span><button class="keyword-copy" onclick="copyKeyword(&#39;Claymorphism&#39;)">Claymorphism 📋</button></div>
-        <div class="card-title">클레이모피즘</div>
-        <p class="card-desc">마치 점토를 빚어놓은 듯 내부/외부 그림자를 극대화하여 통통하고 부드러운 입체적 촉감을 연출하는 UI 카드 트렌드.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Claymorphism style app UI card, 3D soft clay shape, bright playful colors, smooth lighting</div></div>
-      </div>
-    </div>
-
+    <!-- 3. Pop Art -->
     <div class="card">
       <div class="visual-preview preview-popart">
         <div class="pop-dots"></div>
@@ -1557,6 +1590,7 @@
       </div>
     </div>
 
+    <!-- 4. Psychedelic -->
     <div class="card">
       <div class="visual-preview preview-psychedelic">
         <div class="psych-spiral"></div>
@@ -1569,6 +1603,53 @@
       </div>
     </div>
 
+    <!-- 5. Japonisme -->
+    <div class="card">
+      <div class="visual-preview preview-japonisme">
+        <div class="japo-sun"></div>
+        <div class="japo-wave-container">
+          <div class="japo-wave"></div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Style</span><button class="keyword-copy" onclick="copyKeyword(&#39;Japonisme&#39;)">Japonisme 📋</button></div>
+        <div class="card-title">자포니즘</div>
+        <p class="card-desc">일본 전통 민화(우키요에)에서 영감을 얻은, 굵고 단순화된 아웃라인과 플랫한 채색법, 여백의 미를 살린 장식 스타일.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Japonisme style illustration, traditional Japanese wave pattern, large red sun, clean line art, retro flat colors</div></div>
+      </div>
+    </div>
+
+    <!-- 7. Chinoiserie -->
+    <div class="card">
+      <div class="visual-preview preview-chinoiserie">
+        <svg class="chino-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" fill="#e0f2f1"></rect>
+          <circle cx="50" cy="50" r="42" stroke="#b2dfdb" stroke-width="0.8"></circle>
+          <circle cx="50" cy="50" r="39" stroke="#00796b" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.6"></circle>
+          <!-- Branch -->
+          <path d="M 12,78 Q 32,68 50,45 T 82,28" stroke="#004d40" stroke-width="1.8" fill="none"></path>
+          <path d="M 32,65 Q 46,71 60,66" stroke="#004d40" stroke-width="1.2" fill="none"></path>
+          <!-- Blossoms -->
+          <circle cx="50" cy="45" r="3.5" fill="#e91e63" stroke="#004d40" stroke-width="0.6"></circle>
+          <circle cx="38" cy="58" r="3" fill="#e91e63" stroke="#004d40" stroke-width="0.6"></circle>
+          <circle cx="66" cy="37" r="2.8" fill="#e91e63" stroke="#004d40" stroke-width="0.6"></circle>
+          <circle cx="26" cy="70" r="2.8" fill="#e91e63" stroke="#004d40" stroke-width="0.6"></circle>
+          <circle cx="54" cy="69" r="2.2" fill="#e91e63" stroke="#004d40" stroke-width="0.6"></circle>
+          <!-- Oriental bird silhouette -->
+          <path d="M 45,34 C 42,31 38,31 35,34 C 32,37 35,43 37,45 C 39,47 43,47 46,43 C 49,39 48,36 45,34 Z" fill="#00796b"></path>
+          <path d="M 35,34 Q 30,33 28,36" stroke="#00796b" stroke-width="1.2" fill="none"></path>
+          <path d="M 44,43 Q 50,52 56,58" stroke="#00796b" stroke-width="1.5" fill="none"></path>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Style</span><button class="keyword-copy" onclick="copyKeyword(&#39;Chinoiserie&#39;)">Chinoiserie 📋</button></div>
+        <div class="card-title">시누아즈리</div>
+        <p class="card-desc">18세기 유럽 귀족 사이에서 대유행했던 중국풍 장식 미술. 민트나 크림색 등 화사한 톤에 새, 꽃, 덩굴을 정교하게 묘사하는 양식.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Chinoiserie style wallpaper, delicate turquoise background, hand-painted branches with flowers and birds, vintage luxury</div></div>
+      </div>
+    </div>
+
+    <!-- 8. Constructivism -->
     <div class="card">
       <div class="visual-preview preview-constructivism">
         <div class="const-red-tri"></div>
@@ -1583,6 +1664,7 @@
       </div>
     </div>
 
+    <!-- 9. De Stijl -->
     <div class="card">
       <div class="visual-preview preview-destijl">
         <div class="destijl-frame">
@@ -1604,6 +1686,7 @@
       </div>
     </div>
 
+    <!-- 10. Risograph -->
     <div class="card">
       <div class="visual-preview preview-risograph">
         <div class="riso-dots"></div>
@@ -1618,6 +1701,27 @@
       </div>
     </div>
 
+    <!-- 28. Kinetic Typography -->
+    <div class="card">
+      <div class="visual-preview preview-kinetic-typography">
+        <div class="kinetic-text-wrap">
+          <div class="kinetic-row-1">Motion</div>
+          <div class="kinetic-row-2">Kinetic</div>
+          <div class="kinetic-row-3">Typography</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Style</span><button class="keyword-copy" onclick="copyKeyword(&#39;Kinetic Typography&#39;)">Kinetic Typography 📋</button></div>
+        <div class="card-title">키네틱 타이포그래피</div>
+        <p class="card-desc">텍스트가 살아 움직이며 크기·위치·회전이 역동적으로 변하는 모션 그래픽 스타일.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Kinetic typography poster, bold moving text layout, distorted typography, high energy dynamic composition</div></div>
+      </div>
+    </div>
+
+    <!-- 29. Morphing Design -->
+    
+
+    <!-- 30. Generative Art -->
     <div class="card">
       <div class="visual-preview preview-generative-art">
         <div class="generative-grid">
@@ -1638,32 +1742,74 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Generative art, algorithmic design, complex fractal geometry, math-based procedural rendering, glowing lines</div></div>
       </div>
     </div>
+    <!-- 31. Neo-Brutalism -->
+    
 
+    <!-- 32. Claymorphism -->
+    
+
+  
+    <!-- 31. Art Toy & Pop Mart Style -->
     <div class="card">
-      <div class="visual-preview preview-neobrutalism">
-        <div class="neobru-box">NEO</div>
+      <div class="visual-preview preview-arttoy">
+        <svg class="toy-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 60px; height: 60px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));">
+          <!-- Ears -->
+          <circle cx="35" cy="35" r="10" fill="#ffccd5" />
+          <circle cx="35" cy="35" r="6" fill="#ffb3c6" />
+          <circle cx="65" cy="35" r="10" fill="#ffccd5" />
+          <circle cx="65" cy="35" r="6" fill="#ffb3c6" />
+          <!-- Head -->
+          <circle cx="50" cy="55" r="22" fill="#ffccd5" />
+          <!-- Glossy highlight on head -->
+          <ellipse cx="42" cy="46" rx="4" ry="2" fill="#ffffff" opacity="0.6" transform="rotate(-30 42 46)" />
+          <!-- Eyes -->
+          <circle cx="43" cy="54" r="2.5" fill="#2d3748" />
+          <circle cx="57" cy="54" r="2.5" fill="#2d3748" />
+          <circle cx="44" cy="53" r="0.8" fill="#ffffff" />
+          <circle cx="58" cy="53" r="0.8" fill="#ffffff" />
+          <!-- Cheeks -->
+          <circle cx="39" cy="59" r="3" fill="#ff85a1" opacity="0.6" />
+          <circle cx="61" cy="59" r="3" fill="#ff85a1" opacity="0.6" />
+          <!-- Snout -->
+          <ellipse cx="50" cy="59" rx="5" ry="3.5" fill="#ffffff" />
+          <polygon points="50,57 48,59 52,59" fill="#2d3748" />
+          <path d="M48,60 Q50,62 52,60" stroke="#2d3748" stroke-width="1" stroke-linecap="round" />
+        </svg>
       </div>
       <div class="card-info">
-        <div class="card-meta"><span class="card-category">Style</span><button class="keyword-copy" onclick="copyKeyword(&#39;Neo-Brutalism UI design / flat high contrast style&#39;)">Neo-Brutalism 📋</button></div>
-        <div class="card-title">네오 브루탈리즘</div>
-        <p class="card-desc">채도가 높은 원색 배경, 굵은 검은색 테두리선, 스큐(Skew)된 투박하고 어두운 그림자를 사용하여 강렬하고 힙한 느낌을 주는 웹/앱 레이아웃 기법.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Neo-Brutalism style mobile app UI dashboard, vivid colors, thick black borders, flat bold drop shadows, high contrast typographic layout</div></div>
+        <div class="card-meta"><span class="card-category">Style</span><button class="keyword-copy" onclick="copyKeyword('Art Toy Style')">Art Toy 📋</button></div>
+        <div class="card-title">아트 토이 & 팝 마트 스타일</div>
+        <p class="card-desc">정교하고 매끄러운 플라스틱/레진 재질감과 광택 하이라이트가 강조된 수집용 피규어 및 3D 캐릭터 디자인 스타일.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Cute 3D art toy character, Pop Mart style, glossy pastel plastic, soft studio lighting, high-end toy collectible</div></div>
       </div>
     </div>
 
-
+    <!-- 32. Decoden & Y2K Fancy -->
+    <div class="card">
+      <div class="visual-preview preview-decoden" style="background: #fff0f5; display: flex; align-items: center; justify-content: center; position: relative;">
+        <div class="decoden-heart" style="font-size: 2.5rem; text-shadow: 0 4px 6px rgba(0,0,0,0.15); animation: float-slow 4s ease-in-out infinite;">💖</div>
+        <div style="position: absolute; top: 12px; left: 12px; font-size: 1.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">⭐</div>
+        <div style="position: absolute; bottom: 12px; right: 12px; font-size: 1.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">✨</div>
+        <div style="position: absolute; top: 18px; right: 18px; width: 12px; height: 12px; border-radius: 50%; background: #ffd6a5; box-shadow: inset -2px -2px 4px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1);"></div>
+        <div style="position: absolute; bottom: 18px; left: 18px; width: 14px; height: 14px; border-radius: 50%; background: #bfdbfe; box-shadow: inset -2px -2px 4px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1);"></div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Style</span><button class="keyword-copy" onclick="copyKeyword('Decoden Style')">Decoden 📋</button></div>
+        <div class="card-title">데코덴 & Y2K 팬시</div>
+        <p class="card-desc">비즈, 미니어처 파츠, 크림 모양 클레이가 아기자기하게 부착되어 화려하고 키치하며 세대 특유의 빈티지 감성을 자극하는 스타일.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Decoden aesthetic cell phone case design, Y2K cute pastel cream clay base, miniature beads and heart charms, kitsch fancy style</div></div>
+      </div>
+    </div>
   </div>
-
-  <!-- ==================== SECTION 2: COLORS ==================== -->
+<!-- ==================== SECTION 2: COLORS ==================== -->
   <div class="section-container" id="sec-color">
     <div class="section-title">
       <span>2. 색상 &amp; 톤 (Colors &amp; Tones)</span>
-      <span style="font-size:1rem; opacity:0.6;">37 Items</span>
+      <span style="font-size:1rem; opacity:0.6;">28 Items</span>
     </div>
     <p class="section-desc">이미지의 무드와 무게감을 좌우하는 컬러 매칭 기법들입니다.</p>
   </div>
   <div class="grid">
-    
     <div class="card">
       <div class="visual-preview preview-mesh"><div class="mesh-text">Mesh</div></div>
       <div class="card-info">
@@ -1673,7 +1819,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Soft mesh gradient background, pastel purple, indigo, orange, fluid transition</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-mono"><div class="mono-circle"></div></div>
       <div class="card-info">
@@ -1683,7 +1828,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Monochromatic indigo blue color palette, clean modern UI design, minimal shades</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-pastel"><div class="pastel-card">Soft</div></div>
       <div class="card-info">
@@ -1693,7 +1837,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Pastel tone aesthetic, soft lighting, pale lavender and light mint illustration</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-muted"><div class="muted-card">Calm</div></div>
       <div class="card-info">
@@ -1703,7 +1846,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Muted earth tones, warm beige and olive green interior design, cozy low saturation</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-vivid"><div class="vivid-element">POP!</div></div>
       <div class="card-info">
@@ -1713,7 +1855,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Vivid tone abstract poster design, high saturation neon yellow and hot pink shapes</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-contrast"><div class="contrast-split"></div><div class="contrast-circle"></div></div>
       <div class="card-info">
@@ -1723,7 +1864,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">High contrast black and white minimal composition, heavy graphic shadows</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-duotone"><div class="duotone-box"></div><div class="duotone-badge">DUO</div></div>
       <div class="card-info">
@@ -1733,7 +1873,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Duotone aesthetic portrait, electric pink and deep indigo navy colors, Spotify vibe</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-earth"><div class="earth-palette-1"></div><div class="earth-palette-2"></div><div class="earth-palette-3"></div></div>
       <div class="card-info">
@@ -1743,7 +1882,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Clay pot and dried leaves, earth tones, soft shadows, cozy warm brown aesthetic</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-holographic"><div class="hologram-element"></div></div>
       <div class="card-info">
@@ -1753,7 +1891,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Holographic iridescent metallic sheet, liquid ripples, pastel pink and cyan reflections</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-darkmode"><div class="dark-ui-box"><div class="dark-ui-row"><div class="dark-ui-text"></div><div class="dark-ui-switch"></div></div><div class="dark-ui-text" style="width:100px; opacity:0.4;"></div></div></div>
       <div class="card-info">
@@ -1764,6 +1901,7 @@
       </div>
     </div>
 
+    <!-- ADDED 5 NEW CARDS -->
     <div class="card">
       <div class="visual-preview preview-monochrome-accent"><div class="mono-element"></div><div class="mono-element accent"></div><div class="mono-element"></div></div>
       <div class="card-info">
@@ -1773,7 +1911,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Black and white street photography, a girl holding a bright red umbrella, high contrast</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-gradient-mesh-soft"></div>
       <div class="card-info">
@@ -1783,7 +1920,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Soft flowing gradient mesh, liquid transitions of warm gold, lavender, and sky blue</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-neon-black"><div class="neon-line-green"></div><div class="neon-line-cyan"></div></div>
       <div class="card-info">
@@ -1793,7 +1929,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Futuristic schematic line art, neon green and electric cyan glowing lines on pure black background</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-sepia-warm"><div class="sepia-overlay"></div></div>
       <div class="card-info">
@@ -1803,7 +1938,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Cozy vintage coffee shop interior, warm sepia color grading, nostalgic retro photograph</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-color-blocking"><div class="block-yellow"></div><div class="block-blue"></div><div class="block-red"></div></div>
       <div class="card-info">
@@ -1814,6 +1948,7 @@
       </div>
     </div>
 
+    <!-- 11. Analogous Colors -->
     <div class="card">
       <div class="visual-preview preview-analogous">
         <div class="analogous-badge">Analogous</div>
@@ -1826,6 +1961,7 @@
       </div>
     </div>
 
+    <!-- 12. Complementary Colors -->
     <div class="card">
       <div class="visual-preview preview-complementary">
         <div class="comp-blue">Blue</div>
@@ -1839,6 +1975,7 @@
       </div>
     </div>
 
+    <!-- 13. Split Complementary -->
     <div class="card">
       <div class="visual-preview preview-splitcomplementary">
         <div class="split-comp-1"></div>
@@ -1852,6 +1989,7 @@
       </div>
     </div>
 
+    <!-- 14. Triadic Colors -->
     <div class="card">
       <div class="visual-preview preview-triadic">
         <div class="tri-red"></div>
@@ -1866,6 +2004,7 @@
       </div>
     </div>
 
+    <!-- 15. Jewel Tones -->
     <div class="card">
       <div class="visual-preview preview-jewel">
         <div class="jewel-gem jewel-ruby"></div>
@@ -1880,6 +2019,7 @@
       </div>
     </div>
 
+    <!-- 16. Candy / Bubblegum -->
     <div class="card">
       <div class="visual-preview preview-candy">
         <div class="candy-sphere-1"></div>
@@ -1893,6 +2033,7 @@
       </div>
     </div>
 
+    <!-- 17. Nordic / Scandinavian -->
     <div class="card">
       <div class="visual-preview preview-nordic">
         <div class="nordic-sun"></div>
@@ -1907,6 +2048,7 @@
       </div>
     </div>
 
+    <!-- 18. Sunset / Sunrise Palette -->
     <div class="card">
       <div class="visual-preview preview-sunset-palette">
         <div class="sunset-sun"></div>
@@ -1919,6 +2061,7 @@
       </div>
     </div>
 
+    <!-- 19. Cool Blue Tones -->
     <div class="card">
       <div class="visual-preview preview-coolblue">
         <div class="cool-glass"></div>
@@ -1931,6 +2074,7 @@
       </div>
     </div>
 
+    <!-- 20. Desaturated / Faded Tones -->
     <div class="card">
       <div class="visual-preview preview-desaturated">
         <div class="desat-noise"></div>
@@ -1944,6 +2088,7 @@
       </div>
     </div>
 
+    <!-- 26. Tetradic Colors -->
     <div class="card">
       <div class="visual-preview preview-tetradic">
         <div class="tetradic-col tetradic-1"></div>
@@ -1959,6 +2104,7 @@
       </div>
     </div>
 
+    <!-- 27. Gradient Map -->
     <div class="card">
       <div class="visual-preview preview-gradient-map">
         <div class="gmap-glow"></div>
@@ -1972,6 +2118,7 @@
       </div>
     </div>
 
+    <!-- 28. Cyber Gradient -->
     <div class="card">
       <div class="visual-preview preview-cyber-gradient">
         <div class="cyber-grad-bar"></div>
@@ -1983,125 +2130,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Cyber gradient design, electric neon colors blend, glowing cyan pink lime transitions, high energy abstract backdrop</div></div>
       </div>
     </div>
-
-    <div class="card">
-      <div class="visual-preview preview-deep-tone">
-        <div class="deep-gem deep-burgundy"></div>
-        <div class="deep-gem deep-forest"></div>
-        <div class="deep-gem deep-sapphire"></div>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Color</span><button class="keyword-copy" onclick="copyKeyword(&#39;Deep Tone&#39;)">Deep Tone 📋</button></div>
-        <div class="card-title">딥 톤</div>
-        <p class="card-desc">어둡고 깊지만 탁하지 않은 럭셔리한 톤. 와인레드, 딥에메랄드 등으로 무겁고 고급스러운 분위기와 묵직한 신뢰감을 연출할 때 좋습니다.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Deep tone luxurious velvet texture, burgundy red, forest green, navy indigo, dramatic shadows, dark elegant background</div></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="visual-preview preview-light-tone">
-        <div class="light-bubble light-yellow"></div>
-        <div class="light-bubble light-peach"></div>
-        <div class="light-bubble light-lavender"></div>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Color</span><button class="keyword-copy" onclick="copyKeyword(&#39;Light Tones&#39;)">Light Tones 📋</button></div>
-        <div class="card-title">라이트 톤</div>
-        <p class="card-desc">파스텔보다 한 단계 더 밝고 선명한, 채도가 살아있는 화사한 톤. 산뜻하며 생기 있고 긍정적인 에너지를 줍니다.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Clean aesthetic design, light tones, bright lavender, sunny yellow, soft peach colors, optimistic friendly mood</div></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="visual-preview preview-grayish-tone">
-        <div class="grayish-card">Grayish</div>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Color</span><button class="keyword-copy" onclick="copyKeyword(&#39;Grayish Tones&#39;)">Grayish Tones 📋</button></div>
-        <div class="card-title">그레이시 톤</div>
-        <p class="card-desc">뮤트 톤보다 회색의 비중이 더 높고 채도가 극히 낮은 톤. 차분하고 진중하며 지적이고, 극도의 미니멀리즘 디자인에 잘 어울립니다.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Architectural concrete structure, grayish tone aesthetic, fog gray and dark cement colors, quiet serene atmosphere</div></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="visual-preview preview-aurora">
-        <div class="aurora-stream-1"></div>
-        <div class="aurora-stream-2"></div>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Color</span><button class="keyword-copy" onclick="copyKeyword(&#39;Aurora Palette&#39;)">Aurora Palette 📋</button></div>
-        <div class="card-title">오로라 팔레트</div>
-        <p class="card-desc">밤하늘의 오로라 현상처럼 신비롭고 몽환적인 딥 그린, 청보라, 일렉트릭 마젠타가 어우러져 흐르는 우주적 팔레트.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Cosmic aurora palette background, swirling ribbons of glowing green, neon violet, and deep cosmic indigo, starry sky</div></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="visual-preview preview-terracotta">
-        <div class="clay-pot-1"></div>
-        <div class="clay-pot-2"></div>
-        <div class="clay-pot-3"></div>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Color</span><button class="keyword-copy" onclick="copyKeyword(&#39;Terracotta &amp; Clay&#39;)">Terracotta &amp; Clay 📋</button></div>
-        <div class="card-title">테라코타 &amp; 클레이</div>
-        <p class="card-desc">구운 점토, 황토, 벽돌색 등 따뜻하고 유기적인 붉은 대지의 색상들. 수공예적 감성과 아늑한 자연미를 부여합니다.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Organic ceramic vase, terracotta and warm clay color palette, soft natural shadows, rustic earthy aesthetic</div></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="visual-preview preview-ice-frost-color">
-        <div class="ice-crystal-color-1"></div>
-        <div class="ice-crystal-color-2"></div>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Color</span><button class="keyword-copy" onclick="copyKeyword(&#39;Ice &amp; Frost&#39;)">Ice &amp; Frost 📋</button></div>
-        <div class="card-title">아이스 &amp; 프로스트</div>
-        <p class="card-desc">꽁꽁 얼어붙은 얼음과 서리, 글레이셜 블루, 투명한 은빛이 결합되어 극도로 차갑고 맑은 청량감을 주는 배색.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Frosted glass cube, ice and frost color palette, cold silver, pale glacial blue, crystalline transparent reflections</div></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="visual-preview preview-moss-sage">
-        <div class="moss-patch"></div>
-        <div class="sage-patch"></div>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Color</span><button class="keyword-copy" onclick="copyKeyword(&#39;Moss &amp; Sage&#39;)">Moss &amp; Sage 📋</button></div>
-        <div class="card-title">모스 &amp; 세이지</div>
-        <p class="card-desc">이끼와 말린 세이지 허브에서 유래한 톤다운된 녹색계열. 자연스럽고 유기적이며 눈을 편안하게 해줍니다.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Minimal wellness spa interior, moss green and sage gray color palette, natural linen textures, serene organic vibe</div></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="visual-preview preview-glassmorphism-color">
-        <div class="glass-card-color"></div>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Color</span><button class="keyword-copy" onclick="copyKeyword(&#39;Glassmorphism Colors&#39;)">Glassmorphism Colors 📋</button></div>
-        <div class="card-title">글래스모피즘 컬러</div>
-        <p class="card-desc">반투명 유리 뒤로 스며나오는 빛 번짐을 극대화하기 위해, 프로스트 화이트와 함께 백그라운드에 배치되는 고대비 컬러 조합.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Glassmorphism UI panel floating on vivid background blur, bright orange, purple gradient glow behind frosted glass sheet</div></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="visual-preview preview-gradient-blur">
-        <div class="blur-glow-1"></div>
-        <div class="blur-glow-2"></div>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Color</span><button class="keyword-copy" onclick="copyKeyword(&#39;Gradient Blur&#39;)">Gradient Blur 📋</button></div>
-        <div class="card-title">그라디언트 블러</div>
-        <p class="card-desc">색상 간의 경계선을 고의로 심하게 흐려주어(Blur), 몽환적이고 정교하게 분산된 광원 효과를 표현하는 배경 컬러 연출법.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Dreamy gradient blur wallpaper, diffuse glowing light blobs of lavender and soft orange, clean abstract aesthetic</div></div>
-      </div>
-    </div>
-
   </div>
 
   <!-- ==================== SECTION 3: TEXTURES ==================== -->
@@ -2113,7 +2141,6 @@
     <p class="section-desc">오브젝트들의 정렬 방식과 조형미를 다루는 미학 요소들입니다.</p>
   </div>
   <div class="grid">
-    
     <div class="card">
       <div class="visual-preview preview-matte" style="justify-content: space-evenly;"><div style="text-align: center;"><div class="matte-obj"></div><div style="font-size: 0.8rem; margin-top:8px; color:#aaa;">Matte</div></div><div style="text-align: center;"><div class="glossy-obj"></div><div style="font-size: 0.8rem; margin-top:8px; color:#aaa;">Glossy</div></div></div>
       <div class="card-info">
@@ -2123,7 +2150,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Matte black plastic minimal bottle next to a glossy metal silver container, studio light</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-negative"><div class="neg-text">NE<span>G</span></div></div>
       <div class="card-info">
@@ -2133,7 +2159,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Minimal photographic composition, massive negative space, tiny silhouette in center</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-asymmetry"><div class="asym-bar"></div><div class="asym-circle"></div></div>
       <div class="card-info">
@@ -2143,7 +2168,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Asymmetrical layout editorial design, heavy bold typography offset to one side</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-grain"><div class="grain-overlay"></div><div class="grain-card">Grain</div></div>
       <div class="card-info">
@@ -2153,7 +2177,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Vibrant warm gradients with subtle film grain texture overlay, nostalgic retro feel</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-metallic"><div class="metal-bar"></div></div>
       <div class="card-info">
@@ -2163,7 +2186,7 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Shiny polished chrome metallic object, fluid metal reflection, dark studio backdrop</div></div>
       </div>
     </div>
-
+    
     <div class="card">
       <div class="visual-preview preview-grid"><div class="grid-box"></div><div class="grid-box"></div><div class="grid-box"></div><div class="grid-box"></div><div class="grid-box"></div><div class="grid-box"></div></div>
       <div class="card-info">
@@ -2173,7 +2196,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">UI design adhering to a clean grid system, structured layout, modular blocks</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-typography"><div class="typo-huge">AB</div><div class="typo-sub">Focus</div></div>
       <div class="card-info">
@@ -2183,7 +2205,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Minimalist poster design, typography-driven layout, massive bold serif font center-aligned</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-dynamic"><div class="dynamic-line"></div><div class="dynamic-triangle"></div></div>
       <div class="card-info">
@@ -2194,6 +2215,7 @@
       </div>
     </div>
 
+    <!-- ADDED 6 NEW CARDS -->
     <div class="card">
       <div class="visual-preview preview-symmetry"><div class="sym-left"></div><div class="sym-right"></div><div class="sym-center"></div></div>
       <div class="card-info">
@@ -2203,7 +2225,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Symmetrical architecture photograph of a grand library hall, center perspective</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-rule-of-thirds"><div class="thirds-grid"></div><div class="thirds-dot"></div></div>
       <div class="card-info">
@@ -2213,7 +2234,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Minimalist seascape, a single sailboat placed exactly on the left third intersection line</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-layered-depth"><div class="layer-back"></div><div class="layer-mid"></div><div class="layer-front"></div></div>
       <div class="card-info">
@@ -2223,7 +2243,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Paper cut art vector illustration of a forest, layered depth, front trees cast shadow on mountains</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-tessellation"></div>
       <div class="card-info">
@@ -2233,7 +2252,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Intricate Islamic geometric tiles pattern, repeating tessellation design, gold and turquoise</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-organic"><div class="organic-blob"></div></div>
       <div class="card-info">
@@ -2243,7 +2261,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Abstract fluid layout, pastel blobs, organic smooth shapes wrapping around central text</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-radial-comp"><div class="radial-circle-1"></div><div class="radial-circle-2"></div><div class="radial-circle-3"></div></div>
       <div class="card-info">
@@ -2254,6 +2271,7 @@
       </div>
     </div>
 
+    <!-- 16. Golden Ratio -->
     <div class="card">
       <div class="visual-preview preview-golden-ratio">
         <svg class="golden-ratio-svg" viewBox="0 0 100 100" fill="none" stroke="#6366f1" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg">
@@ -2273,6 +2291,7 @@
       </div>
     </div>
 
+    <!-- 17. Frame within Frame -->
     <div class="card">
       <div class="visual-preview preview-frame-in-frame">
         <div class="outer-frame">
@@ -2289,6 +2308,7 @@
       </div>
     </div>
 
+    <!-- 18. Leading Lines -->
     <div class="card">
       <div class="visual-preview preview-leading-lines">
         <div class="leading-line-left"></div>
@@ -2302,7 +2322,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Leading lines composition, symmetrical road leading to a distant glowing horizon, perspective lines guiding view</div></div>
       </div>
     </div>
-
   </div>
 
   <!-- ==================== SECTION 4: LIGHTING ==================== -->
@@ -2314,7 +2333,6 @@
     <p class="section-desc">피사체의 명암 대비와 공간의 무드를 극대화하는 광원 배정 기법들입니다.</p>
   </div>
   <div class="grid">
-    
     <div class="card">
       <div class="visual-preview preview-studio-lighting"><div class="studio-ball"></div></div>
       <div class="card-info">
@@ -2324,7 +2342,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Minimal white mug, studio lighting, smooth shadow, isolated dark grey background</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-rim-light"><div class="rim-ball"></div></div>
       <div class="card-info">
@@ -2334,7 +2351,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Dark futuristic armor, rim light highlight, high contrast background</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-cinematic-lighting"><div class="cinematic-face"></div></div>
       <div class="card-info">
@@ -2344,7 +2360,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Cyberpunk cyber-detective standing in rain, cinematic lighting, orange and teal hue</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-golden-hour"><div class="golden-ray"></div><div class="golden-shadow"></div></div>
       <div class="card-info">
@@ -2354,7 +2369,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Modern architecture glass villa, golden hour warm lighting, long shadows</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-neon-lighting"><div class="neon-tube-1"></div><div class="neon-tube-2"></div></div>
       <div class="card-info">
@@ -2364,7 +2378,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Cyberpunk cybernetic skull, hot pink and bright cyan neon lighting, reflective metal</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-bioluminescence"><div class="jellyfish-dome"></div><div class="jellyfish-tentacles"><div class="tentacle"></div><div class="tentacle"></div><div class="tentacle"></div></div></div>
       <div class="card-info">
@@ -2374,7 +2387,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Enchanted forest pathways, glowing blue mushrooms, bioluminescence, surreal night</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-volumetric"><div class="volumetric-source"></div><div class="volumetric-beam"></div></div>
       <div class="card-info">
@@ -2384,7 +2396,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Inside of old church gothic window, volumetric light beams slicing through dust</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-subsurface"><div class="sss-wax"></div></div>
       <div class="card-info">
@@ -2394,7 +2405,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">3D render of jade statuette, subsurface scattering, translucent glowing green wax material</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-ambient-occlusion"><div class="ao-block"></div><div class="ao-block ao-block-deep"></div></div>
       <div class="card-info">
@@ -2404,7 +2414,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Intricate mechanical clockwork gear details, high ambient occlusion, clay render</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-backlit"><div class="backlit-bg"></div><div class="backlit-silhouette"></div></div>
       <div class="card-info">
@@ -2414,7 +2423,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Backlit silhouette of a person standing at the entrance of a glowing blue cave</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-caustics"><div class="caustics-net"></div></div>
       <div class="card-info">
@@ -2424,7 +2432,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Swimming pool bottom view, clear turquoise water caustics light patterns, sunny day</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-hard-light"><div class="hard-shadow"></div><div class="hard-obj"></div></div>
       <div class="card-info">
@@ -2434,7 +2441,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Minimalist architecture, hard sunlight, sharp angular pitch-black shadows on white concrete wall</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-soft-diffused"><div class="soft-ball"></div></div>
       <div class="card-info">
@@ -2444,7 +2450,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Macro cosmetic jar, soft diffused studio light, subtle grey gradient backdrop, seamless shadows</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-split-lighting"><div class="split-ball"></div></div>
       <div class="card-info">
@@ -2454,7 +2459,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Dramatic studio portrait of an athlete, split lighting, one half of face in deep shadow</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-chiaroscuro"><div class="chiar-beam"></div><div class="chiar-obj"></div></div>
       <div class="card-info">
@@ -2464,19 +2468,17 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Still life oil painting of grapes and silver chalice, chiaroscuro lighting, deep dramatic shadows</div></div>
       </div>
     </div>
-
   </div>
 
   <div class="section-container" id="sec-material">
     <div class="section-title">
       <span>5. 재질 &amp; 소재 (Materials &amp; Surfaces)</span>
-      <span style="font-size:1rem; opacity:0.6;">18 Items</span>
+      <span style="font-size:1rem; opacity:0.6;">19 Items</span>
     </div>
     <p class="section-desc">오브젝트 고유의 마감 형태와 만져질 듯 실감 나는 표면 성질들입니다.</p>
   </div>
   <div class="grid">
     <!-- 1. Frosted Glass -->
-    
     <div class="card">
       <div class="visual-preview preview-frosted-glass">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -2539,6 +2541,7 @@
       </div>
     </div>
 
+    <!-- 2. Ceramic -->
     <div class="card">
       <div class="visual-preview preview-ceramic">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -2588,6 +2591,7 @@
       </div>
     </div>
 
+    <!-- 3. Fabric / Cloth -->
     <div class="card">
       <div class="visual-preview preview-fabric">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -2627,6 +2631,7 @@
       </div>
     </div>
 
+    <!-- 4. Translucent -->
     <div class="card">
       <div class="visual-preview preview-translucent">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -2673,6 +2678,7 @@
       </div>
     </div>
 
+    <!-- 5. Rubber / Silicone -->
     <div class="card">
       <div class="visual-preview preview-rubber">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -2718,6 +2724,7 @@
       </div>
     </div>
 
+    <!-- 6. Concrete -->
     <div class="card">
       <div class="visual-preview preview-concrete">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -2777,6 +2784,7 @@
       </div>
     </div>
 
+    <!-- 7. Wood Grain -->
     <div class="card">
       <div class="visual-preview preview-wood">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -2827,6 +2835,7 @@
       </div>
     </div>
 
+    <!-- 8. Crystal -->
     <div class="card">
       <div class="visual-preview preview-crystal">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -2880,6 +2889,7 @@
       </div>
     </div>
 
+    <!-- 9. Liquid / Fluid -->
     <div class="card">
       <div class="visual-preview preview-liquid">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -2923,6 +2933,7 @@
       </div>
     </div>
 
+    <!-- 10. Paper -->
     <div class="card">
       <div class="visual-preview preview-paper">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -2967,6 +2978,7 @@
       </div>
     </div>
 
+    <!-- 11. Iridescent / Opalescent -->
     <div class="card">
       <div class="visual-preview preview-iridescent">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3016,6 +3028,7 @@
       </div>
     </div>
 
+    <!-- 12. Marble -->
     <div class="card">
       <div class="visual-preview preview-marble">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3059,6 +3072,7 @@
       </div>
     </div>
 
+    <!-- 13. Embossed Leather -->
     <div class="card">
       <div class="visual-preview preview-leather-embossed">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3106,6 +3120,51 @@
       </div>
     </div>
 
+    <!-- 14. Smoke / Fog -->
+    <div class="card">
+      <div class="visual-preview preview-smoke">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+          <defs>
+            <linearGradient id="smoke_bg" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#07070b" />
+              <stop offset="100%" stop-color="#010102" />
+            </linearGradient>
+            <radialGradient id="smoke_mist1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.2" />
+              <stop offset="50%" stop-color="#e2e8f0" stop-opacity="0.08" />
+              <stop offset="100%" stop-color="#0f172a" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="smoke_mist2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#94a3b8" stop-opacity="0.15" />
+              <stop offset="60%" stop-color="#475569" stop-opacity="0.04" />
+              <stop offset="100%" stop-color="#0f172a" stop-opacity="0" />
+            </radialGradient>
+            <filter id="mist_blur" x="-25%" y="-25%" width="150%" height="150%">
+              <feGaussianBlur stdDeviation="9.5" />
+            </filter>
+          </defs>
+          <rect width="120" height="120" fill="url(#smoke_bg)" />
+          
+          <!-- Overlapping organic volumetric smoke curves -->
+          <circle cx="35" cy="65" r="32" fill="url(#smoke_mist1)" filter="url(#mist_blur)" class="mood-glow-pulse" />
+          <circle cx="85" cy="50" r="38" fill="url(#smoke_mist2)" filter="url(#mist_blur)" class="mood-glow-pulse" style="animation-delay: -3s;" />
+          
+          <!-- Flowing wisps -->
+          <path d="M 15,115 Q 40,85 45,55 T 85,5" stroke="#ffffff" stroke-width="7" stroke-linecap="round" fill="none" opacity="0.07" filter="url(#mist_blur)" class="mood-mist-drift" />
+          <path d="M 105,115 Q 75,80 70,45 T 35,5" stroke="#cbd5e1" stroke-width="9" stroke-linecap="round" fill="none" opacity="0.06" filter="url(#mist_blur)" class="mood-mist-drift" style="animation-delay: -4.5s;" />
+          
+          <path d="M-10,85 Q 30,65 60,75 T 130,55" stroke="#94a3b8" stroke-width="5" fill="none" opacity="0.05" filter="url(#mist_blur)" />
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Material</span><button class="keyword-copy" onclick="copyKeyword(&#39;Dense Smoke / Fog effect texture&#39;)">Smoke / Fog 📋</button></div>
+        <div class="card-title">연기 &amp; 안개 질감</div>
+        <p class="card-desc">고정된 형태 없이 공기 중에 흐트러지는 기체 상태의 소재. 불투명함과 반투명함이 오묘하게 섞여 몽환적이거나 미스터리한 분위기를 극대화합니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Dense white smoke swirling on clean black background, ethereal fog texture, slow motion drift</div></div>
+      </div>
+    </div>
+
+    <!-- 15. Ice / Frost -->
     <div class="card">
       <div class="visual-preview preview-ice-frost">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3125,7 +3184,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Thick blue ice texture overlay, frosty crystals blooming on a frozen window glass pane</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-velvet">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3162,6 +3220,7 @@
       </div>
     </div>
 
+    <!-- 17. Terracotta -->
     <div class="card">
       <div class="visual-preview preview-terracotta">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3199,6 +3258,7 @@
       </div>
     </div>
 
+    <!-- 18. Enamel / Lacquer -->
     <div class="card">
       <div class="visual-preview preview-enamel">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3228,6 +3288,7 @@
       </div>
     </div>
 
+    <!-- 19. Sand Texture -->
     <div class="card">
       <div class="visual-preview preview-sand-texture">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3263,19 +3324,17 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Windblown sand dunes ripple pattern, fine desert sand texture, warm golden hour dry environment</div></div>
       </div>
     </div>
-
   </div>
 
   <!-- ==================== SECTION 6: EFFECTS ==================== -->
   <div class="section-container" id="sec-motion">
     <div class="section-title">
       <span>6. 모션 &amp; 시각 효과 (Motion &amp; Visual Effects)</span>
-      <span style="font-size:1rem; opacity:0.6;">15 Items</span>
+      <span style="font-size:1rem; opacity:0.6;">9 Items</span>
     </div>
     <p class="section-desc">이미지에 렌즈의 개성적 결함이나 동적인 시간 차원을 얹어주는 물리 효과들입니다.</p>
   </div>
   <div class="grid">
-    
     <div class="card">
       <div class="visual-preview preview-motion-blur">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3302,7 +3361,7 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Running athlete, street light backgrounds, motion blur effect, sense of speed</div></div>
       </div>
     </div>
-
+    
     <div class="card">
       <div class="visual-preview preview-dof">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3325,7 +3384,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Portrait of a cat in garden, soft background blur, shallow depth of field, dreamlike bokeh</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-chromatic">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3342,7 +3400,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Retro VHS tape overlay, subtle chromatic aberration, glitch colors distortion</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-glitch">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3364,44 +3421,7 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Cyberpunk hacker interface, glitch effect, neon errors, technical static noise</div></div>
       </div>
     </div>
-
-    <div class="card">
-      <div class="visual-preview preview-double-exposure">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-          <rect width="100" height="100" fill="#0f111a"></rect>
-          <defs>
-            <mask id="faceMask">
-              <path d="M 30,90 C 30,70 35,60 40,55 C 38,48 38,40 45,30 C 52,20 62,22 65,32 C 68,36 67,42 63,45 C 64,48 68,50 67,55 C 65,58 60,60 58,65 C 58,75 60,85 62,90 Z" fill="#ffffff"></path>
-            </mask>
-            <lineargradient id="forestGrad" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0%" stop-color="#1e1b4b"></stop>
-              <stop offset="50%" stop-color="#312e81"></stop>
-              <stop offset="100%" stop-color="#4f46e5"></stop>
-            </lineargradient>
-          </defs>
-          <path d="M 30,90 C 30,70 35,60 40,55 C 38,48 38,40 45,30 C 52,20 62,22 65,32 C 68,36 67,42 63,45 C 64,48 68,50 67,55 C 65,58 60,60 58,65 C 58,75 60,85 62,90 Z" fill="#1e1e2f" stroke="rgba(99, 102, 241, 0.3)" stroke-width="1"></path>
-          <g mask="url(#faceMask)">
-            <rect x="20" y="20" width="60" height="70" fill="url(#forestGrad)"></rect>
-            <polygon points="45,90 40,75 48,75" fill="#06b6d4" opacity="0.8"></polygon>
-            <polygon points="45,78 42,65 47,65" fill="#06b6d4" opacity="0.8"></polygon>
-            <polygon points="55,90 48,70 60,70" fill="#10b981" opacity="0.7"></polygon>
-            <polygon points="55,73 50,58 58,58" fill="#10b981" opacity="0.7"></polygon>
-            <polygon points="37,90 32,78 41,78" fill="#4f46e5" opacity="0.6"></polygon>
-            <polygon points="63,90 58,80 67,80" fill="#4f46e5" opacity="0.6"></polygon>
-          </g>
-          <circle cx="48" cy="38" r="1" fill="#fff" opacity="0.8"></circle>
-          <circle cx="56" cy="44" r="0.8" fill="#fff" opacity="0.8"></circle>
-          <circle cx="44" cy="48" r="1.2" fill="#fff" opacity="0.5"></circle>
-        </svg>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Effect</span><button class="keyword-copy" onclick="copyKeyword(&#39;Double Exposure&#39;)">Double Exposure 📋</button></div>
-        <div class="card-title">이중 노출</div>
-        <p class="card-desc">두 가지 별개의 프레임을 겹치게 인화하여, 인물 선 안에 풍경이 드러나는 등 문학적인 이중 합성 이미지를 만드는 사진 기술.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Double exposure portrait of a thinker and winter forest trees, cold blue atmosphere</div></div>
-      </div>
-    </div>
-
+    
     <div class="card">
       <div class="visual-preview preview-particle">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3449,6 +3469,7 @@
       </div>
     </div>
 
+    <!-- ADDED 7 NEW CARDS -->
     <div class="card">
       <div class="visual-preview preview-lens-flare">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3469,7 +3490,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Sci-fi space travel, bright star in background causing horizontal blue anamorphic lens flare</div></div>
       </div>
     </div>
-
     <div class="card">
       <div class="visual-preview preview-vignette">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3492,252 +3512,8 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Moody portrait of a craftsman working, strong dark vignette around the frame edges</div></div>
       </div>
     </div>
-
-    <div class="card">
-      <div class="visual-preview preview-tilt-shift">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-          <defs>
-            <!-- Blur filters simulating shallow depth of field (Tilt-Shift) -->
-            <filter id="tiltBgBlur" x="-30%" y="-30%" width="160%" height="160%">
-              <fegaussianblur stdDeviation="2.4"></fegaussianblur>
-            </filter>
-            <filter id="tiltFgBlur" x="-30%" y="-30%" width="160%" height="160%">
-              <fegaussianblur stdDeviation="3.0"></fegaussianblur>
-            </filter>
-            
-            <!-- Background Sky Gradient -->
-            <lineargradient id="tiltSky" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#020617"></stop>
-              <stop offset="100%" stop-color="#0f172a"></stop>
-            </lineargradient>
-            
-            <!-- Road Gradient -->
-            <lineargradient id="roadGrad" x1="0" y1="1" x2="1" y2="0">
-              <stop offset="0%" stop-color="#1e293b"></stop>
-              <stop offset="100%" stop-color="#334155"></stop>
-            </lineargradient>
-          </defs>
-
-          <!-- Sky background -->
-          <rect width="100" height="100" fill="url(#tiltSky)"></rect>
-          
-          <!-- BACKGROUND LAYER (Blurred) -->
-          <g filter="url(#tiltBgBlur)">
-            <!-- Back hills / distant mountains -->
-            <path d="M-20,35 Q 25,15 60,32 Q 85,20 120,35 L120,60 L-20,60 Z" fill="#111827" opacity="0.8"></path>
-            <!-- Distant skyscraper silhouettes -->
-            <rect x="15" y="10" width="8" height="25" fill="#1e293b"></rect>
-            <rect x="25" y="18" width="6" height="17" fill="#1e293b" opacity="0.9"></rect>
-            <rect x="70" y="8" width="10" height="27" fill="#1e293b"></rect>
-            <rect x="83" y="15" width="7" height="20" fill="#1e293b" opacity="0.9"></rect>
-            
-            <!-- Background house -->
-            <g transform="translate(48, 22)">
-              <path d="M 0,6 L 0,12 L -4,10 L -4,4 Z" fill="#475569"></path>
-              <path d="M 0,6 L 0,12 L 4,10 L 4,4 Z" fill="#334155"></path>
-              <path d="M -4,4 L 0,6 L 0,2 Z" fill="#ef4444"></path>
-              <path d="M 4,4 L 0,6 L 0,2 Z" fill="#b91c1c"></path>
-            </g>
-          </g>
-
-          <!-- MIDGROUND GROUND (Sharp / In-focus plane) -->
-          <!-- Base plane for middle section -->
-          <path d="M-10,32 L110,32 L110,68 L-10,68 Z" fill="#0f172a"></path>
-          
-          <!-- Diagonal Road stretching across the scene -->
-          <path d="M-20,53 L120,23 L120,37 L-20,67 Z" fill="url(#roadGrad)"></path>
-          <!-- Road marking lines -->
-          <path d="M-20,60 L120,29.8" stroke="#fef08a" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.7"></path>
-          
-          <!-- SHARP MIDGROUND ELEMENTS (Inside the 35-65 Y focus band) -->
-          <!-- House Left (X=22, Y=42) -->
-          <g>
-            <path d="M 22,41 L 22,48 L 17,45.5 L 17,38.5 Z" fill="#cbd5e1"></path>
-            <path d="M 22,41 L 22,48 L 27,45.5 L 27,38.5 Z" fill="#94a3b8"></path>
-            <path d="M 17,38.5 L 22,41 L 22,34 Z" fill="#10b981"></path>
-            <path d="M 27,38.5 L 22,41 L 22,34 Z" fill="#047857"></path>
-            <!-- Yellow window glow -->
-            <rect x="23.5" y="43" width="1.5" height="2" fill="#fbbf24" transform="skewY(-17)"></rect>
-          </g>
-          
-          <!-- House Right (X=72, Y=40) -->
-          <g>
-            <path d="M 72,39 L 72,46 L 67,43.5 L 67,36.5 Z" fill="#cbd5e1"></path>
-            <path d="M 72,39 L 72,46 L 77,43.5 L 77,36.5 Z" fill="#94a3b8"></path>
-            <path d="M 67,36.5 L 72,39 L 72,32 Z" fill="#3b82f6"></path>
-            <path d="M 77,36.5 L 72,39 L 72,32 Z" fill="#1d4ed8"></path>
-            <!-- Window -->
-            <rect x="68.5" y="39.5" width="1.5" height="2" fill="#fbbf24" transform="skewY(17)"></rect>
-          </g>
-
-          <!-- Tiny Toy Car on the road (X=48, Y=48) -->
-          <g>
-            <!-- Car body -->
-            <path d="M 45,46.5 L 53,44.8 L 53,47 L 45,48.7 Z" fill="#ef4444"></path>
-            <path d="M 47,44.5 L 51,43.7 L 51,45 L 47,45.8 Z" fill="#ffffff" opacity="0.8"></path>
-            <!-- Wheels -->
-            <circle cx="47.5" cy="48" r="0.9" fill="#000000"></circle>
-            <circle cx="51.5" cy="47.1" r="0.9" fill="#000000"></circle>
-          </g>
-          
-          <!-- Tiny Tree (X=59, Y=39) -->
-          <g>
-            <line x1="59" y1="39" x2="59" y2="44" stroke="#78350f" stroke-width="0.8"></line>
-            <circle cx="59" cy="37" r="3" fill="#22c55e"></circle>
-            <circle cx="58" cy="36" r="2" fill="#4ade80"></circle>
-          </g>
-
-          <!-- Tiny Tree 2 (X=11, Y=48) -->
-          <g>
-            <line x1="11" y1="46" x2="11" y2="50" stroke="#78350f" stroke-width="0.7"></line>
-            <circle cx="11" cy="44" r="2.5" fill="#15803d"></circle>
-          </g>
-
-          <!-- FOREGROUND LAYER (Blurred) -->
-          <g filter="url(#tiltFgBlur)">
-            <!-- Big Foreground Tree (X=85, Y=80) -->
-            <g>
-              <line x1="85" y1="78" x2="85" y2="92" stroke="#451a03" stroke-width="2.5"></line>
-              <circle cx="85" cy="73" r="8.5" fill="#15803d"></circle>
-              <circle cx="81" cy="69" r="6" fill="#16a34a" opacity="0.9"></circle>
-              <circle cx="88" cy="71" r="5.5" fill="#22c55e" opacity="0.8"></circle>
-            </g>
-
-            <!-- Foreground House (X=36, Y=78) -->
-            <g>
-              <path d="M 36,76 L 36,87 L 27,81.5 L 27,70.5 Z" fill="#fef08a"></path>
-              <path d="M 36,76 L 36,87 L 45,81.5 L 45,70.5 Z" fill="#fde047"></path>
-              <path d="M 27,70.5 L 36,76 L 36,64 Z" fill="#f97316"></path>
-              <path d="M 45,70.5 L 36,76 L 36,64 Z" fill="#ea580c"></path>
-            </g>
-          </g>
-          
-          <!-- Overlay Focus Depth of Field Indicators -->
-          <!-- Top focus limit -->
-          <line x1="0" y1="32" x2="100" y2="32" stroke="#6366f1" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.5"></line>
-          <!-- Bottom focus limit -->
-          <line x1="0" y1="68" x2="100" y2="68" stroke="#6366f1" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.5"></line>
-          <!-- Focus area side braces to make it look like a technical screen diagram -->
-          <path d="M 4,36 L 4,32 L 12,32 M 4,64 L 4,68 L 12,68" stroke="#38bdf8" stroke-width="0.8" opacity="0.6"></path>
-          <path d="M 96,36 L 96,32 L 88,32 M 96,64 L 96,68 L 88,68" stroke="#38bdf8" stroke-width="0.8" opacity="0.6"></path>
-        </svg>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Effect</span><button class="keyword-copy" onclick="copyKeyword(&#39;Tilt-Shift photography style / miniature effect&#39;)">Tilt-Shift 📋</button></div>
-        <div class="card-title">틸트 시프트</div>
-        <p class="card-desc">렌즈의 기울기(Tilt)를 조작하여 극도로 좁은 포커스 띠를 형성하고 주변을 블러(Blur) 처리함으로써, 실제 도시나 자동차를 아기자기한 미니어처 모형처럼 보이게 하는 특수 기법.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Tilt-shift photography of a busy Tokyo intersection, tiny toy-like cars and people, blurred edges</div></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="visual-preview preview-refraction">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-          <defs>
-            <!-- Background Gradient -->
-            <lineargradient id="refractBg" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#0a0c16"></stop>
-              <stop offset="100%" stop-color="#05060b"></stop>
-            </lineargradient>
-            
-            <!-- Glass Sphere Radial Shading (Lens effect) -->
-            <radialgradient id="lens3D" cx="35%" cy="35%" r="65%">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"></stop>
-              <stop offset="40%" stop-color="#ffffff" stop-opacity="0.05"></stop>
-              <stop offset="75%" stop-color="#000000" stop-opacity="0.3"></stop>
-              <stop offset="96%" stop-color="#000000" stop-opacity="0.75"></stop>
-              <stop offset="100%" stop-color="#000000" stop-opacity="0.9"></stop>
-            </radialgradient>
-
-            <!-- Fresnel Ring Gradient -->
-            <radialgradient id="fresnel" cx="50%" cy="50%" r="50%">
-              <stop offset="85%" stop-color="#38bdf8" stop-opacity="0"></stop>
-              <stop offset="96%" stop-color="#38bdf8" stop-opacity="0.5"></stop>
-              <stop offset="100%" stop-color="#ffffff" stop-opacity="0.8"></stop>
-            </radialgradient>
-
-            <!-- Clipping path for inside the lens -->
-            <clippath id="lensClip">
-              <circle cx="50" cy="50" r="28"></circle>
-            </clippath>
-          </defs>
-
-          <!-- Background Canvas -->
-          <rect width="100" height="100" fill="url(#refractBg)"></rect>
-
-          <!-- Background Grid Pattern (fine lines) to show distortion more clearly -->
-          <path d="M 0,20 L 100,20 M 0,40 L 100,40 M 0,60 L 100,60 M 0,80 L 100,80" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></path>
-          <path d="M 20,0 L 20,100 M 40,0 L 40,100 M 60,0 L 60,100 M 80,0 L 80,100" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"></path>
-
-          <!-- BACKGROUND STRIPES (Straight, normal) -->
-          <g opacity="0.85">
-            <!-- Pink Stripe -->
-            <line x1="-10" y1="20" x2="110" y2="60" stroke="#ec4899" stroke-width="6.5"></line>
-            <!-- Cyan Stripe -->
-            <line x1="-10" y1="40" x2="110" y2="80" stroke="#06b6d4" stroke-width="6.5"></line>
-            <!-- Yellow Stripe -->
-            <line x1="-10" y1="60" x2="110" y2="100" stroke="#eab308" stroke-width="6.5"></line>
-          </g>
-
-          <!-- REFRACTED / WARPED CONTENT (Clipped inside the sphere) -->
-          <g clip-path="url(#lensClip)">
-            <!-- Dark glass base shadow inside -->
-            <circle cx="50" cy="50" r="28" fill="#0c1020"></circle>
-            
-            <!-- Warped Grid Lines -->
-            <path d="M 22,30 Q 50,45 78,30" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"></path>
-            <path d="M 22,50 Q 50,68 78,50" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"></path>
-            <path d="M 22,70 Q 50,85 78,70" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"></path>
-
-            <!-- Warped Pink Stripe with Chromatic Aberration -->
-            <!-- Red channel (offset bottom) -->
-            <path d="M 22,29 Q 50,60 78,51" stroke="#f43f5e" stroke-width="7" opacity="0.8"></path>
-            <!-- Cyan channel (offset top) -->
-            <path d="M 22,29 Q 50,56 78,51" stroke="#06b6d4" stroke-width="6.5" opacity="0.8"></path>
-            <!-- Main Yellow/White center core -->
-            <path d="M 22,29 Q 50,58 78,51" stroke="#f472b6" stroke-width="5"></path>
-
-            <!-- Warped Cyan Stripe with Chromatic Aberration -->
-            <!-- Red channel (offset bottom) -->
-            <path d="M 22,49 Q 50,80 78,71" stroke="#f43f5e" stroke-width="7" opacity="0.8"></path>
-            <!-- Cyan channel (offset top) -->
-            <path d="M 22,49 Q 50,76 78,71" stroke="#06b6d4" stroke-width="6.5" opacity="0.8"></path>
-            <!-- Main center core -->
-            <path d="M 22,49 Q 50,78 78,71" stroke="#ffffff" stroke-width="5"></path>
-
-            <!-- Warped Yellow Stripe with Chromatic Aberration -->
-            <!-- Red channel (offset bottom) -->
-            <path d="M 22,69 Q 50,100 78,91" stroke="#ea580c" stroke-width="7" opacity="0.8"></path>
-            <!-- Cyan channel (offset top) -->
-            <path d="M 22,69 Q 50,96 78,91" stroke="#3b82f6" stroke-width="6.5" opacity="0.8"></path>
-            <!-- Main center core -->
-            <path d="M 22,69 Q 50,98 78,91" stroke="#fbbf24" stroke-width="5"></path>
-          </g>
-
-          <!-- GLASS 3D VOLUMETRIC SHADING OVERLAY -->
-          <circle cx="50" cy="50" r="28" fill="url(#lens3D)"></circle>
-          <circle cx="50" cy="50" r="28" fill="url(#fresnel)" style="mix-blend-mode: screen;"></circle>
-
-          <!-- GLASS SPECULAR HIGHLIGHTS -->
-          <!-- Top-left main bright reflection -->
-          <ellipse cx="38" cy="34" rx="7" ry="3.5" transform="rotate(-30 38 34)" fill="#ffffff" opacity="0.65"></ellipse>
-          <ellipse cx="36" cy="32" rx="3.5" ry="1.5" transform="rotate(-30 36 32)" fill="#ffffff" opacity="0.9"></ellipse>
-          
-          <!-- Bottom-right subtle ground reflection glow -->
-          <path d="M 33,67 A 24 24 0 0 0 67,67 A 22 22 0 0 1 33,67" fill="#ffffff" opacity="0.25"></path>
-
-          <!-- Thin Glass Outer Ring Highlight -->
-          <circle cx="50" cy="50" r="28" stroke="rgba(255, 255, 255, 0.45)" stroke-width="0.8"></circle>
-        </svg>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Effect</span><button class="keyword-copy" onclick="copyKeyword(&#39;Light Refraction / glass distortion effect&#39;)">Refraction 📋</button></div>
-        <div class="card-title">굴절 &amp; 왜곡</div>
-        <p class="card-desc">빛이 물, 유리를 통과할 때 방향이 꺾여 뒤쪽의 배경이나 사물이 일그러지고 분할되어 보이는 신비롭고 투명한 시각적 렌즈 효과.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">A flower seen through a ribbed glass vase, realistic light refraction, wavy glass distortion</div></div>
-      </div>
-    </div>
-
+    
+    
     <div class="card">
       <div class="visual-preview preview-light-leak">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3767,53 +3543,10 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Nostalgic portrait of a friend laughing, warm orange light leak on the left edge, analog film camera vibe</div></div>
       </div>
     </div>
+    
+    
 
-    <div class="card">
-      <div class="visual-preview preview-bokeh">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-          <rect width="100" height="100" fill="#020617"></rect>
-          <circle cx="30" cy="40" r="14" fill="#ec4899" fill-opacity="0.3" stroke="#ec4899" stroke-width="0.8" stroke-opacity="0.5"></circle>
-          <circle cx="50" cy="60" r="18" fill="#3b82f6" fill-opacity="0.25" stroke="#3b82f6" stroke-width="0.8" stroke-opacity="0.5"></circle>
-          <circle cx="68" cy="35" r="12" fill="#eab308" fill-opacity="0.3" stroke="#eab308" stroke-width="0.8" stroke-opacity="0.5"></circle>
-          <circle cx="48" cy="32" r="10" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="0.5" stroke-opacity="0.4"></circle>
-          <circle cx="78" cy="65" r="15" fill="#a855f7" fill-opacity="0.25" stroke="#a855f7" stroke-width="0.8" stroke-opacity="0.5"></circle>
-        </svg>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Effect</span><button class="keyword-copy" onclick="copyKeyword(&#39;Dreamy blurred bokeh circles&#39;)">Bokeh 📋</button></div>
-        <div class="card-title">보케 효과</div>
-        <p class="card-desc">아웃포커싱된 야경의 전등이나 촛불이 흐릿하고 둥근 동전 모양의 빛망울(빛 오라)로 표현되어 몽환적이고 따뜻함을 살려주는 렌즈 효과.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Rainy city street at night, dreamy giant glowing blurred bokeh circles from car headlamps</div></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="visual-preview preview-dispersion">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-          <rect width="100" height="100" fill="#030712"></rect>
-          <defs>
-            <lineargradient id="rainbowRay" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"></stop>
-              <stop offset="20%" stop-color="#ef4444"></stop>
-              <stop offset="40%" stop-color="#f59e0b"></stop>
-              <stop offset="60%" stop-color="#10b981"></stop>
-              <stop offset="80%" stop-color="#3b82f6"></stop>
-              <stop offset="100%" stop-color="#a855f7"></stop>
-            </lineargradient>
-          </defs>
-          <line x1="5" y1="65" x2="42" y2="50" stroke="#ffffff" stroke-width="2.5" style="filter: drop-shadow(0 0 4px #fff);"></line>
-          <polygon points="50,25 70,65 30,65" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.4)" stroke-width="1"></polygon>
-          <polygon points="58,52 95,78 90,85 55,60" fill="url(#rainbowRay)" opacity="0.8" style="filter: drop-shadow(0 0 5px rgba(99,102,241,0.3));"></polygon>
-        </svg>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Effect</span><button class="keyword-copy" onclick="copyKeyword(&#39;Light dispersion / prism rainbow spectrum&#39;)">Dispersion 📋</button></div>
-        <div class="card-title">빛 분산 현상</div>
-        <p class="card-desc">빛 분산 현상. 백색의 단일 광선이 프리즘이나 물방울을 거치면서 파장(굴절률)에 따라 빨주노초파남보 다채로운 무지개색 스펙트럼으로 갈라지는 극적 렌더링 효과.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">A white beam hitting a crystal pyramid, light dispersion prism creating a bright rainbow spectrum</div></div>
-      </div>
-    </div>
-
+    <!-- 15. Parallax Effect -->
     <div class="card">
       <div class="visual-preview preview-parallax">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3838,49 +3571,11 @@
       </div>
     </div>
 
-    <div class="card">
-      <div class="visual-preview preview-smoke">
-        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-          <defs>
-            <linearGradient id="smoke_bg" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#07070b" />
-              <stop offset="100%" stop-color="#010102" />
-            </linearGradient>
-            <radialGradient id="smoke_mist1" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.2" />
-              <stop offset="50%" stop-color="#e2e8f0" stop-opacity="0.08" />
-              <stop offset="100%" stop-color="#0f172a" stop-opacity="0" />
-            </radialGradient>
-            <radialGradient id="smoke_mist2" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#94a3b8" stop-opacity="0.15" />
-              <stop offset="60%" stop-color="#475569" stop-opacity="0.04" />
-              <stop offset="100%" stop-color="#0f172a" stop-opacity="0" />
-            </radialGradient>
-            <filter id="mist_blur" x="-25%" y="-25%" width="150%" height="150%">
-              <feGaussianBlur stdDeviation="9.5" />
-            </filter>
-          </defs>
-          <rect width="120" height="120" fill="url(#smoke_bg)" />
-          
-          <!-- Overlapping organic volumetric smoke curves -->
-          <circle cx="35" cy="65" r="32" fill="url(#smoke_mist1)" filter="url(#mist_blur)" class="mood-glow-pulse" />
-          <circle cx="85" cy="50" r="38" fill="url(#smoke_mist2)" filter="url(#mist_blur)" class="mood-glow-pulse" style="animation-delay: -3s;" />
-          
-          <!-- Flowing wisps -->
-          <path d="M 15,115 Q 40,85 45,55 T 85,5" stroke="#ffffff" stroke-width="7" stroke-linecap="round" fill="none" opacity="0.07" filter="url(#mist_blur)" class="mood-mist-drift" />
-          <path d="M 105,115 Q 75,80 70,45 T 35,5" stroke="#cbd5e1" stroke-width="9" stroke-linecap="round" fill="none" opacity="0.06" filter="url(#mist_blur)" class="mood-mist-drift" style="animation-delay: -4.5s;" />
-          
-          <path d="M-10,85 Q 30,65 60,75 T 130,55" stroke="#94a3b8" stroke-width="5" fill="none" opacity="0.05" filter="url(#mist_blur)" />
-        </svg>
-      </div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Effect</span><button class="keyword-copy" onclick="copyKeyword(&#39;Dense Smoke / Fog effect texture&#39;)">Smoke / Fog 📋</button></div>
-        <div class="card-title">연기 &amp; 안개 질감</div>
-        <p class="card-desc">고정된 형태 없이 공기 중에 흐트러지는 기체 상태의 소재. 불투명함과 반투명함이 오묘하게 섞여 몽환적이거나 미스터리한 분위기를 극대화합니다.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Dense white smoke swirling on clean black background, ethereal fog texture, slow motion drift</div></div>
-      </div>
-    </div>
+    <!-- 16. Morph Transition -->
+    
 
+    <!-- 17. Timelapse Effect -->
+    
   </div>
 
   <!-- ==================== SECTION 7: MOODS ==================== -->
@@ -3892,8 +3587,16 @@
     <p class="section-desc">사용자가 "어떤 느낌이면 좋겠어"라고 할 때 가장 먼저 참조하는 무드 카테고리입니다.</p>
   </div>
   <div class="grid">
+    <div class="card">
+      <div class="visual-preview preview-ethereal"><div class="ethereal-glow-1"></div><div class="ethereal-glow-2"></div><div class="ethereal-crystal"></div></div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Texture</span><button class="keyword-copy" onclick="copyKeyword(&#39;Ethereal glowing aura&#39;)">Ethereal 📋</button></div>
+        <div class="card-title">에테리얼</div>
+        <p class="card-desc">안개, 퍼지는 빛무리 등 신비롭고 현실을 초월한 듯한 몽환적인 시각 연출 기법.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Ethereal magical atmosphere, soft crystal glowing with neon pastel prism light refraction</div></div>
+      </div>
+    </div>
     <!-- 1. Dreamlike -->
-    
     <div class="card">
       <div class="visual-preview preview-dreamlike">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3937,6 +3640,7 @@
       </div>
     </div>
 
+    <!-- 2. Nostalgic -->
     <div class="card">
       <div class="visual-preview preview-nostalgic">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -3972,6 +3676,7 @@
       </div>
     </div>
 
+    <!-- 3. Dystopian -->
     <div class="card">
       <div class="visual-preview preview-dystopian">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4010,6 +3715,7 @@
       </div>
     </div>
 
+    <!-- 4. Utopian -->
     <div class="card">
       <div class="visual-preview preview-utopian">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4047,6 +3753,7 @@
       </div>
     </div>
 
+    <!-- 5. Mysterious -->
     <div class="card">
       <div class="visual-preview preview-mysterious">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4085,6 +3792,7 @@
       </div>
     </div>
 
+    <!-- 6. Romantic -->
     <div class="card">
       <div class="visual-preview preview-romantic">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4119,6 +3827,7 @@
       </div>
     </div>
 
+    <!-- 7. Majestic -->
     <div class="card">
       <div class="visual-preview preview-majestic">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4154,6 +3863,7 @@
       </div>
     </div>
 
+    <!-- 8. Serene -->
     <div class="card">
       <div class="visual-preview preview-serene">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4187,6 +3897,7 @@
       </div>
     </div>
 
+    <!-- 9. Chaotic -->
     <div class="card">
       <div class="visual-preview preview-chaotic">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4218,6 +3929,7 @@
       </div>
     </div>
 
+    <!-- 10. Cozy -->
     <div class="card">
       <div class="visual-preview preview-cozy">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4256,6 +3968,7 @@
       </div>
     </div>
 
+    <!-- 11. Futuristic Sci-Fi -->
     <div class="card">
       <div class="visual-preview preview-futuristic-scifi">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4295,6 +4008,7 @@
       </div>
     </div>
 
+    <!-- 12. Organic Natural -->
     <div class="card">
       <div class="visual-preview preview-organic-natural">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4327,17 +4041,6 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Organic natural concept, dense mossy stone texture, green foliage, sun dappled light, earthy forest environment</div></div>
       </div>
     </div>
-
-    <div class="card">
-      <div class="visual-preview preview-ethereal"><div class="ethereal-glow-1"></div><div class="ethereal-glow-2"></div><div class="ethereal-crystal"></div></div>
-      <div class="card-info">
-        <div class="card-meta"><span class="card-category">Mood</span><button class="keyword-copy" onclick="copyKeyword(&#39;Ethereal glowing aura&#39;)">Ethereal 📋</button></div>
-        <div class="card-title">에테리얼</div>
-        <p class="card-desc">안개, 퍼지는 빛무리 등 신비롭고 현실을 초월한 듯한 몽환적인 시각 연출 기법.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Ethereal magical atmosphere, soft crystal glowing with neon pastel prism light refraction</div></div>
-      </div>
-    </div>
-
   </div>
 
   <!-- ==================== SECTION 8: ERAS ==================== -->
@@ -4351,6 +4054,17 @@
   <div class="grid">
     <!-- 1. Medieval -->
     
+
+    <!-- 2. Renaissance -->
+    
+
+    <!-- 3. Baroque / Rococo -->
+    
+
+    <!-- 4. Victorian -->
+    
+
+    <!-- 5. Mid-Century Modern -->
     <div class="card">
       <div class="visual-preview preview-midcentury">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4379,6 +4093,7 @@
       </div>
     </div>
 
+    <!-- 6. Groovy Hippie -->
     <div class="card">
       <div class="visual-preview preview-hippie">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4414,6 +4129,7 @@
       </div>
     </div>
 
+    <!-- 7. 80s Retro -->
     <div class="card">
       <div class="visual-preview preview-80s-retro">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4451,6 +4167,7 @@
       </div>
     </div>
 
+    <!-- 8. Y2K Aesthetic -->
     <div class="card">
       <div class="visual-preview preview-y2k">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4484,19 +4201,17 @@
         <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Y2K aesthetic design, glossy metallic silver surfaces, transparent pink bubble chairs, futuristic tech from 2000</div></div>
       </div>
     </div>
-
   </div>
 
   <div class="section-container" id="sec-illustration">
     <div class="section-title">
       <span>9. 일러스트 &amp; 렌더링 기법 (Illustration &amp; Rendering)</span>
-      <span style="font-size:1rem; opacity:0.6;">11 Items</span>
+      <span style="font-size:1rem; opacity:0.6;">13 Items</span>
     </div>
     <p class="section-desc">손으로 그린 회화부터 고정밀 그래픽 렌더링까지 어떠한 도구와 매체로 그린 느낌인지 정의합니다.</p>
   </div>
   <div class="grid">
     <!-- 1. Watercolor -->
-    
     <div class="card">
       <div class="visual-preview preview-watercolor">
         <div class="watercolor-texture"></div>
@@ -4511,6 +4226,10 @@
       </div>
     </div>
 
+    <!-- 2. Oil Painting -->
+    
+
+    <!-- 3. Ink Drawing -->
     <div class="card">
       <div class="visual-preview preview-ink-drawing">
         <div class="ink-drawing-pen">
@@ -4525,6 +4244,7 @@
       </div>
     </div>
 
+    <!-- 4. Pencil Sketch -->
     <div class="card">
       <div class="visual-preview preview-pencil-sketch">
         <div class="sketch-sphere">
@@ -4539,6 +4259,7 @@
       </div>
     </div>
 
+    <!-- 5. Vector Illustration -->
     <div class="card">
       <div class="visual-preview preview-vector-illustration">
         <div class="vector-mountains">
@@ -4555,6 +4276,7 @@
       </div>
     </div>
 
+    <!-- 6. 3D Render / CGI -->
     <div class="card">
       <div class="visual-preview preview-3d-render">
         <div class="render-3d-sphere"></div>
@@ -4567,6 +4289,7 @@
       </div>
     </div>
 
+    <!-- 7. Clay Render -->
     <div class="card">
       <div class="visual-preview preview-clay-render">
         <div class="clay-render-sphere"></div>
@@ -4579,6 +4302,7 @@
       </div>
     </div>
 
+    <!-- 8. Wireframe -->
     <div class="card">
       <div class="visual-preview preview-wireframe">
         <div class="wireframe-grid">
@@ -4604,6 +4328,7 @@
       </div>
     </div>
 
+    <!-- 9. Collage -->
     <div class="card">
       <div class="visual-preview preview-collage">
         <div class="collage-paper-1">
@@ -4620,6 +4345,23 @@
       </div>
     </div>
 
+    <!-- 10. Woodcut -->
+    <div class="card">
+      <div class="visual-preview preview-woodcut">
+        <div class="woodcut-stamp">
+          <div class="woodcut-row"></div>
+          <div class="woodcut-row"></div>
+          <div class="woodcut-row"></div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Render</span><button class="keyword-copy" onclick="copyKeyword(&#39;Woodcut / Linocut&#39;)">Woodcut 📋</button></div>
+        <div class="card-title">목판화 / 리노컷</div>
+        <p class="card-desc">나무나 판을 조각칼로 파내고 잉크를 묻혀 찍어내는 기법. 거친 옹이 결, 깎인 자국, 투박하고 강렬한 명암비.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Traditional woodcut print illustration, rough carved texture lines, bold ink blocks, vintage handcraft, high contrast</div></div>
+      </div>
+    </div>
+    <!-- 11. Papercut Art -->
     <div class="card">
       <div class="visual-preview preview-papercut">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4639,6 +4381,7 @@
       </div>
     </div>
 
+    <!-- 12. Stained Glass -->
     <div class="card">
       <div class="visual-preview preview-stainedglass">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
@@ -4663,52 +4406,901 @@
       </div>
     </div>
 
+    <!-- 13. Embroidery -->
     <div class="card">
-      <div class="visual-preview preview-blownglass">
+      <div class="visual-preview preview-embroidery">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
-          <rect width="100" height="100" fill="#090d16"></rect>
-          <path d="M 50,20 C 68,20 75,35 70,60 C 65,85 55,90 50,90 C 45,90 35,85 30,60 C 25,35 32,20 50,20 Z" fill="rgba(56, 189, 248, 0.08)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="0.8"></path>
-          <path d="M 50,20 Q 58,40 45,60 T 50,90" stroke="#f472b6" stroke-width="6" fill="none" opacity="0.6" style="filter: blur(2px);"></path>
-          <path d="M 50,20 Q 42,40 55,60 T 50,90" stroke="#38bdf8" stroke-width="4.5" fill="none" opacity="0.6" style="filter: blur(1.5px);"></path>
-          <path d="M 50,20 Q 50,40 50,90" stroke="#fbbf24" stroke-width="2.5" fill="none" opacity="0.5" style="filter: blur(1px);"></path>
-          <path d="M 38,32 C 34,42 32,58 35,68" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.75"></path>
-          <path d="M 37,35 C 35,42 33,55 35,65" stroke="#ffffff" stroke-width="0.8" stroke-linecap="round" opacity="0.9"></path>
-          <ellipse cx="62" cy="38" rx="4" ry="2" transform="rotate(-30 62 38)" fill="#ffffff" opacity="0.6"></ellipse>
-          <path d="M 50,20 C 68,20 75,35 70,60 C 65,85 55,90 50,90 C 45,90 35,85 30,60 C 25,35 32,20 50,20 Z" stroke="rgba(255, 255, 255, 0.45)" stroke-width="0.8"></path>
+          <rect width="100" height="100" fill="#e2e8f0"></rect>
+          <path d="M 0,10 L 100,10 M 0,20 L 100,20 M 0,30 L 100,30 M 0,40 L 100,40 M 0,50 L 100,50 M 0,60 L 100,60 M 0,70 L 100,70 M 0,80 L 100,80 M 0,90 L 100,90" stroke="rgba(0,0,0,0.03)" stroke-width="0.5"></path>
+          <path d="M 10,0 L 10,100 M 20,0 L 20,100 M 30,0 L 30,100 M 40,0 L 40,100 M 50,0 L 50,100 M 60,0 L 60,100 M 70,0 L 70,100 M 80,0 L 80,100 M 90,0 L 90,100" stroke="rgba(0,0,0,0.03)" stroke-width="0.5"></path>
+          <path d="M 50,85 Q 48,60 52,45" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="1.5 1.5"></path>
+          <path d="M 49,65 Q 38,62 42,55 Q 47,58 50,62" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="1.5 1.5"></path>
+          <path d="M 52,45 C 57,45 62,38 52,32 C 42,38 47,45 52,45 Z" fill="none" stroke="#dc2626" stroke-width="3" stroke-dasharray="1 1"></path>
+          <path d="M 52,43 C 55,43 58,38 52,34 C 46,38 49,43 52,43 Z" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="1 1"></path>
+          <circle cx="52" cy="38" r="3" fill="none" stroke="#fde047" stroke-width="2" stroke-dasharray="1 1"></circle>
+          <circle cx="50" cy="50" r="45" stroke="#b45309" stroke-width="3" opacity="0.8"></circle>
+          <circle cx="50" cy="50" r="46.5" stroke="#d97706" stroke-width="1.5" opacity="0.6"></circle>
         </svg>
       </div>
       <div class="card-info">
-        <div class="card-meta"><span class="card-category">Render</span><button class="keyword-copy" onclick="copyKeyword(&#39;Blown glass art / Murano glass style&#39;)">Blown Glass 📋</button></div>
-        <div class="card-title">유리 공예</div>
-        <p class="card-desc">입으로 불어서 성형한 반투명 유리의 흐르는 유기적 곡선과 번쩍이는 재질감. 유리 내에 화려한 색이 소용돌이치는 미학.</p>
-        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Blown glass sculpture of an abstract ocean wave, Murano glass style, swirling colors inside translucent glass, highly reflective, glossy finish</div></div>
+        <div class="card-meta"><span class="card-category">Render</span><button class="keyword-copy" onclick="copyKeyword(&#39;Detailed embroidery / needlepoint textile art&#39;)">Embroidery 📋</button></div>
+        <div class="card-title">자수 &amp; 퀼트 아트</div>
+        <p class="card-desc">패브릭 원단 위에 실을 한 땀 한 땀 누벼 넣은 수공예 아트. 실제 실 뭉치 질감과 천의 따뜻한 물성을 시각화하는 렌더링.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Detailed embroidery art, a cute sleeping fox in flowers, visible thread texture, hand-stitched needlepoint on linen fabric</div></div>
       </div>
     </div>
 
+    <!-- 14. Felt Craft -->
+    <div class="card">
+      <div class="visual-preview preview-felt">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+          <rect width="100" height="100" fill="#f1f5f9"></rect>
+          <circle cx="50" cy="50" r="35" fill="#f472b6" opacity="0.9" style="filter: blur(0.5px);"></circle>
+          <circle cx="50" cy="50" r="35" stroke="#db2777" stroke-width="1.5" stroke-dasharray="1.5 2" opacity="0.8"></circle>
+          <path d="M 35,55 C 30,55 28,48 33,43 C 33,35 43,32 48,37 C 52,30 65,33 63,42 C 68,45 68,55 60,55 Z" fill="#ffffff" style="filter: drop-shadow(0 3px 6px rgba(0,0,0,0.1));"></path>
+          <path d="M 35,55 C 30,55 28,48 33,43 C 33,35 43,32 48,37 C 52,30 65,33 63,42 C 68,45 68,55 60,55 Z" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="1 1.5"></path>
+          <circle cx="40" cy="48" r="2" fill="#f472b6" opacity="0.6"></circle>
+          <circle cx="56" cy="48" r="2" fill="#f472b6" opacity="0.6"></circle>
+          <path d="M 46,47 Q 48,49 50,47" stroke="#475569" stroke-width="0.8" stroke-linecap="round"></path>
+          <path d="M 72,28 L 76,32 M 76,28 L 72,32" stroke="#eab308" stroke-width="1.5" stroke-linecap="round"></path>
+        </svg>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Render</span><button class="keyword-copy" onclick="copyKeyword(&#39;3D needle felted wool miniature&#39;)">Felt Craft 📋</button></div>
+        <div class="card-title">펠트 공예</div>
+        <p class="card-desc">양모 솜을 바늘로 다져 고정시킨 포근하고 복슬복슬한 양모 인형/패치 질감. 소품이나 3D 미니어처에 유용한 질감.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Needle felted wool miniature of a tiny penguin, cozy soft fuzzy texture, hand-crafted felt art, studio lighting</div></div>
+      </div>
+    </div>
+
+    <!-- 15. Blown Glass -->
+    
   </div>
 
-  <!-- Toast Notification -->
+  
+  <!-- ==========================================================================
+       SECTION 10: COLOR PALETTES
+       ========================================================================== -->
+  <div class="section-container" id="sec-palettes">
+    <div class="section-title">
+      <span>10. 색상 조합 팔레트 (Color Palette Combinations)</span>
+      <span style="font-size:1rem; opacity:0.6;">34 Items</span>
+    </div>
+    <p class="section-desc">디자인 무드를 결정짓는 대표적인 컬러 조합 예시입니다. 프롬프트 작성 시 이 조합들을 참고하여 원하는 감성을 즉각적으로 연출해보세요.</p>
+  </div>
+  <div class="grid">
+    <!-- 1. Gold & White -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #ffffff;">
+          <span class="palette-label" style="color: #333333; text-shadow: none;">White</span>
+          <span class="palette-hex">#FFFFFF</span>
+        </div>
+        <div class="palette-color" style="background: #d4af37;">
+          <span class="palette-label">Gold</span>
+          <span class="palette-hex">#D4AF37</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Gold and White')">Copy 📋</button></div>
+        <div class="card-title">골드 & 화이트</div>
+        <p class="card-desc"><strong>고급스러움, 귀족적, 프리미엄.</strong><br>깨끗하고 순수한 화이트에 빛나는 골드 포인트가 어우러져 가장 클래식하면서도 럭셔리한 브랜드 무드를 만들어냅니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Pure white background, highly reflective gold accents</div></div>
+      </div>
+    </div>
+
+    <!-- 2. Black & Neon -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #0f0f13;">
+          <span class="palette-label">Black</span>
+          <span class="palette-hex">#0F0F13</span>
+        </div>
+        <div class="palette-color" style="background: #00f2fe;">
+          <span class="palette-label" style="color: #0f0f13; text-shadow: none;">Cyan</span>
+          <span class="palette-hex" style="color: #0f0f13; border-color: rgba(0,0,0,0.15); background: rgba(255,255,255,0.4);">#00F2FE</span>
+        </div>
+        <div class="palette-color" style="background: #fe0979;">
+          <span class="palette-label">Pink</span>
+          <span class="palette-hex">#FE0979</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Black with Neon Cyan and Pink')">Copy 📋</button></div>
+        <div class="card-title">블랙 & 네온 (사이버펑크)</div>
+        <p class="card-desc"><strong>미래지향적, 강렬함, 테크놀로지.</strong><br>칠흑 같은 어두운 배경에 쨍한 형광빛 블루/핑크가 대비를 이루며 해커, SF, 네온사인 감성을 자아냅니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Deep black background, glowing neon cyan and hot pink accents</div></div>
+      </div>
+    </div>
+
+    <!-- 3. Pastel Pink & Mint -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #ffb7b2;">
+          <span class="palette-label" style="color: #5d4037; text-shadow: none;">Pink</span>
+          <span class="palette-hex" style="color: #5d4037; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FFB7B2</span>
+        </div>
+        <div class="palette-color" style="background: #e2f0cb;">
+          <span class="palette-label" style="color: #33691e; text-shadow: none;">Mint</span>
+          <span class="palette-hex" style="color: #33691e; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#E2F0CB</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Pastel Pink and Mint')">Copy 📋</button></div>
+        <div class="card-title">파스텔 핑크 & 민트</div>
+        <p class="card-desc"><strong>러블리, 달콤함, 코지(Cozy).</strong><br>솜사탕이나 마카롱이 떠오르는 부드러운 톤의 결합으로, 아기자기하고 귀여우며 평화로운 느낌을 줍니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Soft pastel pink, mint green accents</div></div>
+      </div>
+    </div>
+
+
+
+    <!-- 5. Olive Green & Beige -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #f5ebe6;">
+          <span class="palette-label" style="color: #4e342e; text-shadow: none;">Beige</span>
+          <span class="palette-hex" style="color: #4e342e; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#F5EBE6</span>
+        </div>
+        <div class="palette-color" style="background: #606c38;">
+          <span class="palette-label">Olive</span>
+          <span class="palette-hex">#606C38</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Olive Green and Beige')">Copy 📋</button></div>
+        <div class="card-title">올리브 그린 & 베이지</div>
+        <p class="card-desc"><strong>내추럴, 오가닉, 따뜻함.</strong><br>자연을 닮은 차분한 얼스톤(Earth Tone) 조합으로, 에코 프렌들리, 친환경, 그리고 정서적인 편안함을 줍니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Warm beige base, olive green accents</div></div>
+      </div>
+    </div>
+
+    <!-- 6. Burgundy & Deep Gold -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #581c2f;">
+          <span class="palette-label">Burgundy</span>
+          <span class="palette-hex">#581C2F</span>
+        </div>
+        <div class="palette-color" style="background: #b8860b;">
+          <span class="palette-label">Gold</span>
+          <span class="palette-hex">#B8860B</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Burgundy and Deep Gold')">Copy 📋</button></div>
+        <div class="card-title">버건디 & 딥 골드</div>
+        <p class="card-desc"><strong>클래식, 빈티지, 중후함.</strong><br>오래된 포도주처럼 짙고 매혹적인 버건디에 깊은 톤의 골드가 더해져 전통적이고 앤틱하며 묵직한 카리스마를 발산합니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Deep burgundy base, rich gold accents</div></div>
+      </div>
+    </div>
+
+    <!-- 7. Minimal Monochrome -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #ffffff;">
+          <span class="palette-label" style="color: #333333; text-shadow: none;">White</span>
+          <span class="palette-hex">#FFFFFF</span>
+        </div>
+        <div class="palette-color" style="background: #27272a;">
+          <span class="palette-label">Dark Gray</span>
+          <span class="palette-hex">#27272A</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Pure White and Dark Gray')">Copy 📋</button></div>
+        <div class="card-title">화이트 & 다크 그레이</div>
+        <p class="card-desc"><strong>미니멀리즘, 모던, 시크.</strong><br>색상을 최대한 덜어내고 명암 대비만으로 승부하는 모노톤 조합. 극도의 깔끔함과 여백의 미를 강조하는 미니멀리즘에 제격입니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Pure white, dark gray accents</div></div>
+      </div>
+    </div>
+
+    <!-- 8. Vivid Orange & Electric Blue -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #ff5e00;">
+          <span class="palette-label">Orange</span>
+          <span class="palette-hex">#FF5E00</span>
+        </div>
+        <div class="palette-color" style="background: #0047ff;">
+          <span class="palette-label">Blue</span>
+          <span class="palette-hex">#0047FF</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Vivid Orange and Electric Blue')">Copy 📋</button></div>
+        <div class="card-title">비비드 오렌지 & 일렉트릭 블루</div>
+        <p class="card-desc"><strong>팝아트, 에너제틱, 캐주얼.</strong><br>서로 반대되는 강렬한 보색 대비를 통해 시선을 확 잡아끌며, 경쾌하고 활동적이며 영(Young)한 감성을 어필합니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Vivid orange and electric blue complementary colors</div></div>
+      </div>
+    </div>
+
+    <!-- 9. Forest Green & Terracotta -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #1e3f20;">
+          <span class="palette-label">Green</span>
+          <span class="palette-hex">#1E3F20</span>
+        </div>
+        <div class="palette-color" style="background: #c86b4d;">
+          <span class="palette-label">Terracotta</span>
+          <span class="palette-hex">#C86B4D</span>
+        </div>
+        <div class="palette-color" style="background: #eadec9;">
+          <span class="palette-label" style="color: #5d4037; text-shadow: none;">Sand</span>
+          <span class="palette-hex" style="color: #5d4037; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#EADEC9</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Forest Green and Terracotta with Warm Sand')">Copy 📋</button></div>
+        <div class="card-title">포레스트 그린 & 테라코타</div>
+        <p class="card-desc"><strong>에코 럭셔리, 내추럴, 대지의 따뜻함.</strong><br>차분한 딥 그린과 따뜻한 붉은 황토색, 부드러운 샌드 베이지가 어우러져 오가닉하고 편안한 웰빙 감성을 자아냅니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Earthy forest green and terracotta, warm sand beige accents</div></div>
+      </div>
+    </div>
+
+    <!-- 10. Deep Teal & Coral -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #005c53;">
+          <span class="palette-label">Deep Teal</span>
+          <span class="palette-hex">#005C53</span>
+        </div>
+        <div class="palette-color" style="background: #ff6f61;">
+          <span class="palette-label">Coral Pink</span>
+          <span class="palette-hex">#FF6F61</span>
+        </div>
+        <div class="palette-color" style="background: #faf3e0;">
+          <span class="palette-label" style="color: #4e342e; text-shadow: none;">Cream</span>
+          <span class="palette-hex" style="color: #4e342e; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FAF3E0</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Deep Teal and Coral with Cream')">Copy 📋</button></div>
+        <div class="card-title">딥 틸 & 코랄</div>
+        <p class="card-desc"><strong>청량함, 감각적 대비, 트렌디.</strong><br>깊고 차분한 청록색 위에 화사하고 톡톡 튀는 살구빛 코랄을 얹어, 트렌디하면서도 생기 있는 공간과 라이프스타일을 연출합니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Cream white background, deep teal and vibrant coral accents</div></div>
+      </div>
+    </div>
+
+    <!-- 11. Midnight Purple & Acid Green -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #1c0a35;">
+          <span class="palette-label">Midnight</span>
+          <span class="palette-hex">#1C0A35</span>
+        </div>
+        <div class="palette-color" style="background: #3e106d;">
+          <span class="palette-label">Violet</span>
+          <span class="palette-hex">#3E106D</span>
+        </div>
+        <div class="palette-color" style="background: #d1f540;">
+          <span class="palette-label" style="color: #1c0a35; text-shadow: none;">Acid Lime</span>
+          <span class="palette-hex" style="color: #1c0a35; border-color: rgba(0,0,0,0.15); background: rgba(255,255,255,0.4);">#D1F540</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Midnight Purple and Violet with Acid Lime')">Copy 📋</button></div>
+        <div class="card-title">퍼플 & 애시드 라임</div>
+        <p class="card-desc"><strong>힙함, 사이키델릭, 독창적.</strong><br>깊은 우주나 미드나잇 느낌의 바이올렛 베이스에 강렬한 형광 연두색(라임) 포인트가 가미되어 개성 강한 아티스틱 무드를 표현합니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Midnight purple base, neon acid lime accents</div></div>
+      </div>
+    </div>
+
+    <!-- 12. Creamy Peach & Warm Gray -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #fff3e3;">
+          <span class="palette-label" style="color: #7d7473; text-shadow: none;">Cream</span>
+          <span class="palette-hex" style="color: #7d7473; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FFF3E3</span>
+        </div>
+        <div class="palette-color" style="background: #ffd5c2;">
+          <span class="palette-label" style="color: #7d7473; text-shadow: none;">Peach</span>
+          <span class="palette-hex" style="color: #7d7473; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FFD5C2</span>
+        </div>
+        <div class="palette-color" style="background: #7d7473;">
+          <span class="palette-label">Warm Gray</span>
+          <span class="palette-hex">#7D7473</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Creamy Peach and Warm Gray')">Copy 📋</button></div>
+        <div class="card-title">크리미 피치 & 웜 그레이</div>
+        <p class="card-desc"><strong>포근함, 코지(Cozy), 사랑스러움.</strong><br>부드럽고 따뜻한 복숭아빛 피치 크림과 차분한 웜 그레이의 절묘한 매칭으로, 온화하고 소박한 북유럽식 감성을 보여줍니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Creamy peach and warm gray, butter cream accents</div></div>
+      </div>
+    </div>
+  
+
+
+
+
+    <!-- 15. Midnight & Bioluminescence -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #0b132b;">
+          <span class="palette-label">Midnight</span>
+          <span class="palette-hex">#0B132B</span>
+        </div>
+        <div class="palette-color" style="background: #47e5bc;">
+          <span class="palette-label" style="color: #0b132b; text-shadow: none;">Mint</span>
+          <span class="palette-hex" style="color: #0b132b; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#47E5BC</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Midnight and Bioluminescent Mint')">Copy 📋</button></div>
+        <div class="card-title">심해 블루 & 발광 민트</div>
+        <p class="card-desc"><strong>신비로움, 심연, 생명력.</strong><br>칠흑같이 어두운 미드나잇 블루 속에서 스스로 빛을 발하는 생명체처럼 청량하고 차가운 민트 라이트가 마법 같은 에너지를 전합니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Midnight blue background, glowing mint green highlights</div></div>
+      </div>
+    </div>
+
+    <!-- 16. Muted Sage & Dusty Rose -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #8f9e8b;">
+          <span class="palette-label">Sage</span>
+          <span class="palette-hex">#8F9E8B</span>
+        </div>
+        <div class="palette-color" style="background: #c89f9c;">
+          <span class="palette-label">Dusty Rose</span>
+          <span class="palette-hex">#C89F9C</span>
+        </div>
+        <div class="palette-color" style="background: #f2ebe5;">
+          <span class="palette-label" style="color: #5c4037; text-shadow: none;">Oat</span>
+          <span class="palette-hex" style="color: #5c4037; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#F2EBE5</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Muted Sage and Dusty Rose')">Copy 📋</button></div>
+        <div class="card-title">뮤트 세이지 & 더스티 로즈</div>
+        <p class="card-desc"><strong>로맨틱, 코티지코어(Cottagecore), 평온함.</strong><br>자연을 닮은 차분한 세이지 그린, 은은한 빛바랜 핑크빛 로즈, 부드러운 오트밀 색이 만나 아늑하고 서정적인 휴식의 무드를 이끌어냅니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Muted sage green, dusty rose, and creamy oat base</div></div>
+      </div>
+    </div>
+
+
+
+    <!-- 18. Dark Academia -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #3e2723;">
+          <span class="palette-label">Espresso</span>
+          <span class="palette-hex">#3E2723</span>
+        </div>
+        <div class="palette-color" style="background: #d7ccc8;">
+          <span class="palette-label" style="color: #3e2723; text-shadow: none;">Parchment</span>
+          <span class="palette-hex" style="color: #3e2723; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#D7CCC8</span>
+        </div>
+        <div class="palette-color" style="background: #2e4c3b;">
+          <span class="palette-label">Forest</span>
+          <span class="palette-hex">#2E4C3B</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Dark Academia Espresso and Forest')">Copy 📋</button></div>
+        <div class="card-title">다크 아카데미아</div>
+        <p class="card-desc"><strong>고전적, 지적임, 앤틱.</strong><br>중후한 에스프레소 브라운, 세월의 흔적이 묻은 양장본 같은 파치먼트 베이지, 깊은 숲속 같은 다크 그린이 어우러져 클래식하고 학구적인 분위기를 자아냅니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Espresso brown, aged parchment beige, deep forest green accents</div></div>
+      </div>
+    </div>
+
+    <!-- 19. Vibrant Sorbet -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #ffd166;">
+          <span class="palette-label" style="color: #ef476f; text-shadow: none;">Lemon</span>
+          <span class="palette-hex" style="color: #ef476f; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FFD166</span>
+        </div>
+        <div class="palette-color" style="background: #ef476f;">
+          <span class="palette-label">Watermelon</span>
+          <span class="palette-hex">#EF476F</span>
+        </div>
+        <div class="palette-color" style="background: #f78c6b;">
+          <span class="palette-label">Tangerine</span>
+          <span class="palette-hex">#F78C6B</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Vibrant Sorbet Yellow Orange Pink')">Copy 📋</button></div>
+        <div class="card-title">비비드 소르베</div>
+        <p class="card-desc"><strong>팝 아트, 활기참, 청량감.</strong><br>달콤상큼한 레몬 옐로우, 과즙 가득한 핑크, 탠저린 오렌지가 모여 에너제틱하고 경쾌하며 트렌디한 여름의 팝 감성을 전합니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Lemon yellow, ripe watermelon pink, fresh tangerine orange</div></div>
+      </div>
+    </div>
+
+    <!-- 20. Icy Monotone -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #a0c4ff;">
+          <span class="palette-label" style="color: #3b5c8f; text-shadow: none;">Glacier Blue</span>
+          <span class="palette-hex" style="color: #3b5c8f; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#A0C4FF</span>
+        </div>
+        <div class="palette-color" style="background: #6c7a89;">
+          <span class="palette-label">Slate Gray</span>
+          <span class="palette-hex">#6C7A89</span>
+        </div>
+        <div class="palette-color" style="background: #fafafa;">
+          <span class="palette-label" style="color: #6c7a89; text-shadow: none;">Snow White</span>
+          <span class="palette-hex" style="color: #6c7a89; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FAFAFA</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Icy Monotone Glacier Blue and Slate')">Copy 📋</button></div>
+        <div class="card-title">아이스 모노톤</div>
+        <p class="card-desc"><strong>차가움, 미니멀리즘, 정적.</strong><br>눈 덮인 모노톤의 풍경과 맑고 투명한 청빙을 닮은 글레이셔 블루의 매치로 깨끗하고 고요하며 절제된 현대적 미를 보여줍니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Translucent glacier blue, slate gray, pristine snow white</div></div>
+      </div>
+    </div>
+  
+    <!-- 21. Sand & Warm Brown -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #f7f3ee;">
+          <span class="palette-label" style="color: #8c6a4e; text-shadow: none;">Linen</span>
+          <span class="palette-hex" style="color: #8c6a4e; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#F7F3EE</span>
+        </div>
+        <div class="palette-color" style="background: #d4c5b0;">
+          <span class="palette-label" style="color: #8c6a4e; text-shadow: none;">Sand</span>
+          <span class="palette-hex" style="color: #8c6a4e; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#D4C5B0</span>
+        </div>
+        <div class="palette-color" style="background: #8c6a4e;">
+          <span class="palette-label">Walnut</span>
+          <span class="palette-hex">#8C6A4E</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Sand & Warm Brown')">Copy 📋</button></div>
+        <div class="card-title">샌드 & 웜 브라운</div>
+        <p class="card-desc"><strong>스칸디나비안, 젠(Zen), 포근함.</strong><br>모래밭과 풍화된 나무껍질을 닮은 따뜻한 뉴트럴 톤. 미니멀하면서도 온기가 느껴지는 북유럽 인테리어 감성.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Linen white, sandy beige, walnut brown accents</div></div>
+      </div>
+    </div>
+
+    <!-- 22. Black & Matte Gold -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #0d0d0d;">
+          <span class="palette-label">Black</span>
+          <span class="palette-hex">#0D0D0D</span>
+        </div>
+        <div class="palette-color" style="background: #b8a04a;">
+          <span class="palette-label" style="color: #0d0d0d; text-shadow: none;">Matte Gold</span>
+          <span class="palette-hex" style="color: #0d0d0d; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#B8A04A</span>
+        </div>
+        <div class="palette-color" style="background: #2a2a2a;">
+          <span class="palette-label">Charcoal</span>
+          <span class="palette-hex">#2A2A2A</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Black & Matte Gold')">Copy 📋</button></div>
+        <div class="card-title">블랙 & 매트 골드</div>
+        <p class="card-desc"><strong>럭셔리 모던, 엣지, 하이엔드.</strong><br>빛나지 않는 매트한 골드와 칠흑 같은 블랙의 조합. 화려하지 않으면서도 묵직하고 고급스러운 프리미엄 무드.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Matte black, flat antique gold accents, charcoal gray</div></div>
+      </div>
+    </div>
+
+    <!-- 23. Sunset Terracotta -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #fdf6ec;">
+          <span class="palette-label" style="color: #e76f51; text-shadow: none;">Cream</span>
+          <span class="palette-hex" style="color: #e76f51; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FDF6EC</span>
+        </div>
+        <div class="palette-color" style="background: #f4a261;">
+          <span class="palette-label" style="color: #8a3c1e; text-shadow: none;">Amber</span>
+          <span class="palette-hex" style="color: #8a3c1e; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#F4A261</span>
+        </div>
+        <div class="palette-color" style="background: #e76f51;">
+          <span class="palette-label">Terracotta</span>
+          <span class="palette-hex">#E76F51</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Sunset Terracotta')">Copy 📋</button></div>
+        <div class="card-title">선셋 테라코타</div>
+        <p class="card-desc"><strong>보헤미안, 따뜻한 에너지, 지중해.</strong><br>석양이 물드는 지중해 해안처럼 따뜻하고 생동감 있는 색조. 여행, 푸드, 라이프스타일 브랜드에 어울리는 활기찬 어스톤.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Warm cream base, amber orange and deep terracotta</div></div>
+      </div>
+    </div>
+
+    <!-- 24. Lavender & Mute Purple -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #f0ebf8;">
+          <span class="palette-label" style="color: #7b5ea7; text-shadow: none;">Blush</span>
+          <span class="palette-hex" style="color: #7b5ea7; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#F0EBF8</span>
+        </div>
+        <div class="palette-color" style="background: #c9b1e8;">
+          <span class="palette-label" style="color: #7b5ea7; text-shadow: none;">Lavender</span>
+          <span class="palette-hex" style="color: #7b5ea7; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#C9B1E8</span>
+        </div>
+        <div class="palette-color" style="background: #7b5ea7;">
+          <span class="palette-label">Amethyst</span>
+          <span class="palette-hex">#7B5EA7</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Lavender & Mute Purple')">Copy 📋</button></div>
+        <div class="card-title">라벤더 & 뮤트 퍼플</div>
+        <p class="card-desc"><strong>감성적, 몽환적, 웰니스.</strong><br>갓 핀 라벤더 꽃밭처럼 흐릿하고 차분한 보라 계열. 뷰티, 명상, 웰니스 브랜드에서 사랑받는 서정적인 무드.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Soft lavender, floral blush base, gentle amethyst accents</div></div>
+      </div>
+    </div>
+
+    <!-- 25. Fresh Green & Nature -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #e8f5e9;">
+          <span class="palette-label" style="color: #2e7d32; text-shadow: none;">Mint</span>
+          <span class="palette-hex" style="color: #2e7d32; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#E8F5E9</span>
+        </div>
+        <div class="palette-color" style="background: #81c784;">
+          <span class="palette-label" style="color: #2e7d32; text-shadow: none;">Leaf</span>
+          <span class="palette-hex" style="color: #2e7d32; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#81C784</span>
+        </div>
+        <div class="palette-color" style="background: #2e7d32;">
+          <span class="palette-label">Forest</span>
+          <span class="palette-hex">#2E7D32</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Fresh Green & Nature')">Copy 📋</button></div>
+        <div class="card-title">프레시 그린 & 네이처</div>
+        <p class="card-desc"><strong>청량함, 생명력, 에코 테크.</strong><br>갓 자란 새싹처럼 싱그럽고 선명한 그린 계열. 지속가능성, 건강, 푸드테크 브랜드의 신선하고 깨끗한 이미지.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Light mint background, vivid leaf green, deep forest green</div></div>
+      </div>
+    </div>
+
+    <!-- 26. Navy Night & Crimson -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #1a1a2e;">
+          <span class="palette-label">Night</span>
+          <span class="palette-hex">#1A1A2E</span>
+        </div>
+        <div class="palette-color" style="background: #16213e;">
+          <span class="palette-label">Midnight</span>
+          <span class="palette-hex">#16213E</span>
+        </div>
+        <div class="palette-color" style="background: #e94560;">
+          <span class="palette-label">Crimson</span>
+          <span class="palette-hex">#E94560</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Navy Night & Crimson')">Copy 📋</button></div>
+        <div class="card-title">네이비 나이트 & 크림슨</div>
+        <p class="card-desc"><strong>드라마틱, 시네마틱, 인텐스.</strong><br>깊은 밤하늘 같은 네이비 레이어와 단 하나의 강렬한 크림슨 포인트. 영화 포스터나 게임 UI처럼 긴장감과 몰입감을 극대화.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Deep midnight blue layers, single bold crimson red accent</div></div>
+      </div>
+    </div>
+
+    <!-- 27. Honey & Butter -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #fff8f0;">
+          <span class="palette-label" style="color: #bf6600; text-shadow: none;">Butter</span>
+          <span class="palette-hex" style="color: #bf6600; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FFF8F0</span>
+        </div>
+        <div class="palette-color" style="background: #ffd9a0;">
+          <span class="palette-label" style="color: #bf6600; text-shadow: none;">Cream</span>
+          <span class="palette-hex" style="color: #bf6600; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FFD9A0</span>
+        </div>
+        <div class="palette-color" style="background: #ff9900;">
+          <span class="palette-label" style="color: #4a2800; text-shadow: none;">Honey</span>
+          <span class="palette-hex" style="color: #4a2800; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FF9900</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Honey & Butter')">Copy 📋</button></div>
+        <div class="card-title">허니 & 버터</div>
+        <p class="card-desc"><strong>따뜻함, 달콤함, 핸드메이드.</strong><br>갓 구운 버터 쿠키와 꿀 한 스푼처럼 달콤하고 따뜻한 옐로우 계열. 베이커리, 수공예, 홈 리빙 브랜드의 정직하고 따뜻한 감성.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Vanilla cream base, warm honey, golden amber accents</div></div>
+      </div>
+    </div>
+
+    <!-- 28. Dream Purple & Cyan -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #f5f0ff;">
+          <span class="palette-label" style="color: #7c3aed; text-shadow: none;">Mist</span>
+          <span class="palette-hex" style="color: #7c3aed; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#F5F0FF</span>
+        </div>
+        <div class="palette-color" style="background: #a78bfa;">
+          <span class="palette-label" style="color: #4c1d95; text-shadow: none;">Violet</span>
+          <span class="palette-hex" style="color: #4c1d95; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#A78BFA</span>
+        </div>
+        <div class="palette-color" style="background: #06b6d4;">
+          <span class="palette-label" style="color: #164e63; text-shadow: none;">Cyan</span>
+          <span class="palette-hex" style="color: #164e63; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#06B6D4</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Dream Purple & Cyan')">Copy 📋</button></div>
+        <div class="card-title">드림 퍼플 & 사이안</div>
+        <p class="card-desc"><strong>AI, 미래감, 크리에이티브 테크.</strong><br>소프트한 퍼플과 선명한 사이안의 대비로 창의적이고 진보적인 테크 무드. AI 플랫폼, 스타트업, 크리에이터 툴에 어울리는 인디고 드림.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Soft purple mist background, vibrant violet, electric cyan accents</div></div>
+      </div>
+    </div>
+
+    <!-- 29. Oatmeal & Cacao -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #f9f5f0;">
+          <span class="palette-label" style="color: #5c4033; text-shadow: none;">Oat</span>
+          <span class="palette-hex" style="color: #5c4033; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#F9F5F0</span>
+        </div>
+        <div class="palette-color" style="background: #c5a882;">
+          <span class="palette-label" style="color: #5c4033; text-shadow: none;">Latte</span>
+          <span class="palette-hex" style="color: #5c4033; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#C5A882</span>
+        </div>
+        <div class="palette-color" style="background: #5c4033;">
+          <span class="palette-label">Cacao</span>
+          <span class="palette-hex">#5C4033</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Oatmeal & Cacao')">Copy 📋</button></div>
+        <div class="card-title">오트밀 & 카카오</div>
+        <p class="card-desc"><strong>미니멀 카페, 무채색 브라운, 정갈함.</strong><br>진한 카카오 브라운과 크리미한 오트밀의 절제된 조화. 스페셜티 커피, 무드 있는 카페, 프리미엄 식품 브랜드의 감각적인 내추럴 톤.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Creamy oat base, warm latte mid tone, rich dark chocolate accents</div></div>
+      </div>
+    </div>
+
+    <!-- 30. Aqua & Coral Pop -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #e0f2f1;">
+          <span class="palette-label" style="color: #004d40; text-shadow: none;">Aqua</span>
+          <span class="palette-hex" style="color: #004d40; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#E0F2F1</span>
+        </div>
+        <div class="palette-color" style="background: #4db6ac;">
+          <span class="palette-label" style="color: #004d40; text-shadow: none;">Teal</span>
+          <span class="palette-hex" style="color: #004d40; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#4DB6AC</span>
+        </div>
+        <div class="palette-color" style="background: #ff8a65;">
+          <span class="palette-label">Coral</span>
+          <span class="palette-hex">#FF8A65</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Aqua & Coral Pop')">Copy 📋</button></div>
+        <div class="card-title">아쿠아 & 코랄 팝</div>
+        <p class="card-desc"><strong>여름, 발랄함, 트로피컬.</strong><br>맑은 수영장 물빛의 아쿠아와 산호초의 코랄이 만나는 트로피컬 조합. 여름 캠페인, 여행, 스포츠 브랜드의 경쾌하고 생동감 있는 에너지.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Refreshing teal water, vibrant coral accents</div></div>
+      </div>
+    </div>
+  
+    <!-- 31. Ocean Ceramic -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #f0fafa;">
+          <span class="palette-label" style="color: #0d3b3b; text-shadow: none;">Mist</span>
+          <span class="palette-hex" style="color: #0d3b3b; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#F0FAFA</span>
+        </div>
+        <div class="palette-color" style="background: #99d9d9;">
+          <span class="palette-label" style="color: #0d3b3b; text-shadow: none;">Celadon</span>
+          <span class="palette-hex" style="color: #0d3b3b; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#99D9D9</span>
+        </div>
+        <div class="palette-color" style="background: #2a7f7f;">
+          <span class="palette-label">Ocean</span>
+          <span class="palette-hex">#2A7F7F</span>
+        </div>
+        <div class="palette-color" style="background: #0d3b3b;">
+          <span class="palette-label">Abyss</span>
+          <span class="palette-hex">#0D3B3B</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Ocean Ceramic')">Copy 📋</button></div>
+        <div class="card-title">오션 세라믹</div>
+        <p class="card-desc"><strong>스파, 힐링, 젠 미니멀.</strong><br>온천수와 청자 도자기가 떠오르는 깊고 차분한 틸 계열. 기존 리스트의 딥 틸보다 훨씬 조용하고 명상적이며 고요한 동양미를 전달합니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Pale mist white, soft celadon, deep ocean teal, dark abyss accents</div></div>
+      </div>
+    </div>
+
+    <!-- 32. Graffiti Red -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #1a1a1a;">
+          <span class="palette-label">Pitch</span>
+          <span class="palette-hex">#1A1A1A</span>
+        </div>
+        <div class="palette-color" style="background: #2d2d2d;">
+          <span class="palette-label">Concrete</span>
+          <span class="palette-hex">#2D2D2D</span>
+        </div>
+        <div class="palette-color" style="background: #e8e8e8;">
+          <span class="palette-label" style="color: #1a1a1a; text-shadow: none;">Chalk</span>
+          <span class="palette-hex" style="color: #1a1a1a; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#E8E8E8</span>
+        </div>
+        <div class="palette-color" style="background: #ff3b30;">
+          <span class="palette-label">Tag Red</span>
+          <span class="palette-hex">#FF3B30</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Graffiti Red')">Copy 📋</button></div>
+        <div class="card-title">그래피티 레드</div>
+        <p class="card-desc"><strong>스트리트웨어, 언더그라운드, 반항적.</strong><br>칠흑 블랙과 콘크리트 그레이 위에 단 하나의 빨간 낙서처럼 튀어나오는 레드 포인트. 슈프림·오프화이트 같은 스트리트 컬처의 날 것의 에너지를 뿜어냅니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Pitch black and raw concrete gray base, chalk white contrast, single bold red accent</div></div>
+      </div>
+    </div>
+
+    <!-- 33. Rose & Deep Magenta -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #fde8f0;">
+          <span class="palette-label" style="color: #9d174d; text-shadow: none;">Blush</span>
+          <span class="palette-hex" style="color: #9d174d; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FDE8F0</span>
+        </div>
+        <div class="palette-color" style="background: #f472b6;">
+          <span class="palette-label" style="color: #9d174d; text-shadow: none;">Rose</span>
+          <span class="palette-hex" style="color: #9d174d; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#F472B6</span>
+        </div>
+        <div class="palette-color" style="background: #9d174d;">
+          <span class="palette-label">Magenta</span>
+          <span class="palette-hex">#9D174D</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Rose & Deep Magenta')">Copy 📋</button></div>
+        <div class="card-title">로즈 & 딥 마젠타</div>
+        <p class="card-desc"><strong>페미닌 모던, 감각적, 럭셔리 뷰티.</strong><br>파스텔 핑크와 달리 깊이감이 있는 핑크 그라데이션. 연한 블러셔부터 진한 마젠타까지 이어져 뷰티·패션 브랜드에 어울리는 세련된 여성스러움입니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Soft blush base, vibrant rose pink mid tone, rich deep magenta accents</div></div>
+      </div>
+    </div>
+
+    <!-- 34. Electric Lime & Deep Green -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #f0fdf4;">
+          <span class="palette-label" style="color: #1a2e05; text-shadow: none;">Frost</span>
+          <span class="palette-hex" style="color: #1a2e05; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#F0FDF4</span>
+        </div>
+        <div class="palette-color" style="background: #ccff00;">
+          <span class="palette-label" style="color: #1a2e05; text-shadow: none;">Lime</span>
+          <span class="palette-hex" style="color: #1a2e05; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#CCFF00</span>
+        </div>
+        <div class="palette-color" style="background: #1a2e05;">
+          <span class="palette-label">Deep Green</span>
+          <span class="palette-hex">#1A2E05</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Electric Lime & Deep Green')">Copy 📋</button></div>
+        <div class="card-title">일렉트릭 라임 & 딥 그린</div>
+        <p class="card-desc"><strong>스포츠테크, 애슬레틱, 미래형 에너지.</strong><br>형광 라임과 거의 블랙에 가까운 딥 그린의 극단적 대비. 나이키·아디다스 캠페인처럼 강렬하고 운동적인 에너지를 뿜는 하이 임팩트 팔레트입니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Deep forest black base, electric neon lime accents</div></div>
+      </div>
+    </div>
+
+    <!-- 35. Jazz Yellow & Black -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #fffbf0;">
+          <span class="palette-label" style="color: #1c1917; text-shadow: none;">Cream</span>
+          <span class="palette-hex" style="color: #1c1917; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FFFBF0</span>
+        </div>
+        <div class="palette-color" style="background: #fcd34d;">
+          <span class="palette-label" style="color: #1c1917; text-shadow: none;">Jazz Yellow</span>
+          <span class="palette-hex" style="color: #1c1917; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FCD34D</span>
+        </div>
+        <div class="palette-color" style="background: #1c1917;">
+          <span class="palette-label">Ink</span>
+          <span class="palette-hex">#1C1917</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Jazz Yellow & Black')">Copy 📋</button></div>
+        <div class="card-title">재즈 옐로우 & 블랙</div>
+        <p class="card-desc"><strong>재즈, 빈티지 포스터, 아트 데코.</strong><br>크림 화이트 위에 선명한 옐로우가 빛나고 잉크 블랙이 베이스를 잡는 조합. 50~60년대 재즈 앨범 커버와 아트 데코 포스터에서 나오는 강렬하고 클래식한 레트로 감성입니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Cream white background, bold cadmium yellow accent, deep ink black</div></div>
+      </div>
+    </div>
+
+    <!-- 36. Quantum Indigo -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #eef2ff;">
+          <span class="palette-label" style="color: #312e81; text-shadow: none;">Ghost</span>
+          <span class="palette-hex" style="color: #312e81; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#EEF2FF</span>
+        </div>
+        <div class="palette-color" style="background: #e0e7ff;">
+          <span class="palette-label" style="color: #312e81; text-shadow: none;">Haze</span>
+          <span class="palette-hex" style="color: #312e81; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#E0E7FF</span>
+        </div>
+        <div class="palette-color" style="background: #6366f1;">
+          <span class="palette-label">Indigo</span>
+          <span class="palette-hex">#6366F1</span>
+        </div>
+        <div class="palette-color" style="background: #312e81;">
+          <span class="palette-label">Deep</span>
+          <span class="palette-hex">#312E81</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Quantum Indigo')">Copy 📋</button></div>
+        <div class="card-title">퀀텀 인디고</div>
+        <p class="card-desc"><strong>디지털 미니멀, 집중, 딥워크.</strong><br>노션·리니어 같은 프로덕티비티 툴의 차갑고 절제된 인디고. 화려하지 않지만 지적이고 집중력 있는 현대 SaaS 디자인 무드입니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Soft indigo mist background, pure indigo accent, deep navy base</div></div>
+      </div>
+    </div>
+
+    <!-- 37. Craft Amber -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #fff9f0;">
+          <span class="palette-label" style="color: #7c3f0e; text-shadow: none;">Parchment</span>
+          <span class="palette-hex" style="color: #7c3f0e; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FFF9F0</span>
+        </div>
+        <div class="palette-color" style="background: #fddcb5;">
+          <span class="palette-label" style="color: #7c3f0e; text-shadow: none;">Honey</span>
+          <span class="palette-hex" style="color: #7c3f0e; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FDDCB5</span>
+        </div>
+        <div class="palette-color" style="background: #c97b2e;">
+          <span class="palette-label">Kiln</span>
+          <span class="palette-hex">#C97B2E</span>
+        </div>
+        <div class="palette-color" style="background: #7c3f0e;">
+          <span class="palette-label">Clay</span>
+          <span class="palette-hex">#7C3F0E</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Craft Amber')">Copy 📋</button></div>
+        <div class="card-title">크래프트 앰버</div>
+        <p class="card-desc"><strong>도예, 수공예, 아르티장.</strong><br>물레 위 도자기와 수제 가죽처럼 손으로 만든 질감이 느껴지는 앰버 계열. 빈티지 공방, 도예 브랜드, 핸드크래프트 마켓의 따뜻하고 정직한 감성입니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Parchment white base, warm honey, kiln-fired amber, deep clay brown accents</div></div>
+      </div>
+    </div>
+  
+    <!-- 38. Soft Mesh Sorbet -->
+    <div class="card">
+      <div class="palette-preview">
+        <div class="palette-color" style="background: #ffb3c6;">
+          <span class="palette-label" style="color: #9d174d; text-shadow: none;">Blush</span>
+          <span class="palette-hex" style="color: #9d174d; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FFB3C6</span>
+        </div>
+        <div class="palette-color" style="background: #bde0fe;">
+          <span class="palette-label" style="color: #1e3a8a; text-shadow: none;">Sky</span>
+          <span class="palette-hex" style="color: #1e3a8a; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#BDE0FE</span>
+        </div>
+        <div class="palette-color" style="background: #caffbf;">
+          <span class="palette-label" style="color: #2e7d32; text-shadow: none;">Mint</span>
+          <span class="palette-hex" style="color: #2e7d32; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#CAFFBF</span>
+        </div>
+        <div class="palette-color" style="background: #ffd6a5;">
+          <span class="palette-label" style="color: #bf6600; text-shadow: none;">Peach</span>
+          <span class="palette-hex" style="color: #bf6600; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#FFD6A5</span>
+        </div>
+        <div class="palette-color" style="background: #e8c8ff;">
+          <span class="palette-label" style="color: #7b5ea7; text-shadow: none;">Lilac</span>
+          <span class="palette-hex" style="color: #7b5ea7; border-color: rgba(0,0,0,0.1); background: rgba(255,255,255,0.4);">#E8C8FF</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-meta"><span class="card-category">Color Palette</span><button class="keyword-copy" onclick="copyKeyword('Soft Mesh Sorbet')">Copy 📋</button></div>
+        <div class="card-title">소프트 메쉬 소르베</div>
+        <p class="card-desc"><strong>UI 배경, 앱 온보딩, 감성 웹.</strong><br>서로 녹아드는 파스텔 5색의 메쉬 그라데이션 팔레트. 여러 색이 물감처럼 퍼져나가는 기법을 팔레트화한 가장 트렌디한 배색입니다.</p>
+        <div class="prompt-box"><div class="prompt-label">Prompt Example</div><div class="prompt-text">Blush pink, sky blue, mint green, peach, and lilac blending in a mesh gradient</div></div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+<!-- Toast Notification -->
   <div class="toast" id="copy-toast">Keyword copied to clipboard!</div>
 
   <script>
     // Copy to clipboard function for single keywords
     function copyKeyword(text) {
-      let copiedText = text;
-      const evt = window.event;
-      if (evt) {
-        const button = evt.currentTarget || evt.target;
-        if (button && typeof button.closest === 'function') {
-          const cardInfo = button.closest('.card-info');
-          if (cardInfo) {
-            const promptTextElement = cardInfo.querySelector('.prompt-text');
-            if (promptTextElement) {
-              copiedText = promptTextElement.textContent.trim();
-            }
-          }
-        }
-      }
-      navigator.clipboard.writeText(copiedText).then(() => {
-        showToast("프롬프트 예시가 복사되었습니다!");
+      navigator.clipboard.writeText(text).then(() => {
+        showToast("개념 단어가 복사되었습니다!");
       }).catch(err => {
         console.error('Failed to copy text: ', err);
       });
@@ -4726,25 +5318,36 @@
 
     // Intersection Observer for Active Nav Link
     document.addEventListener('DOMContentLoaded', () => {
-      // Set up click handlers on copy buttons to copy Prompt Example instead of keyword
-      const copyButtons = document.querySelectorAll('.keyword-copy');
-      copyButtons.forEach(button => {
-        button.onclick = function(e) {
+      // Dynamically add a copy button to each prompt box
+      const promptBoxes = document.querySelectorAll('.prompt-box');
+      promptBoxes.forEach(box => {
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'prompt-copy';
+        copyBtn.innerHTML = 'Copy 📋';
+        copyBtn.title = '프롬프트 복사';
+        
+        copyBtn.onclick = function(e) {
           e.preventDefault();
           e.stopPropagation();
-          const cardInfo = this.closest('.card-info');
-          if (cardInfo) {
-            const promptTextElement = cardInfo.querySelector('.prompt-text');
-            if (promptTextElement) {
-              const promptText = promptTextElement.textContent.trim();
-              navigator.clipboard.writeText(promptText).then(() => {
-                showToast("프롬프트 예시가 복사되었습니다!");
-              }).catch(err => {
-                console.error('Failed to copy text: ', err);
-              });
-            }
+          const promptTextElement = box.querySelector('.prompt-text');
+          if (promptTextElement) {
+            const promptText = promptTextElement.textContent.trim();
+            navigator.clipboard.writeText(promptText).then(() => {
+              showToast("프롬프트 예시가 복사되었습니다!");
+            }).catch(err => {
+              console.error('Failed to copy text: ', err);
+            });
           }
         };
+        const label = box.querySelector('.prompt-label');
+        if (label) {
+          label.style.display = 'flex';
+          label.style.justifyContent = 'space-between';
+          label.style.alignItems = 'center';
+          label.appendChild(copyBtn);
+        } else {
+          box.appendChild(copyBtn);
+        }
       });
 
       const sections = document.querySelectorAll('.section-container');
